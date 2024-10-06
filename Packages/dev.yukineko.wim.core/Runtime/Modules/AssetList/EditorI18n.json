@@ -1,0 +1,37 @@
+{
+    "ja": {
+        "$title": "アセット一覧モジュール",
+        "description": "アセット名とURLを入力してください。URLは入力を省略しても問題ありません。",
+        "assetList": "アセットリスト",
+        "name": "アセット名",
+        "url": "URL"
+    },
+    "en": {
+        "$title": "Asset List Module",
+        "description": "Please enter the asset name and URL. You can omit the input of URL.",
+        "assetList": "Asset List",
+        "name": "Name",
+        "url": "URL"
+    },
+    "zh-CN": {
+        "$title": "资产列表模块",
+        "description": "请输入资产名称和URL。您可以省略URL的输入。",
+        "assetList": "资产列表",
+        "name": "名称",
+        "url": "URL"
+    },
+    "zh-TW": {
+        "$title": "資產列表模組",
+        "description": "請輸入資產名稱和URL。您可以省略URL的輸入。",
+        "assetList": "資產列表",
+        "name": "名稱",
+        "url": "URL"
+    },
+    "ko": {
+        "$title": "에셋 목록 모듈",
+        "description": "에셋 이름과 URL을 입력하십시오. URL의 입력은 생략해도 됩니다.",
+        "assetList": "에셋 목록",
+        "name": "이름",
+        "url": "URL"
+    }
+}

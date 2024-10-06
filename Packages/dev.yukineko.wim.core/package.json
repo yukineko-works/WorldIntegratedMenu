@@ -1,0 +1,17 @@
+{
+  "name": "dev.yukineko.wim.core",
+  "displayName": "World Integrated Menu",
+  "version": "0.0.1",
+  "description": "World Integrated Menu Core",
+  "gitDependencies": {},
+  "vpmDependencies": {
+    "com.vrchat.worlds": "3.7.1"
+  },
+  "author": {
+    "name": "yukineko",
+    "email": "contact@yukineko.dev",
+    "url": "https://github.com/yukineko-works"
+  },
+  "legacyFolders": {},
+  "legacyFiles": {}
+}

@@ -1,0 +1,22 @@
+{
+    "ja": {
+        "$title": "システム設定モジュール",
+        "description": "システムに関する設定を行うモジュールです。\nこのモジュールは削除しないでください。"
+    },
+    "en": {
+        "$title": "System Settings Module",
+        "description": "This module is for setting up the system.\nPlease do not delete this module."
+    },
+    "zh-CN": {
+        "$title": "系统设置模块",
+        "description": "此模块用于设置系统。\n请勿删除此模块。"
+    },
+    "zh-TW": {
+        "$title": "系統設置模組",
+        "description": "此模組用於設置系統。\n請勿刪除此模組。"
+    },
+    "ko": {
+        "$title": "시스템 설정 모듈",
+        "description": "이 모듈은 시스템 설정을 위한 것입니다.\n이 모듈을 삭제하지 마십시오."
+    }
+}

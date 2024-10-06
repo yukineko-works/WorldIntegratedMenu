@@ -1,0 +1,41 @@
+[{
+    "$name": "Catppuccin Mocha Blue (Dark)",
+    "accent": "#89b4fa",
+    "base": "#1e1e2e",
+    "surface": "#313244",
+    "text": "#cdd6f4",
+    "success": "#a6e3a1",
+    "warning": "#fab387",
+    "error": "#f38ba8",
+    "info": "#89dceb"
+}, {
+    "$name": "Catppuccin Latte Blue (Light)",
+    "accent": "#1e66f5",
+    "base": "#eff1f5",
+    "surface": "#ccd0da",
+    "text": "#4c4f69",
+    "success": "#40a02b",
+    "warning": "#df8e1d",
+    "error": "#e64553",
+    "info": "#04a5e5"
+}, {
+    "$name": "One Dark",
+    "accent": "#62aeef",
+    "base": "#282c34",
+    "surface": "#3e4452",
+    "text": "#abb2bf",
+    "success": "#98c379",
+    "warning": "#e5c07b",
+    "error": "#e06c75",
+    "info": "#56b6c2"
+}, {
+    "$name": "One Light",
+    "accent": "#528bff",
+    "base": "#f8f8f8",
+    "surface": "#f0f0f0",
+    "text": "#383a42",
+    "success": "#50a14f",
+    "warning": "#c18401",
+    "error": "#e45649",
+    "info": "#0184bc"
+}]

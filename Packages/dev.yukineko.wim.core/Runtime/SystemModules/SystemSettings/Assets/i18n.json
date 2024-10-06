@@ -1,0 +1,37 @@
+{
+    "ja": {
+        "$moduleName": "システム設定",
+        "languageSetting": "言語設定 / Language Setting",
+        "auto": "auto / 自動設定",
+        "quickMenuSize": "クイックメニューのサイズ",
+        "qmSizeNotice": "VRChatの仕様上、小さくするとスクロールがしづらくなります"
+    },
+    "en": {
+        "$moduleName": "System Settings",
+        "languageSetting": "Language Setting",
+        "auto": "auto",
+        "quickMenuSize": "Quick Menu Size",
+        "qmSizeNotice": "Due to the specifications of VRChat, scrolling becomes difficult when it is reduced"
+    },
+    "zh-CN": {
+        "$moduleName": "系统设置",
+        "languageSetting": "语言设置 / Language Setting",
+        "auto": "auto / 自动设置",
+        "quickMenuSize": "快捷菜单大小",
+        "qmSizeNotice": "由于VRChat的规格，缩小后滚动会变得困难"
+    },
+    "zh-TW": {
+        "$moduleName": "系統設定",
+        "languageSetting": "語言設定 / Language Setting",
+        "auto": "auto / 自動設定",
+        "quickMenuSize": "快速選單大小",
+        "qmSizeNotice": "由於VRChat的規格，縮小後滾動會變得困難"
+    },
+    "ko": {
+        "$moduleName": "시스템 설정",
+        "languageSetting": "언어 설정 / Language Setting",
+        "auto": "auto / 자동 설정",
+        "quickMenuSize": "퀵 메뉴 크기",
+        "qmSizeNotice": "VRChat의 사양상 작게 만들면 스크롤이 어려워집니다"
+    }
+}

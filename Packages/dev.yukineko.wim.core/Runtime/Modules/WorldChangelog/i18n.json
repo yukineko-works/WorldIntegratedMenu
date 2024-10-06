@@ -1,0 +1,17 @@
+{
+    "ja": {
+        "$moduleName": "ワールド更新履歴"
+    },
+    "en": {
+        "$moduleName": "World Changelog"
+    },
+    "zh-CN": {
+        "$moduleName": "世界更新日志"
+    },
+    "zh-TW": {
+        "$moduleName": "世界更新日誌"
+    },
+    "ko": {
+        "$moduleName": "월드 업데이트 로그"
+    }
+}

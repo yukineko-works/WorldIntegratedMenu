@@ -1,0 +1,27 @@
+{
+    "ja": {
+        "$title": "フリーテキストモジュール",
+        "description": "ModuleMetadataコンポーネントの「モジュール名」を変更することで、メニューに表示される名前を変更することができます。\nこのモジュールは複数配置が可能です。",
+        "text": "テキスト"
+    },
+    "en": {
+        "$title": "Free Text Module",
+        "description": "You can change the name displayed in the menu by changing the \"Module Name\" of the ModuleMetadata component.\nThis module can be placed multiple times.",
+        "text": "Text"
+    },
+    "zh-CN": {
+        "$title": "自由文本模块",
+        "description": "通过更改ModuleMetadata组件的“模块名称”，可以更改菜单中显示的名称。\n此模块可以多次放置。",
+        "text": "文本"
+    },
+    "zh-TW": {
+        "$title": "自由文本模組",
+        "description": "通過更改ModuleMetadata組件的“模組名稱”，可以更改菜單中顯示的名稱。\n此模組可以多次放置。",
+        "text": "文本"
+    },
+    "ko": {
+        "$title": "프리 텍스트 모듈",
+        "description": "ModuleMetadata 구성 요소의 '모듈 이름'을 변경하여 메뉴에 표시되는 이름을 변경할 수 있습니다.\n이 모듈은 여러 번 배치할 수 있습니다.",
+        "text": "텍스트"
+    }
+}

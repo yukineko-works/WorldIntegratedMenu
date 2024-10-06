@@ -1,0 +1,67 @@
+{
+    "ja": {
+        "$moduleName": "クラウドセーブ",
+        "lastSaveTime": "最終セーブ日時",
+        "savedataLoading": "データを取得しています...",
+        "savedataNotFound": "データが見つかりませんでした",
+        "savedataGetError": "データ取得中にエラーが発生しました\n(「Allow Untrusted URLs」が無効になっているか、サーバーがダウンしている可能性があります)",
+        "cloudSave": "クラウドセーブ",
+        "cloudSaveInfo": "「セーブ用URLコピー」を押すことで、現在の設定を保存できるURLを表示・コピーすることができます。\nここでコピーしたURLを「コピーしたURLの貼り付け」に貼り付けることで、設定を保存することができます。",
+        "saveUrlCopy": "セーブ用URLをコピー",
+        "pasteSaveUrl": "コピーしたURLの\n貼り付け(セーブ)",
+        "aboutCloudSaveTitle": "クラウドセーブについて",
+        "aboutCloudSaveDescription": "クラウドセーブを行うことで現在の設定の一部を保存することができ、次回以降に再設定を行う必要がなくなります。\n保存した設定は、このメニューを導入している全てのワールドで参加したタイミングで自動的に読み込まれます。\n(別途VRChatの設定から「Comfort & Safety (快適性とセーフティー)」→「Allow Untrusted URLs (信頼されていないURLを許可)」を有効にする必要があります)"
+    },
+    "en": {
+        "$moduleName": "Cloud Save",
+        "lastSaveTime": "Last Save Time",
+        "savedataLoading": "Loading data...",
+        "savedataNotFound": "Data not found",
+        "savedataGetError": "An error occurred while getting data\n(Allow Untrusted URLs may be disabled or the server may be down)",
+        "cloudSave": "Cloud Save",
+        "cloudSaveInfo": "By pressing \"Copy Save URL\", you can display and copy the URL that can save the current settings.\nBy pasting the copied URL in \"Paste the copied URL (Save)\", you can save the settings.",
+        "saveUrlCopy": "Copy Save URL",
+        "pasteSaveUrl": "Paste the copied URL (Save)",
+        "aboutCloudSaveTitle": "About Cloud Save",
+        "aboutCloudSaveDescription": "By performing cloud save, you can save some of the current settings and eliminate the need to reconfigure them in the future.\nThe saved settings are automatically loaded when you join any world that has this menu installed.\n(You need to enable \"Comfort & Safety\" → \"Allow Untrusted URLs\" in VRChat settings)"
+    },
+    "zh-CN": {
+        "$moduleName": "云端存档",
+        "lastSaveTime": "最后保存时间",
+        "savedataLoading": "正在获取数据...",
+        "savedataNotFound": "未找到数据",
+        "savedataGetError": "获取数据时发生错误\n(可能未启用\"Allow Untrusted URLs\"或服务器已关闭)",
+        "cloudSave": "云端存档",
+        "cloudSaveInfo": "通过按下\"复制保存URL\"，您可以显示和复制可以保存当前设置的URL。\n通过将复制的URL粘贴到\"粘贴复制的URL (保存)\"中，您可以保存设置。",
+        "saveUrlCopy": "复制保存URL",
+        "pasteSaveUrl": "粘贴复制的URL (保存)",
+        "aboutCloudSaveTitle": "关于云端存档",
+        "aboutCloudSaveDescription": "通过进行云端存档，您可以保存当前设置的一部分，并消除将来重新配置它们的需要。\n保存的设置在您加入任何安装了此菜单的世界时会自动加载。\n(您需要在VRChat设置中启用\"舒适性和安全性\" → \"允许不受信任的URL\")"
+    },
+    "zh-TW": {
+        "$moduleName": "雲端存檔",
+        "lastSaveTime": "最後保存時間",
+        "savedataLoading": "正在取得資料...",
+        "savedataNotFound": "找不到資料",
+        "savedataGetError": "取得資料時發生錯誤\n(可能未啟用\"Allow Untrusted URLs\"或伺服器已關閉)",
+        "cloudSave": "雲端存檔",
+        "cloudSaveInfo": "透過按下\"複製保存URL\"，您可以顯示和複製可以保存當前設定的URL。\n透過將複製的URL貼上到\"貼上複製的URL (保存)\"中，您可以保存設定。",
+        "saveUrlCopy": "複製保存URL",
+        "pasteSaveUrl": "貼上複製的URL (保存)",
+        "aboutCloudSaveTitle": "關於雲端存檔",
+        "aboutCloudSaveDescription": "透過進行雲端存檔，您可以保存當前設定的一部分，並消除將來重新配置它們的需要。\n保存的設定在您加入任何安裝了此選單的世界時會自動載入。\n(您需要在VRChat設定中啟用\"舒適性和安全性\" → \"允許不受信任的URL\")"
+    },
+    "ko": {
+        "$moduleName": "클라우드 세이브",
+        "lastSaveTime": "마지막 저장 시간",
+        "savedataLoading": "데이터를 가져오는 중...",
+        "savedataNotFound": "데이터를 찾을 수 없습니다",
+        "savedataGetError": "데이터를 가져오는 중 오류가 발생했습니다\n(\"신뢰되지 않는 URL 허용\"이 비활성화되어 있거나 서버가 다운되었을 수 있습니다)",
+        "cloudSave": "클라우드 세이브",
+        "cloudSaveInfo": "세이브용 URL 복사를 누르면 현재 설정을 저장할 수 있는 URL을 표시하고 복사할 수 있습니다.\n여기서 복사한 URL을 \"복사한 URL 붙여넣기(세이브)\"에 붙여넣으면 설정을 저장할 수 있습니다.",
+        "saveUrlCopy": "세이브용 URL 복사",
+        "pasteSaveUrl": "복사한 URL 붙여넣기(세이브)",
+        "aboutCloudSaveTitle": "클라우드 세이브에 대해",
+        "aboutCloudSaveDescription": "클라우드 세이브를 수행하면 현재 설정의 일부를 저장할 수 있으며, 앞으로 다시 구성할 필요가 없어집니다.\n저장된 설정은 이 메뉴가 설치된 모든 월드에 참가할 때 자동으로 로드됩니다.\n(VRChat 설정에서 \"Comfort & Safety (편의 및 안전)\" → \"Allow Untrusted URLs (신뢰되지 않는 URL 허용)\"을 활성화해야 합니다)"
+    }
+}

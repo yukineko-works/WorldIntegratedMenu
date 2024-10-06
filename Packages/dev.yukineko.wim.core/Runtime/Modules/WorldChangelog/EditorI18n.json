@@ -1,0 +1,37 @@
+{
+    "ja": {
+        "$title": "ワールド更新履歴モジュール",
+        "description": "ワールドの更新履歴を表示することができます。\nタイトルにはバージョンまたは更新日を、内容には更新内容を入力してください。",
+        "changelog": "更新履歴",
+        "title": "タイトル",
+        "content": "内容"
+    },
+    "en": {
+        "$title": "World Changelog Module",
+        "description": "You can display the update history of the world. \nPlease enter the version or update date in the title and the update content in the content.",
+        "changelog": "Changelog",
+        "title": "Title",
+        "content": "Content"
+    },
+    "zh-CN": {
+        "$title": "世界更新日志模块",
+        "description": "您可以显示世界的更新历史。\n请在标题中输入版本或更新日期，在内容中输入更新内容。",
+        "changelog": "更新日志",
+        "title": "标题",
+        "content": "内容"
+    },
+    "zh-TW": {
+        "$title": "世界更新日誌模組",
+        "description": "您可以顯示世界的更新歷史。\n請在標題中輸入版本或更新日期，在內容中輸入更新內容。",
+        "changelog": "更新日誌",
+        "title": "標題",
+        "content": "內容"
+    },
+    "ko": {
+        "$title": "월드 업데이트 기록 모듈",
+        "description": "월드의 업데이트 기록을 표시할 수 있습니다.\n제목에는 버전 또는 업데이트 날짜를 입력하고 내용에는 업데이트 내용을 입력하세요.",
+        "changelog": "업데이트 기록",
+        "title": "제목",
+        "content": "내용"
+    }
+}

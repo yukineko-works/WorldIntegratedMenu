@@ -1,0 +1,17 @@
+{
+    "ja": {
+        "$moduleName": "バージョン情報"
+    },
+    "en": {
+        "$moduleName": "Version Info"
+    },
+    "zh-CN": {
+        "$moduleName": "版本信息"
+    },
+    "zh-TW": {
+        "$moduleName": "版本資訊"
+    },
+    "ko": {
+        "$moduleName": "버전 정보"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "ja": {
+        "$title": "クラウド同期モジュール"
+    },
+    "en": {
+        "$title": "Cloud Sync Module"
+    },
+    "zh-CN": {
+        "$title": "云同步模块"
+    },
+    "zh-TW": {
+        "$title": "雲同步模組"
+    },
+    "ko": {
+        "$title": "클라우드 동기화 모듈"
+    }
+}

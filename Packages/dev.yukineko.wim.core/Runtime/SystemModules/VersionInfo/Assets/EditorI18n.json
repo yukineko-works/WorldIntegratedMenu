@@ -1,0 +1,22 @@
+{
+    "ja": {
+        "$title": "バージョン情報モジュール",
+        "warning": "可能な限り、このモジュールの削除は避けてください"
+    },
+    "en": {
+        "$title": "Version Info Module",
+        "warning": "Please avoid deleting this module as much as possible"
+    },
+    "zh-CN": {
+        "$title": "版本信息模块",
+        "warning": "请尽量避免删除此模块"
+    },
+    "zh-TW": {
+        "$title": "版本資訊模組",
+        "warning": "請盡量避免刪除此模組"
+    },
+    "ko": {
+        "$title": "버전 정보 모듈",
+        "warning": "가능한 한 이 모듈을 삭제하지 마십시오"
+    }
+}

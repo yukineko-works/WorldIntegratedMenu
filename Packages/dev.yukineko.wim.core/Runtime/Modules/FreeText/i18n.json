@@ -1,0 +1,17 @@
+{
+    "ja": {
+        "$moduleName": "フリーテキスト"
+    },
+    "en": {
+        "$moduleName": "Free Text"
+    },
+    "zh-CN": {
+        "$moduleName": "自由文本"
+    },
+    "zh-TW": {
+        "$moduleName": "自由文本"
+    },
+    "ko": {
+        "$moduleName": "프리 텍스트"
+    }
+}

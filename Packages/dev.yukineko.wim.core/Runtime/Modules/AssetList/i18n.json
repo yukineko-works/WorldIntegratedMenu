@@ -1,0 +1,17 @@
+{
+    "ja": {
+        "$moduleName": "アセットリスト"
+    },
+    "en": {
+        "$moduleName": "Asset List"
+    },
+    "zh-CN": {
+        "$moduleName": "资产列表"
+    },
+    "zh-TW": {
+        "$moduleName": "資產列表"
+    },
+    "ko": {
+        "$moduleName": "에셋 목록"
+    }
+}
