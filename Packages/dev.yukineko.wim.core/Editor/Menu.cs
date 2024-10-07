@@ -68,11 +68,11 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
 
         private static void BuildMenu()
         {
-            AddItem(EditorI18n.GetTranslation("menuItemRoot"), ""); // TODO: Add prefab GUID
+            AddItem(EditorI18n.GetTranslation("menuItemRoot"), "39d3a2bb8ccfe2d47b24a4fffce11afb");
             AddSeparator();
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("assetList"), ""); // TODO: Add prefab GUID
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("worldChangelog"), ""); // TODO: Add prefab GUID
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("freeText"), ""); // TODO: Add prefab GUID
+            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("assetList"), "ed33d988b3d716742ab7e0adade59fcc");
+            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("worldChangelog"), "fb42e405e8429a640a8888686a29bc4b");
+            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("freeText"), "e2c7e8e62ca41ed46908f8a196e671ab");
 
             foreach (var item in _itemQueue)
             {
