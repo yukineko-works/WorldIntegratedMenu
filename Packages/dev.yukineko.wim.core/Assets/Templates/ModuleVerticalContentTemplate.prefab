@@ -140,11 +140,11 @@ MonoBehaviour:
   forceUseModuleName: 0
   content: {fileID: 8432060474700812376}
   i18nManager: {fileID: 0}
-  moduleId: 
-  isUnique: 1
-  hideInMenu: 0
-  onModuleCalledBehaviours: []
-  onModuleCalledBehaviourIndexes: 
+  _moduleId: 
+  _isUnique: 1
+  _hideInMenu: 0
+  _onModuleCalledBehaviours: []
+  _onModuleCalledBehaviourIndexes: 
 --- !u!114 &8739561340276970947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 840102689802019913}
-  controller: {fileID: 0}
+  _controller: {fileID: 0}
   _localizationJson: {fileID: 0}
 --- !u!114 &840102689802019913
 MonoBehaviour:
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
+  m_Softness: {x: 0, y: 80}
 --- !u!1 &7698131148225521028
 GameObject:
   m_ObjectHideFlags: 0
