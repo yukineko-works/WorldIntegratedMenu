@@ -4437,7 +4437,7 @@ PrefabInstance:
     - target: {fileID: 3396984278628544261, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
       propertyPath: m_Name
-      value: SystemSettingsModule Variant
+      value: SystemSettingsModule
       objectReference: {fileID: 0}
     - target: {fileID: 3604861266348181739, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}

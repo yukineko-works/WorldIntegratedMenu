@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: RadioButtonHelper
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 153cc4240002df0439bd7c04b4ba2e33,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: aaa12244fd050814e9ca6d2f39c9e61a,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -530,7 +530,7 @@ MonoBehaviour:
       Data: 33|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.I18nManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.I18nManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 

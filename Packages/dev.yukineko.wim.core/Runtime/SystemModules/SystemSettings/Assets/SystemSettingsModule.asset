@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SystemSettingsModule
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 908b0c0313741854da792d51fbbed1a9,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: cb0c97b67e82bbf4cbad1325c36a3381,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.I18nManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.I18nManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -128,7 +128,7 @@ MonoBehaviour:
       Data: 8|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.RadioButtonHelper, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.RadioButtonHelper, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -188,7 +188,7 @@ MonoBehaviour:
       Data: 12|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.QuickMenuManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.QuickMenuManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -248,7 +248,7 @@ MonoBehaviour:
       Data: 16|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.CloudSyncManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.CloudSyncManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 

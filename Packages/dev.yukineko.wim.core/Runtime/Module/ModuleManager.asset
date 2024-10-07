@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ModuleManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 509a253c1ceff8c40a411097ad2bfaa2,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 00ce9ae1fbbcf1643bc6ba107329f986,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -122,7 +122,7 @@ MonoBehaviour:
       Data: 7|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.ModuleMetadata[], Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.ModuleMetadata[], dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: QuickMenuManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e09e7bbf926bd144487a3d47c406cc2a,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: f7313c5dc8bc39d458e4ee435e5643bd,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.UIManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.UIManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UIManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 12ceb27d983f35b4493edfd1871dc458,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: b89c6a7a832ebac439034b973c533f36,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -632,7 +632,7 @@ MonoBehaviour:
       Data: 38|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.ModuleManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.ModuleManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -698,7 +698,7 @@ MonoBehaviour:
       Data: 43|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.ThemeManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.ThemeManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -758,7 +758,7 @@ MonoBehaviour:
       Data: 47|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.I18nManager, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.I18nManager, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
@@ -1142,7 +1142,7 @@ MonoBehaviour:
       Data: 69|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.ModuleMetadata, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.ModuleMetadata, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 

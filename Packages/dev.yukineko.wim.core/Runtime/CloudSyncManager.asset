@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: CloudSyncManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e2a728180d094fb47b4f9eea7315c094,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7a2c22044b3a924458a72846b53f66e9,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -296,7 +296,7 @@ MonoBehaviour:
       Data: 18|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: yukineko.WorldIntegratedMenu.CloudSyncUtils, Assembly-CSharp
+      Data: yukineko.WorldIntegratedMenu.CloudSyncUtils, dev.yukineko.wim.core
     - Name: 
       Entry: 8
       Data: 
