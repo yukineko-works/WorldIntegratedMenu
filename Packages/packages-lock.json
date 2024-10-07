@@ -231,6 +231,12 @@
         "com.unity.ugui": "1.0.0"
       }
     },
+    "dev.yukineko.dev-utils": {
+      "version": "file:dev.yukineko.dev-utils",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "dev.yukineko.wim.core": {
       "version": "file:dev.yukineko.wim.core",
       "depth": 0,
