@@ -1,0 +1,55 @@
+root = true
+
+[*.{cs,vb}]
+
+# IDE0028: コレクションの初期化を簡略化します
+dotnet_style_collection_initializer = false
+
+# IDE0066: switch ステートメントを式に変換します
+csharp_style_prefer_switch_expression = false
+
+# IDE0074: 複合代入を使用
+dotnet_style_prefer_compound_assignment = false
+
+# IDE0090: 'new(...)' を使用する
+csharp_style_implicit_object_creation_when_type_is_apparent = false
+
+# UNT0026: GetComponent always allocates
+dotnet_diagnostic.UNT0026.severity = silent
+
+# prefer var
+csharp_style_var_when_type_is_apparent = true:warning
+csharp_style_var_elsewhere = true:warning
+
+# require accessibility modifiers
+dotnet_style_require_accessibility_modifiers = always:warning
+
+# private fields
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.severity = warning
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.style = camel_with_underscore
+
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+
+dotnet_naming_style.camel_with_underscore.capitalization = camel_case
+dotnet_naming_style.camel_with_underscore.required_prefix = _
+
+# public fields
+dotnet_naming_rule.public_fields_should_be_camel.severity = warning
+dotnet_naming_rule.public_fields_should_be_camel.symbols = public_fields
+dotnet_naming_rule.public_fields_should_be_camel.style = camel_case_style
+
+dotnet_naming_symbols.public_fields.applicable_accessibilities = public
+dotnet_naming_symbols.public_fields.applicable_kinds = field
+
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+# properties
+dotnet_naming_rule.properties_should_be_pascal.severity = warning
+dotnet_naming_rule.properties_should_be_pascal.symbols = properties
+dotnet_naming_rule.properties_should_be_pascal.style = pascal_case_style
+
+dotnet_naming_symbols.properties.applicable_kinds = property
+
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
