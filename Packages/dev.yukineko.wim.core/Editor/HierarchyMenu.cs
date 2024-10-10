@@ -6,37 +6,20 @@ using UnityEngine;
 
 namespace yukineko.WorldIntegratedMenu.EditorMenu
 {
-    public static class MenuUtils
+    public static class HierachyMenu
     {
         private const string _menuParent = "GameObject/World Integrated Menu/";
         private static int _priority = 100;
         private static bool _initialized = false;
-
-        private static Dictionary<string, string> _itemQueue = new Dictionary<string, string>();
-
-        public static void TryAddModuleItem(string name, string prefabGuid)
-        {
-            name = EditorI18n.GetTranslation("modules") + "/" + name;
-
-            if (_initialized)
-            {
-                AddItem(name, prefabGuid);
-                Update();
-            }
-            else
-            {
-                _itemQueue[name] = prefabGuid;
-            }
-        }
 
         private static void AddItem(string name, string prefabGuid, string shortcut = "", bool isChecked = false, Func<bool> validate = null)
         {
             MenuHelper.AddMenuItem(_menuParent + name, shortcut, isChecked, _priority++, () => GenerateObject(prefabGuid), validate);
         }
 
-        private static void AddSeparator(string name = "")
+        private static void AddSeparator(string name = null)
         {
-            MenuHelper.AddSeparator(_menuParent + name, _priority++);
+            MenuHelper.AddSeparator(_menuParent + (name ?? Guid.NewGuid().ToString()), _priority++);
         }
 
         public static void RemoveItem(string name)
@@ -70,41 +53,62 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
         {
             AddItem(EditorI18n.GetTranslation("menuItemRoot"), "39d3a2bb8ccfe2d47b24a4fffce11afb");
             AddSeparator();
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("assetList"), "ed33d988b3d716742ab7e0adade59fcc");
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("worldChangelog"), "fb42e405e8429a640a8888686a29bc4b");
-            AddItem(EditorI18n.GetTranslation("modules") + "/" + EditorI18n.GetTranslation("freeText"), "e2c7e8e62ca41ed46908f8a196e671ab");
 
-            foreach (var item in _itemQueue)
+            foreach (var module in ModuleRegistry.ModuleList.Values)
             {
-                AddItem(item.Key, item.Value);
+                AddItem(EditorI18n.GetTranslation("modules") + "/" + module.GetTitle(), module.PrefabGuid);
             }
 
             _initialized = true;
-            _itemQueue.Clear();
-
             Update();
+        }
+
+        public static void RebuildMenu()
+        {
+            if (!_initialized) return;
+            MenuHelper.RemoveAllMenuItems();
+            BuildMenu();
         }
     }
 
     // https://qiita.com/Swanman/items/279b3b679f3f96a5f925
     internal static class MenuHelper
     {
+        private static List<string> _registeredItems = new List<string>();
+
         public static void AddMenuItem(string name, string shortcut, bool isChecked, int priority, Action execute, Func<bool> validate)
         {
+            _registeredItems.Add(name);
             var addMenuItemMethod = typeof(Menu).GetMethod("AddMenuItem", BindingFlags.Static | BindingFlags.NonPublic);
             addMenuItemMethod?.Invoke(null, new object[] { name, shortcut, isChecked, priority, execute, validate });
         }
 
         public static void AddSeparator(string name, int priority)
         {
+            _registeredItems.Add(name);
             var addSeparatorMethod = typeof(Menu).GetMethod("AddSeparator", BindingFlags.Static | BindingFlags.NonPublic);
             addSeparatorMethod?.Invoke(null, new object[] { name, priority });
         }
 
         public static void RemoveMenuItem(string name)
         {
+            if (_registeredItems.Contains(name))
+            {
+                _registeredItems.Remove(name);
+            }
+
             var removeMenuItemMethod = typeof(Menu).GetMethod("RemoveMenuItem", BindingFlags.Static | BindingFlags.NonPublic);
             removeMenuItemMethod?.Invoke(null, new object[] { name });
+        }
+
+        public static void RemoveAllMenuItems()
+        {
+            foreach (var item in _registeredItems)
+            {
+                RemoveMenuItem(item);
+            }
+
+            _registeredItems.Clear();
         }
 
         public static void Update()

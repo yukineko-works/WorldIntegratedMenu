@@ -7,6 +7,7 @@
         "VRC.SDKBase",
         "VRC.SDKBase.Editor",
         "VRC.Udon",
+        "UdonSharp.Runtime",
         "dev.yukineko.wim.core"
     ],
     "includePlatforms": [],

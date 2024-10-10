@@ -88,6 +88,7 @@ namespace yukineko.WorldIntegratedMenu
     public class EditorI18n
     {
         private static InternalEditorI18n _instance = new InternalEditorI18n("1951d403fb3f455469e6264bc069e3f4");
+        public static InternalEditorI18n InternalEditorI18n => _instance;
 
         public static string GetTranslation(string key, string language = null) => _instance.GetTranslation(key, language);
         public static GUIContent GetGUITranslation(string key, string language = null) => _instance.GetGUITranslation(key, language);
