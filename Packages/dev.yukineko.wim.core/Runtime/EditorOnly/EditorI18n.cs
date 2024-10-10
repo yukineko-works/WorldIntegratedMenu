@@ -26,10 +26,10 @@ namespace yukineko.WorldIntegratedMenu
 
         public static readonly Dictionary<string, string> availableLanguages = new Dictionary<string, string>() {
             { "en", "English" },
-            { "ja", "日本語" },
-            { "zh-CN", "简体中文" },
-            { "zh-TW", "繁體中文" },
-            { "ko", "한국어" },
+            { "ja", "日本語 (Japanese)" },
+            { "zh-CN", "简体中文 (Simplified Chinese)" },
+            { "zh-TW", "繁體中文 (Traditional Chinese)" },
+            { "ko", "한국어 (Korean)" },
         };
 
         private static string _currentLanguage;

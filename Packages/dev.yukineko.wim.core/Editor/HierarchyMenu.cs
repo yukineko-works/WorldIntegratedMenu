@@ -90,9 +90,9 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
             addSeparatorMethod?.Invoke(null, new object[] { name, priority });
         }
 
-        public static void RemoveMenuItem(string name)
+        public static void RemoveMenuItem(string name, bool noRemoveItem = false)
         {
-            if (_registeredItems.Contains(name))
+            if (_registeredItems.Contains(name) && !noRemoveItem)
             {
                 _registeredItems.Remove(name);
             }
@@ -105,7 +105,7 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
         {
             foreach (var item in _registeredItems)
             {
-                RemoveMenuItem(item);
+                RemoveMenuItem(item, true);
             }
 
             _registeredItems.Clear();
