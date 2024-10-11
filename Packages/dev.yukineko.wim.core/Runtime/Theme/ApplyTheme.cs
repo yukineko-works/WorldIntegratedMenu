@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UdonSharp;
 using UnityEditor;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu
 {

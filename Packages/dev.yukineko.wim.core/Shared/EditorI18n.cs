@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Data;
 
-namespace yukineko.WorldIntegratedMenu
+namespace yukineko.WorldIntegratedMenu.EditorShared
 {
     public class InternalEditorI18n
     {

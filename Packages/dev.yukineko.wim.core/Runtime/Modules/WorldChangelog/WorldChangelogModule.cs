@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Reflection;
 using System.Collections.Generic;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using UnityEditorInternal;

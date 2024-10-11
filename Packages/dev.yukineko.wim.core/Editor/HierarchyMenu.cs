@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
-namespace yukineko.WorldIntegratedMenu.EditorMenu
+namespace yukineko.WorldIntegratedMenu.Editor
 {
     public static class HierachyMenu
     {
@@ -47,6 +48,7 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
         private static void Initialize()
         {
             EditorApplication.delayCall += () => BuildMenu();
+            ModuleRegistry.OnModuleRegistered(RebuildMenu);
         }
 
         private static void BuildMenu()

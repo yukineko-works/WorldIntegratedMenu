@@ -1,13 +1,8 @@
 {
-    "name": "dev.yukineko.wim.core",
+    "name": "dev.yukineko.wim.core.Shared",
     "rootNamespace": "",
     "references": [
-        "VRC.SDK3",
-        "VRC.SDKBase",
-        "VRC.Udon",
-        "VRC.Udon.Serialization.OdinSerializer",
-        "UdonSharp.Runtime",
-        "dev.yukineko.wim.core.Shared"
+        "VRC.SDK3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

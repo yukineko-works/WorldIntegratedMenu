@@ -7,6 +7,7 @@ using UnityEngine;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
 // RFC 5646 Language Tags
 // https://gist.github.com/msikma/8912e62ed866778ff8cd

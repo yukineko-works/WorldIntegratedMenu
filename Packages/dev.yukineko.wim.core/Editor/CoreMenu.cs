@@ -3,12 +3,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using yukineko.WorldIntegratedMenu.EditorMenu;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
-namespace yukineko.WorldIntegratedMenu
+namespace yukineko.WorldIntegratedMenu.Editor
 {
     [CustomEditor(typeof(WIMCore))]
-    public class CoreMenu : Editor
+    public class CoreMenu : UnityEditor.Editor
     {
         private GameObject _moduleContainer;
         private ThemeManager _themeManager;

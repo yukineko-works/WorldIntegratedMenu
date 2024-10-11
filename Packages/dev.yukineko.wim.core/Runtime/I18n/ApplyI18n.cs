@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
 using System.Collections.Generic;
-
-
+using yukineko.WorldIntegratedMenu.EditorShared;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using UnityEditorInternal;

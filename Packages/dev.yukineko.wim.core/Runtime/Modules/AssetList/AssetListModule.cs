@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using yukineko.WorldIntegratedMenu.EditorShared;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using UnityEditorInternal;

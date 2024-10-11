@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using UnityEditor;
-using UnityEngine;
 
-namespace yukineko.WorldIntegratedMenu.EditorMenu
+namespace yukineko.WorldIntegratedMenu.EditorShared
 {
     public class ModuleRegistryItem
     {
@@ -28,6 +25,7 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
 
     public static class ModuleRegistry
     {
+        private static readonly List<Action> _onModuleRegistered = new List<Action>();
         private static readonly Dictionary<string, ModuleRegistryItem> _moduleList = new Dictionary<string, ModuleRegistryItem>() {
             { "AssetListModule", new ModuleRegistryItem(EditorI18n.InternalEditorI18n, "assetList", "ed33d988b3d716742ab7e0adade59fcc") },
             { "WorldChangelogModule", new ModuleRegistryItem(EditorI18n.InternalEditorI18n, "worldChangelog", "fb42e405e8429a640a8888686a29bc4b") },
@@ -42,7 +40,16 @@ namespace yukineko.WorldIntegratedMenu.EditorMenu
             {
                 _moduleList.Add(item.Key, item.Value);
             }
-            HierachyMenu.RebuildMenu();
+
+            foreach (var action in _onModuleRegistered)
+            {
+                action.Invoke();
+            }
+        }
+
+        public static void OnModuleRegistered(Action action)
+        {
+            _onModuleRegistered.Add(action);
         }
     }
 }
