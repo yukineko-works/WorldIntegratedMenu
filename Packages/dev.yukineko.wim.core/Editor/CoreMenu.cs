@@ -224,7 +224,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void TabThemeSettings()
         {
-            if (_themeManager == null)
+            if (_themeManager == null || _themeManagerSerializedObject == null)
             {
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("themeManagerNotFound"), MessageType.Error);
             }
