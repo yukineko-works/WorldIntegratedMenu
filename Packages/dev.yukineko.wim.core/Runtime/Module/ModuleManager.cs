@@ -14,6 +14,7 @@ namespace yukineko.WorldIntegratedMenu
         private DataList _availableModules = new DataList();
         private bool _isInitialized = false;
 
+        public Transform ModulesRoot => _modulesRoot;
         public ModuleMetadata[] Modules => _modules;
         public bool Initialized => _isInitialized;
 

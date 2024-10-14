@@ -32,6 +32,18 @@
         "modules": "モジュール",
         "assetList": "アセットリスト",
         "worldChangelog": "ワールド更新履歴",
-        "freeText": "フリーテキスト"
+        "freeText": "フリーテキスト",
+        "moduleSettings": "モジュール設定",
+        "themeSettings": "テーマ設定",
+        "versionInfo": "バージョン情報",
+        "setAsSeparately": "個別に設定する",
+        "chooseFromPresets": "プリセットから選択する",
+        "useThisTheme": "このテーマを使用する",
+        "refrectSettings": "設定を反映する",
+        "uniqueModuleDuplicatedError": "以下のモジュールが複数個配置されています。これらのモジュールは1個以上配置することができません。",
+        "moduleContainerNotFound": "モジュールコンテナ (Modules) が見つかりません",
+        "themeManagerNotFound": "ThemeManagerが見つかりません",
+        "presetsNotFound": "プリセットが見つかりません",
+        "playModeWarning": "プレイモード中は編集できません"
     }
 }

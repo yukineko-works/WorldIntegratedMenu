@@ -22,6 +22,8 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private Color _errorColor = new Color(243f / 255f, 139f / 255f, 168f / 255f, 1.0f);
         [SerializeField] private Color _infoColor = new Color(137f / 255f, 220f / 255f, 235f / 255f, 1.0f);
 
+        public string ThemePreset => _themePreset.text;
+
         // private DataDictionary _themes;
 
         // void Start()
@@ -68,67 +70,5 @@ namespace yukineko.WorldIntegratedMenu
                 }
             }
         }
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        [CustomEditor(typeof(ThemeManager))]
-        internal class RadioButtonHelperInspector : Editor
-        {
-            private ThemeManager _themeManager;
-            private DataList _themes;
-            private int _selectedThemeIndex = 0;
-
-            private void OnEnable()
-            {
-                _themeManager = target as ThemeManager;
-            }
-
-            public override void OnInspectorGUI()
-            {
-                serializedObject.Update();
-
-                if (_themes == null && _themeManager._themePreset != null)
-                {
-                    VRCJson.TryDeserializeFromJson(_themeManager._themePreset.text, out var _th);
-                    if (_th.TokenType == TokenType.DataList)
-                    {
-                        _themes = _th.DataList;
-                    }
-                }
-                if (_themes != null)
-                {
-                    _selectedThemeIndex = EditorGUILayout.Popup(_selectedThemeIndex, _themes.Select(t =>
-                    {
-                        var res = t.DataDictionary.TryGetValue("$name", out var name);
-                        return res ? name.String : "Unknown";
-                    }).ToArray());
-
-                    if (GUILayout.Button("Use this theme"))
-                    {
-                        var theme = _themes[_selectedThemeIndex];
-                        if (theme.TokenType != TokenType.DataDictionary) return;
-
-                        serializedObject.FindProperty("_accentColor").colorValue = theme.DataDictionary.TryGetValue("accent", out var hexAccent) && ColorUtility.TryParseHtmlString(hexAccent.String, out var accentColor) ? accentColor : _themeManager._accentColor;
-                        serializedObject.FindProperty("_baseColor").colorValue = theme.DataDictionary.TryGetValue("base", out var hexBase) && ColorUtility.TryParseHtmlString(hexBase.String, out var baseColor) ? baseColor : _themeManager._baseColor;
-                        serializedObject.FindProperty("_surfaceColor").colorValue = theme.DataDictionary.TryGetValue("surface", out var hexSurface) && ColorUtility.TryParseHtmlString(hexSurface.String, out var surfaceColor) ? surfaceColor : _themeManager._surfaceColor;
-                        serializedObject.FindProperty("_textColor").colorValue = theme.DataDictionary.TryGetValue("text", out var hexText) && ColorUtility.TryParseHtmlString(hexText.String, out var textColor) ? textColor : _themeManager._textColor;
-                        serializedObject.FindProperty("_successColor").colorValue = theme.DataDictionary.TryGetValue("success", out var hexSuccess) && ColorUtility.TryParseHtmlString(hexSuccess.String, out var successColor) ? successColor : _themeManager._successColor;
-                        serializedObject.FindProperty("_warningColor").colorValue = theme.DataDictionary.TryGetValue("warning", out var hexWarning) && ColorUtility.TryParseHtmlString(hexWarning.String, out var warningColor) ? warningColor : _themeManager._warningColor;
-                        serializedObject.FindProperty("_errorColor").colorValue = theme.DataDictionary.TryGetValue("error", out var hexError) && ColorUtility.TryParseHtmlString(hexError.String, out var errorColor) ? errorColor : _themeManager._errorColor;
-                        serializedObject.FindProperty("_infoColor").colorValue = theme.DataDictionary.TryGetValue("info", out var hexInfo) && ColorUtility.TryParseHtmlString(hexInfo.String, out var infoColor) ? infoColor : _themeManager._infoColor;
-
-                        serializedObject.ApplyModifiedProperties();
-                    }
-                }
-
-                EditorGUILayout.Space();
-                base.OnInspectorGUI();
-                EditorGUILayout.Space();
-                if (GUILayout.Button("Apply Theme"))
-                {
-                    _themeManager.ApplyTheme();
-                }
-            }
-        }
-#endif
     }
 }
