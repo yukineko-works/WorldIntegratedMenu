@@ -12,14 +12,14 @@ namespace yukineko.WorldIntegratedMenu
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class VersionInfoModule : UdonSharpBehaviour
     {
-        [SerializeField] private TextAsset _version;
+        public string version = "0.0.0";
         [SerializeField] private Text _versionText;
 
         private void Start()
         {
-            if (_versionText != null && _version != null)
+            if (_versionText != null)
             {
-                _versionText.text = $"Version {_version.text}";
+                _versionText.text = $"Version {version}";
             }
         }
     }
@@ -53,7 +53,7 @@ namespace yukineko.WorldIntegratedMenu
             if (_showObjectProperties)
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_version"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("version"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_versionText"));
                 EditorGUI.indentLevel--;
             }
