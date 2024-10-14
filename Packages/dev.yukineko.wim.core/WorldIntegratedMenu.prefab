@@ -8345,7 +8345,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: a7cd4444d88602e489cdde180544bdcb,
+        type: 2}
     - target: {fileID: 2869445150640660288, guid: e2c7e8e62ca41ed46908f8a196e671ab,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -8460,7 +8461,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: a1a8a765961b85542b9741969c0755bc,
+        type: 2}
     - target: {fileID: 6048648251315315179, guid: e2c7e8e62ca41ed46908f8a196e671ab,
         type: 3}
       propertyPath: serializedProgramAsset
@@ -8486,7 +8488,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: acc7a6b88dc6d9c45af64d468e1d9715,
+        type: 2}
     - target: {fileID: 7587930662847273024, guid: e2c7e8e62ca41ed46908f8a196e671ab,
         type: 3}
       propertyPath: serializedProgramAsset
