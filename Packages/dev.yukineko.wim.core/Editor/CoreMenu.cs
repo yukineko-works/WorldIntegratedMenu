@@ -29,7 +29,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void OnEnable()
         {
-            if (Application.isPlaying) return;
+            if (AssemblyReloadHandler.Reloading || Application.isPlaying) return;
 
             var moduleManager = FindObjectOfType<ModuleManager>(true);
             _moduleContainer = moduleManager == null ? null : moduleManager.ModulesRoot;
@@ -155,6 +155,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         public override void OnInspectorGUI()
         {
+            if (AssemblyReloadHandler.Reloading) return;
+
             EditorGUILayout.LabelField("World Integrated Menu", LabelStyles.header, GUILayout.ExpandWidth(true));
             var version = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly).version;
             EditorGUILayout.LabelField("v" + version, LabelStyles.center, GUILayout.ExpandWidth(true));
