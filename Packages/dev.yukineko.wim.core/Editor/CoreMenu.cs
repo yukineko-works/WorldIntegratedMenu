@@ -32,17 +32,16 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private void OnEnable()
         {
             if (Application.isPlaying) return;
-            _isReferencedByProjectWindow = !((WIMCore)target).gameObject.scene.IsValid();
+            var gameObject = ((WIMCore)target).gameObject;
+            _isReferencedByProjectWindow = !gameObject.scene.IsValid();
 
-            var moduleManager = FindObjectOfType<ModuleManager>(true);
+            var moduleManager = gameObject.GetComponentInChildren<ModuleManager>(true);
             _moduleContainer = moduleManager == null ? null : moduleManager.ModulesRoot;
-            _themeManager = FindObjectOfType<ThemeManager>(true);
+            _themeManager = gameObject.GetComponentInChildren<ThemeManager>(true);
 
             if (_themeManager != null)
             {
                 _themeManagerSerializedObject = new SerializedObject(_themeManager);
-                _themeManagerSerializedObject.Update();
-
                 if (_themeManager.ThemePreset != null && VRCJson.TryDeserializeFromJson(_themeManager.ThemePreset, out var _th) && _th.TokenType == TokenType.DataList)
                 {
                     _themes = _th.DataList;
