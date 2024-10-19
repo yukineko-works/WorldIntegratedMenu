@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.anatawa12.vpm-package-auto-installer.creator": {
+      "version": "file:com.anatawa12.vpm-package-auto-installer.creator",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.2"
+      }
+    },
     "com.azlab.vrc_hierarchy_highlighter": {
       "version": "file:com.azlab.vrc_hierarchy_highlighter",
       "depth": 0,
