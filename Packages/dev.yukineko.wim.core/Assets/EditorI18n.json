@@ -44,6 +44,7 @@
         "moduleContainerNotFound": "モジュールコンテナ (Modules) が見つかりません",
         "themeManagerNotFound": "ThemeManagerが見つかりません",
         "presetsNotFound": "プリセットが見つかりません",
-        "playModeWarning": "プレイモード中は編集できません"
+        "playModeWarning": "プレイモード中は編集できません",
+        "pleasePlaceInScene": "シーンに配置してください"
     }
 }

@@ -22,6 +22,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private List<string> _usedUniqueModuleIds;
         private List<string> _duplicatedUniqueModuleIds;
 
+        private bool _isReferencedByProjectWindow = false;
+
         private int _selectedTabIndex = 0;
         private string[] _themeNames = new string[0];
         private int _selectedThemeIndex = 0;
@@ -30,6 +32,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private void OnEnable()
         {
             if (AssemblyReloadHandler.Reloading || Application.isPlaying) return;
+            _isReferencedByProjectWindow = !((WIMCore)target).gameObject.scene.IsValid();
 
             var moduleManager = FindObjectOfType<ModuleManager>(true);
             _moduleContainer = moduleManager == null ? null : moduleManager.ModulesRoot;
@@ -176,6 +179,13 @@ namespace yukineko.WorldIntegratedMenu.Editor
             {
                 InternalEditorI18n.CurrentLanguage = InternalEditorI18n.availableLanguages.ElementAt(langIndex).Key;
                 HierachyMenu.RebuildMenu();
+            }
+
+            if (_isReferencedByProjectWindow)
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("pleasePlaceInScene"), MessageType.Error);
+                return;
             }
 
             EditorGUILayout.Space(24);
