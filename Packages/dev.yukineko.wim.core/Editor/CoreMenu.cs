@@ -31,7 +31,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void OnEnable()
         {
-            if (AssemblyReloadHandler.Reloading || Application.isPlaying) return;
+            if (Application.isPlaying) return;
             _isReferencedByProjectWindow = !((WIMCore)target).gameObject.scene.IsValid();
 
             var moduleManager = FindObjectOfType<ModuleManager>(true);
@@ -158,8 +158,6 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         public override void OnInspectorGUI()
         {
-            if (AssemblyReloadHandler.Reloading) return;
-
             EditorGUILayout.LabelField("World Integrated Menu", LabelStyles.header, GUILayout.ExpandWidth(true));
             var version = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly).version;
             EditorGUILayout.LabelField("v" + version, LabelStyles.center, GUILayout.ExpandWidth(true));
