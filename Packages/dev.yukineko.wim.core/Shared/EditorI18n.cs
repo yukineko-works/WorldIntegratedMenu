@@ -10,14 +10,11 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
     {
         public InternalEditorI18n(string i18nJsonGuid)
         {
-#if UNITY_EDITOR
-            var i18nJson = AssetDatabase.LoadAssetAtPath<TextAsset>(AssetDatabase.GUIDToAssetPath(i18nJsonGuid));
-            var data = i18nJson != null && VRCJson.TryDeserializeFromJson(i18nJson.text, out var i) ? i : new DataToken();
-            _i18n = data.TokenType == TokenType.DataDictionary ? data.DataDictionary : new DataDictionary();
-#else
-            _i18n = new DataDictionary();
-#endif
+            _i18nJsonGuid = i18nJsonGuid;
+            BuildI18n();
         }
+
+        private string _i18nJsonGuid;
 
         private DataDictionary _i18n;
         public DataDictionary I18n => _i18n;
@@ -74,10 +71,25 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             }
         }
 
+        private void BuildI18n()
+        {
+#if UNITY_EDITOR
+            var i18nJson = AssetDatabase.LoadAssetAtPath<TextAsset>(AssetDatabase.GUIDToAssetPath(_i18nJsonGuid));
+            if (i18nJson == null) return;
+
+            var data = VRCJson.TryDeserializeFromJson(i18nJson.text, out var i) ? i : new DataToken();
+            _i18n = data.TokenType == TokenType.DataDictionary ? data.DataDictionary : new DataDictionary();
+#else
+            _i18n = new DataDictionary();
+#endif
+        }
+
         public string GetTranslation(string key, string language = null)
         {
+            if (I18n == null) BuildI18n();
             var lang = language ?? CurrentLanguage;
-            if (I18n.TryGetValue(lang, out var translation) && translation.DataDictionary.TryGetValue(key, out var value)) return value.String;
+
+            if (I18n != null && I18n.TryGetValue(lang, out var translation) && translation.DataDictionary.TryGetValue(key, out var value)) return value.String;
             if (lang == _fallbackLanguage) return "[Translation Not Found] " + key;
             return GetTranslation(key, _fallbackLanguage);
         }
