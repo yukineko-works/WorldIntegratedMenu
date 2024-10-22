@@ -2,11 +2,6 @@
     "name": "dev.yukineko.wim.core.Editor",
     "rootNamespace": "",
     "references": [
-        "VRC.SDK3",
-        "VRC.SDK3.Editor",
-        "VRC.SDKBase",
-        "VRC.SDKBase.Editor",
-        "VRC.Udon",
         "UdonSharp.Runtime",
         "dev.yukineko.wim.core",
         "dev.yukineko.wim.core.Shared"
