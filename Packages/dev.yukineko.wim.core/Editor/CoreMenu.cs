@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using VRC.SDK3.Data;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu.Editor
@@ -17,7 +15,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private ThemeManager _themeManager;
         private List<ModuleMetadata> _modulesCache;
         private ReorderableList _reorderableList;
-        private DataList _themes;
+        private ThemePreset[] _themes;
         private SerializedObject _themeManagerSerializedObject;
         private List<string> _usedUniqueModuleIds;
         private List<string> _duplicatedUniqueModuleIds;
@@ -42,15 +40,23 @@ namespace yukineko.WorldIntegratedMenu.Editor
             if (_themeManager != null)
             {
                 _themeManagerSerializedObject = new SerializedObject(_themeManager);
-                if (_themeManager.ThemePreset != null && VRCJson.TryDeserializeFromJson(_themeManager.ThemePreset, out var _th) && _th.TokenType == TokenType.DataList)
+                var propThemePreset = _themeManagerSerializedObject.FindProperty("_themePreset");
+                if (propThemePreset.objectReferenceValue != null)
                 {
-                    _themes = _th.DataList;
-                    _themeNames = _themes.Select(t =>
+                    var themePresetJson = propThemePreset.objectReferenceValue as TextAsset;
+                    if (themePresetJson != null)
                     {
-                        var res = t.DataDictionary.TryGetValue("$name", TokenType.String, out var name);
-                        return res ? name.String : "Unknown";
-                    }).ToArray();
-
+                        try
+                        {
+                            var themePresets = JsonUtility.FromJson<ThemePresetsRoot>($"{{\"presets\": {themePresetJson.text}}}");
+                            _themes = themePresets.presets;
+                            _themeNames = _themes.Select(t => t.name).ToArray();
+                        }
+                        catch (Exception)
+                        {
+                            Debug.LogError("Failed to parse theme presets.");
+                        }
+                    }
                 }
             }
         }
@@ -251,48 +257,17 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
                     if (GUILayout.Button(EditorI18n.GetTranslation("useThisTheme")))
                     {
-                        var theme = _themes[_selectedThemeIndex];
-                        if (theme.TokenType != TokenType.DataDictionary) return;
+                        var theme = _themes[_selectedThemeIndex]?.color;
+                        if (theme == null) return;
 
-                        if (theme.DataDictionary.TryGetValue("accent", TokenType.String, out var hexAccent) && ColorUtility.TryParseHtmlString(hexAccent.String, out var accentColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_accentColor").colorValue = accentColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("base", TokenType.String, out var hexBase) && ColorUtility.TryParseHtmlString(hexBase.String, out var baseColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_baseColor").colorValue = baseColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("surface", TokenType.String, out var hexSurface) && ColorUtility.TryParseHtmlString(hexSurface.String, out var surfaceColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_surfaceColor").colorValue = surfaceColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("text", TokenType.String, out var hexText) && ColorUtility.TryParseHtmlString(hexText.String, out var textColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_textColor").colorValue = textColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("success", TokenType.String, out var hexSuccess) && ColorUtility.TryParseHtmlString(hexSuccess.String, out var successColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_successColor").colorValue = successColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("warning", TokenType.String, out var hexWarning) && ColorUtility.TryParseHtmlString(hexWarning.String, out var warningColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_warningColor").colorValue = warningColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("error", TokenType.String, out var hexError) && ColorUtility.TryParseHtmlString(hexError.String, out var errorColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_errorColor").colorValue = errorColor;
-                        }
-
-                        if (theme.DataDictionary.TryGetValue("info", TokenType.String, out var hexInfo) && ColorUtility.TryParseHtmlString(hexInfo.String, out var infoColor))
-                        {
-                            _themeManagerSerializedObject.FindProperty("_infoColor").colorValue = infoColor;
-                        }
+                        _themeManagerSerializedObject.FindProperty("_accentColor").colorValue = theme.GetColor(ColorPalette.Accent);
+                        _themeManagerSerializedObject.FindProperty("_baseColor").colorValue = theme.GetColor(ColorPalette.Base);
+                        _themeManagerSerializedObject.FindProperty("_surfaceColor").colorValue = theme.GetColor(ColorPalette.Surface);
+                        _themeManagerSerializedObject.FindProperty("_textColor").colorValue = theme.GetColor(ColorPalette.Text);
+                        _themeManagerSerializedObject.FindProperty("_successColor").colorValue = theme.GetColor(ColorPalette.Success);
+                        _themeManagerSerializedObject.FindProperty("_warningColor").colorValue = theme.GetColor(ColorPalette.Warning);
+                        _themeManagerSerializedObject.FindProperty("_errorColor").colorValue = theme.GetColor(ColorPalette.Error);
+                        _themeManagerSerializedObject.FindProperty("_infoColor").colorValue = theme.GetColor(ColorPalette.Info);
 
                         _themeManagerSerializedObject.ApplyModifiedProperties();
                         _themeManager.ApplyTheme();
@@ -359,5 +334,56 @@ namespace yukineko.WorldIntegratedMenu.Editor
     {
         public readonly static GUIStyle header = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter, fontSize = 16, fontStyle = FontStyle.Bold };
         public readonly static GUIStyle center = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter };
+    }
+
+    [Serializable]
+    internal class ThemePresetsRoot
+    {
+        public ThemePreset[] presets;
+    }
+
+    [Serializable]
+    internal class ThemePreset
+    {
+        public string name;
+        public PresetColor color;
+    }
+
+    [Serializable]
+    internal class PresetColor
+    {
+        public string accent;
+        public string bg;
+        public string surface;
+        public string text;
+        public string success;
+        public string warning;
+        public string error;
+        public string info;
+
+        public Color GetColor(ColorPalette colorPalette)
+        {
+            switch (colorPalette)
+            {
+                case ColorPalette.Accent:
+                    return ColorUtility.TryParseHtmlString(accent, out var accentColor) ? accentColor : Color.white;
+                case ColorPalette.Base:
+                    return ColorUtility.TryParseHtmlString(bg, out var bgColor) ? bgColor : Color.white;
+                case ColorPalette.Surface:
+                    return ColorUtility.TryParseHtmlString(surface, out var surfaceColor) ? surfaceColor : Color.white;
+                case ColorPalette.Text:
+                    return ColorUtility.TryParseHtmlString(text, out var textColor) ? textColor : Color.white;
+                case ColorPalette.Success:
+                    return ColorUtility.TryParseHtmlString(success, out var successColor) ? successColor : Color.white;
+                case ColorPalette.Warning:
+                    return ColorUtility.TryParseHtmlString(warning, out var warningColor) ? warningColor : Color.white;
+                case ColorPalette.Error:
+                    return ColorUtility.TryParseHtmlString(error, out var errorColor) ? errorColor : Color.white;
+                case ColorPalette.Info:
+                    return ColorUtility.TryParseHtmlString(info, out var infoColor) ? infoColor : Color.white;
+                default:
+                    return Color.white;
+            }
+        }
     }
 }
