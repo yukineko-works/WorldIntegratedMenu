@@ -77,7 +77,7 @@ namespace yukineko.WorldIntegratedMenu
             if (_languageSelector == null) return;
 
             var language = _languageSelector.Value;
-            _systemI18nManager.SetLanguage(language == "auto" ? null : language);
+            _systemI18nManager.SetLanguage(language);
             _cloudSyncManager.SaveQueue.SetValue("lang", language);
         }
 

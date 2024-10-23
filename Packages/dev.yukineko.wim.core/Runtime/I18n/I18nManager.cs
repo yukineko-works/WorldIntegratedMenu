@@ -27,46 +27,31 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private TextAsset _localizationJson;
         private readonly string _fallbackLanguage = "en";
         private bool _isInitialized = false;
+        private bool _isInitialChange = false;
+        private bool _isAutoSet = false;
         private DataDictionary _localization;
         private string _currentLanguage;
 
         public bool Initialized => _isInitialized;
         public bool HasLocalization => _localization != null;
         public string CurrentLanguage => _currentLanguage;
-
-        public CultureInfo CurrentCulture
-        {
-            get
-            {
-                switch (TimeZoneInfo.Local.Id)
-                {
-                    case "Asia/Tokyo":
-                    case "Tokyo Standard Time":
-                        return CultureInfo.GetCultureInfo("ja-JP");
-
-                    case "Asia/Shanghai":
-                    case "China Standard Time":
-                        return CultureInfo.GetCultureInfo("zh-CN");
-
-                    case "Asia/Taipei":
-                    case "Taipei Standard Time":
-                        return CultureInfo.GetCultureInfo("zh-TW");
-
-                    case "Asia/Seoul":
-                    case "Korea Standard Time":
-                        return CultureInfo.GetCultureInfo("ko-KR");
-
-                    default:
-                        return CultureInfo.InvariantCulture;
-                }
-            }
-
-            private set { }
-        }
+        public CultureInfo CurrentCulture => CultureInfo.GetCultureInfo(_currentLanguage);
 
         private void Start()
         {
             BuildLocalization();
+        }
+
+        public override void OnLanguageChanged(string language)
+        {
+            if (!_isInitialChange)
+            {
+                _isInitialChange = true;
+                return;
+            }
+            if (!_isAutoSet) return;
+
+            SetLanguage(language, true);
         }
 
         public void BuildLocalization()
@@ -78,7 +63,7 @@ namespace yukineko.WorldIntegratedMenu
                 if (_loc.TokenType == TokenType.DataDictionary) _localization = _loc.DataDictionary;
             }
 
-            _currentLanguage = GetSystemLanguage();
+            _currentLanguage = VRCPlayerApi.GetCurrentLanguage();
             _isInitialized = true;
             ApplyI18n();
         }
@@ -118,9 +103,11 @@ namespace yukineko.WorldIntegratedMenu
             }
         }
 
-        public void SetLanguage(string language = null)
+        public void SetLanguage(string language = null, bool skipAutoSetFlag = false)
         {
-            _currentLanguage = language ?? GetSystemLanguage();
+            var isAutoSet = language == null || language == "auto";
+            if (!skipAutoSetFlag) _isAutoSet = isAutoSet;
+            _currentLanguage = isAutoSet ? VRCPlayerApi.GetCurrentLanguage() : language;
             Debug.Log($"[I18nManager] SetLanguage: {_currentLanguage}");
             ApplyI18n();
         }
@@ -135,46 +122,6 @@ namespace yukineko.WorldIntegratedMenu
                 {
                     component.Apply(_currentLanguage);
                 }
-            }
-        }
-
-        public string GetSystemLanguage()
-        {
-            // VRC内だとInvariantCultureになるので使えない
-            // var currentCulture = CultureInfo.CurrentCulture;
-            // var languageCodeWithRegion = currentCulture.ToString(); // e.g. "en-US"
-            // var languageCode = currentCulture.TwoLetterISOLanguageName; // e.g. "en"
-
-            // if (_localization.ContainsKey(languageCodeWithRegion))
-            // {
-            //     return languageCodeWithRegion;
-            // }
-
-            // if (_localization.ContainsKey(languageCode))
-            // {
-            //     return languageCode;
-            // }
-
-            switch (TimeZoneInfo.Local.Id)
-            {
-                case "Asia/Tokyo":
-                case "Tokyo Standard Time":
-                    return "ja";
-
-                case "Asia/Shanghai":
-                case "China Standard Time":
-                    return "zh-CN";
-
-                case "Asia/Taipei":
-                case "Taipei Standard Time":
-                    return "zh-TW";
-
-                case "Asia/Seoul":
-                case "Korea Standard Time":
-                    return "ko";
-
-                default:
-                    return _fallbackLanguage;
             }
         }
 
