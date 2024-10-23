@@ -3384,6 +3384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
+      propertyPath: _onModuleCalledBehaviours.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
       propertyPath: onModuleCalledBehaviours.Array.data[0]
       value: 
       objectReference: {fileID: 722983019223074710}
@@ -3392,6 +3397,11 @@ PrefabInstance:
       propertyPath: onModuleDrawedMethodIndexes.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
+      propertyPath: _onModuleCalledBehaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 722983019223074710}
     - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
       propertyPath: onModuleCalledBehaviourIndexes.Array.size
@@ -3404,6 +3414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
+      propertyPath: _onModuleCalledBehaviourIndexes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
       propertyPath: onModuleCalledBehaviourIndexes.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
@@ -3411,6 +3426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onModuleCalledBehaviourIndexes.Array.data[1]
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599280536385609422, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
+      propertyPath: _onModuleCalledBehaviourIndexes.Array.data[0]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7719357292153697272, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
