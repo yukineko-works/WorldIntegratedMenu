@@ -6,7 +6,9 @@
         "dev.yukineko.wim.core",
         "dev.yukineko.wim.core.Shared"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
