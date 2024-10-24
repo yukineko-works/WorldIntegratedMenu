@@ -23,7 +23,7 @@ namespace yukineko.WorldIntegratedMenu
 
         public void Apply(string language = null)
         {
-            if (manager == null || !manager.Initialized || string.IsNullOrEmpty(key)) return;
+            if (manager == null || !manager.Initialized) return;
 
             var text = GetComponent<Text>();
             if (text == null) return;

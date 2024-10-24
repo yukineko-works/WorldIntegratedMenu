@@ -125,6 +125,12 @@ namespace yukineko.WorldIntegratedMenu
                 module.content.name = module.Uuid;
                 module.content.transform.SetParent(_moduleContentContainer, false);
                 module.content.SetActive(false);
+
+                var moduleI18n = module.GetComponent<I18nManager>();
+                if (moduleI18n != null)
+                {
+                    moduleI18n.masterManager = _i18nManager;
+                }
             }
 
             _linkTemplate.SetActive(false);

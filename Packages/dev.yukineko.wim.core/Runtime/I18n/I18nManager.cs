@@ -25,6 +25,8 @@ namespace yukineko.WorldIntegratedMenu
     {
         [SerializeField] private UIManager _controller;
         [SerializeField] private TextAsset _localizationJson;
+        public I18nManager masterManager;
+
         private readonly string _fallbackLanguage = "en";
         private bool _isInitialized = false;
         private bool _isInitialChange = false;
@@ -34,8 +36,16 @@ namespace yukineko.WorldIntegratedMenu
 
         public bool Initialized => _isInitialized;
         public bool HasLocalization => _localization != null;
-        public string CurrentLanguage => _currentLanguage;
-        public CultureInfo CurrentCulture => CultureInfo.GetCultureInfo(_currentLanguage);
+        public string CurrentLanguage
+        {
+            get
+            {
+                if (masterManager != null) return masterManager.CurrentLanguage;
+                return _currentLanguage ?? VRCPlayerApi.GetCurrentLanguage();
+            }
+        }
+
+        public CultureInfo CurrentCulture => CultureInfo.GetCultureInfo(CurrentLanguage);
 
         private void Start()
         {
@@ -62,15 +72,19 @@ namespace yukineko.WorldIntegratedMenu
                 VRCJson.TryDeserializeFromJson(_localizationJson.text, out var _loc);
                 if (_loc.TokenType == TokenType.DataDictionary) _localization = _loc.DataDictionary;
             }
+            if (masterManager == null)
+            {
+                _currentLanguage = VRCPlayerApi.GetCurrentLanguage();
+            }
 
-            _currentLanguage = VRCPlayerApi.GetCurrentLanguage();
             _isInitialized = true;
-            ApplyI18n();
         }
 
         public string GetTranslation(string key, string language = null)
         {
-            var lang = language ?? _currentLanguage;
+            if (string.IsNullOrEmpty(key)) return string.Empty;
+
+            var lang = language ?? CurrentLanguage;
             if (_localization == null) return string.Empty;
             if (!_localization.TryGetValue(lang, out var translation) || !translation.DataDictionary.TryGetValue(key, out var value))
             {
@@ -105,6 +119,12 @@ namespace yukineko.WorldIntegratedMenu
 
         public void SetLanguage(string language = null, bool skipAutoSetFlag = false)
         {
+            if (masterManager != null)
+            {
+                masterManager.SetLanguage(language, skipAutoSetFlag);
+                return;
+            }
+
             var isAutoSet = language == null || language == "auto";
             if (!skipAutoSetFlag) _isAutoSet = isAutoSet;
             _currentLanguage = isAutoSet ? VRCPlayerApi.GetCurrentLanguage() : language;
@@ -112,8 +132,14 @@ namespace yukineko.WorldIntegratedMenu
             ApplyI18n();
         }
 
-        public void ApplyI18n()
+        public void ApplyI18n(bool isGlobal = false)
         {
+            if (masterManager != null)
+            {
+                if (isGlobal) masterManager.ApplyI18n();
+                return;
+            }
+
             if (_controller == null) return;
             _controller.UpdateTitle();
             foreach (var canvas in _controller.Canvas)
