@@ -24,7 +24,6 @@ namespace yukineko.WorldIntegratedMenu
 
         private VRCPlayerApi _player;
         private bool _isVR;
-        private BoxCollider _collider;
         private Quaternion _lockedRotation = Quaternion.identity;
         private Quaternion _inversedLastHandRotation = Quaternion.identity;
         private float _holdTime = 0.0f;
@@ -45,9 +44,7 @@ namespace yukineko.WorldIntegratedMenu
             }
             _player = Networking.LocalPlayer;
             _isVR = _player.IsUserInVR();
-            _collider = _canvas.GetComponent<BoxCollider>();
-            _canvas.SetActive(true);
-            _collider.enabled = false;
+            _canvas.SetActive(false);
 
             transform.SetParent(transform.root.parent, false);
             SetMenuSize(1f);
@@ -124,14 +121,13 @@ namespace yukineko.WorldIntegratedMenu
             {
                 _isShowing = true;
                 _cancelPostClose = true;
-                _collider.enabled = true;
+                _canvas.SetActive(true);
                 _uiManager.SetMenuParent(_panel.transform);
                 _displayController.SetBool("showMenu", true);
             }
             else
             {
                 _cancelPostClose = false;
-                _collider.enabled = false;
                 _displayController.SetBool("showMenu", false);
                 SendCustomEventDelayedSeconds(nameof(PostClose), 0.3f);
             }
@@ -141,6 +137,7 @@ namespace yukineko.WorldIntegratedMenu
         {
             if (_cancelPostClose) return;
             _uiManager.SetMenuParent(null);
+            _canvas.SetActive(false);
             _isShowing = false;
         }
     }
