@@ -16,9 +16,12 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      build: ${{ steps.variables.outputs.valid && steps.tag.outputs.exists }}
+      build: ${{ steps.variables.outputs.valid && !steps.tag.outputs.exists }}
       version: ${{ steps.package.outputs.version }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Validate Variables
         id: variables
         run: |
