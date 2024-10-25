@@ -41,7 +41,7 @@ jobs:
       - name: Tag Exist Check
         if: steps.variables.outputs.valid == 'true'
         id: tag
-        uses: action-pack/tag-exists@5ee89f68399a54a2c0b21710991efa055d8fdde1
+        uses: action-pack/tag-exists@v1
         with:
           tag: ${{ steps.package.outputs.version }}
 
