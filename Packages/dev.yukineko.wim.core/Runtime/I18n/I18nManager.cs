@@ -148,6 +148,11 @@ namespace yukineko.WorldIntegratedMenu
                 {
                     component.Apply(_currentLanguage);
                 }
+
+                foreach (var component in canvas.GetComponentsInChildren<ApplyTimeI18n>(true))
+                {
+                    component.Apply();
+                }
             }
         }
 

@@ -16,7 +16,7 @@ namespace yukineko.WorldIntegratedMenu
     {
         [SerializeField] private CloudSyncManager _cloudSyncManager;
         [SerializeField] private Animator _saveStatusAnimator;
-        [SerializeField] private Text _lastSaveTimeText;
+        [SerializeField] private ApplyTimeI18n _lastSaveTime;
         [SerializeField] private InputField _saveUrlCopyField;
         [SerializeField] private VRCUrlInputField _saveUrlPasteField;
         private VRCUrl _emptyUrl = new VRCUrl("");
@@ -24,7 +24,7 @@ namespace yukineko.WorldIntegratedMenu
 
         private void Start()
         {
-            if (_cloudSyncManager == null || _saveStatusAnimator == null || _lastSaveTimeText == null || _saveUrlCopyField == null || _saveUrlPasteField == null)
+            if (_cloudSyncManager == null || _saveStatusAnimator == null || _lastSaveTime == null || _saveUrlCopyField == null || _saveUrlPasteField == null)
             {
                 Debug.LogError("CloudSyncModule: Missing required components.");
                 return;
@@ -51,7 +51,8 @@ namespace yukineko.WorldIntegratedMenu
                     }
                     else
                     {
-                        _lastSaveTimeText.text = _cloudSyncManager.LastSaveTime.ToLocalTime().ToString("G", _i18nManager.CurrentCulture);
+                        _lastSaveTime.time = _cloudSyncManager.LastSaveTime.ToLocalTime();
+                        _lastSaveTime.Apply();
                         _saveStatusAnimator.SetTrigger("success");
                     }
                     break;
@@ -103,7 +104,7 @@ namespace yukineko.WorldIntegratedMenu
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_cloudSyncManager"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveStatusAnimator"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_lastSaveTimeText"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("_lastSaveTime"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveUrlCopyField"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveUrlPasteField"));
                 EditorGUI.indentLevel--;

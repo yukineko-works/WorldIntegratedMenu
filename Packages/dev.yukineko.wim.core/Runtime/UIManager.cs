@@ -16,8 +16,8 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private Transform _moduleContentContainer;
         [SerializeField] private Animator _moduleContentAnimator;
         [SerializeField] private Animator _navigationMenuAnimator;
-        [SerializeField] private Text _currentDate;
-        [SerializeField] private Text _currentTime;
+        [SerializeField] private ApplyTimeI18n _currentDate;
+        [SerializeField] private ApplyTimeI18n _currentTime;
         [SerializeField] private Text _homeWelcomeText;
         [SerializeField] private ModuleManager _moduleManager;
         [SerializeField] private ThemeManager _themeManager;
@@ -200,9 +200,8 @@ namespace yukineko.WorldIntegratedMenu
 
         public void UpdateCurrentDateTime()
         {
-            var now = DateTime.Now;
-            _currentDate.text = now.ToString("d", _i18nManager.CurrentCulture);
-            _currentTime.text = now.ToString("t", _i18nManager.CurrentCulture);
+            _currentDate.Apply();
+            _currentTime.Apply();
 
             var nextUpdate = 60 - DateTime.Now.Second;
             SendCustomEventDelayedSeconds(nameof(UpdateCurrentDateTime), nextUpdate);
