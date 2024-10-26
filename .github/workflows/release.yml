@@ -16,7 +16,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      build: ${{ steps.variables.outputs.valid && steps.tag.outputs.exists == 'false' }}
+      build: ${{ steps.variables.outputs.valid == 'true' && steps.tag.outputs.exists == 'false' }}
       version: ${{ steps.package.outputs.version }}
     steps:
       - name: Checkout
