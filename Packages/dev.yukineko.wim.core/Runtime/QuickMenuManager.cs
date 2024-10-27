@@ -24,6 +24,8 @@ namespace yukineko.WorldIntegratedMenu
 
         private VRCPlayerApi _player;
         private bool _isVR;
+        private BoxCollider _collider;
+        private GraphicRaycaster _raycaster;
         private Quaternion _lockedRotation = Quaternion.identity;
         private Quaternion _inversedLastHandRotation = Quaternion.identity;
         private float _holdTime = 0.0f;
@@ -44,7 +46,10 @@ namespace yukineko.WorldIntegratedMenu
             }
             _player = Networking.LocalPlayer;
             _isVR = _player.IsUserInVR();
-            _canvas.SetActive(false);
+            _collider = _canvas.GetComponent<BoxCollider>();
+            _raycaster = _canvas.GetComponent<GraphicRaycaster>();
+            _canvas.SetActive(true);
+            QMSetActive(false);
 
             transform.SetParent(transform.root.parent, false);
             SetMenuSize(1f);
@@ -121,13 +126,14 @@ namespace yukineko.WorldIntegratedMenu
             {
                 _isShowing = true;
                 _cancelPostClose = true;
-                _canvas.SetActive(true);
+                QMSetActive(true);
                 _uiManager.SetMenuParent(_panel.transform);
                 _displayController.SetBool("showMenu", true);
             }
             else
             {
                 _cancelPostClose = false;
+                QMSetActive(false);
                 _displayController.SetBool("showMenu", false);
                 SendCustomEventDelayedSeconds(nameof(PostClose), 0.3f);
             }
@@ -137,8 +143,13 @@ namespace yukineko.WorldIntegratedMenu
         {
             if (_cancelPostClose) return;
             _uiManager.SetMenuParent(null);
-            _canvas.SetActive(false);
             _isShowing = false;
+        }
+
+        private void QMSetActive(bool value)
+        {
+            _collider.enabled = value;
+            _raycaster.enabled = value;
         }
     }
 }
