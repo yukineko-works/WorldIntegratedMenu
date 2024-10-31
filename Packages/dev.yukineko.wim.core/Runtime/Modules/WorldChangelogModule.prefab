@@ -57,11 +57,11 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
-  m_VerticalFit: 1
+  m_VerticalFit: 2
 --- !u!1001 &4525520884151538093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ PrefabInstance:
     - target: {fileID: 3396984278628544261, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
       propertyPath: m_Name
-      value: WorldChangelogModule Variant
+      value: WorldChangelogModule
       objectReference: {fileID: 0}
     - target: {fileID: 3604861266348181739, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
