@@ -141,7 +141,14 @@ namespace yukineko.WorldIntegratedMenu
             }
 
             if (_controller == null) return;
+
+            if (!_isInitialized)
+            {
+                BuildLocalization();
+            }
+
             _controller.UpdateTitle();
+
             foreach (var canvas in _controller.Canvas)
             {
                 foreach (var component in canvas.GetComponentsInChildren<ApplyI18n>(true))
