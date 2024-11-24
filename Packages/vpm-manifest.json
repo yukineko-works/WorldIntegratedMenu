@@ -18,13 +18,13 @@
   },
   "locked": {
     "com.vrchat.worlds": {
-      "version": "3.7.1",
+      "version": "3.7.4",
       "dependencies": {
-        "com.vrchat.base": "3.7.1"
+        "com.vrchat.base": "3.7.4"
       }
     },
     "com.vrchat.base": {
-      "version": "3.7.1",
+      "version": "3.7.4",
       "dependencies": {}
     },
     "com.vrchat.core.vpm-resolver": {
@@ -36,9 +36,9 @@
       "dependencies": {}
     },
     "dev.yukineko.dev-utils": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "dependencies": {
-        "com.vrchat.worlds": "3.7.1"
+        "com.vrchat.worlds": ">=3.7.1"
       }
     },
     "com.anatawa12.vpm-package-auto-installer.creator": {
