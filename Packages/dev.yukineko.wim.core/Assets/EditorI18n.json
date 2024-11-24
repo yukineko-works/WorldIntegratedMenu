@@ -45,7 +45,8 @@
         "themeManagerNotFound": "ThemeManagerが見つかりません",
         "presetsNotFound": "プリセットが見つかりません",
         "playModeWarning": "プレイモード中は編集できません",
-        "pleasePlaceInScene": "シーンに配置してください"
+        "pleasePlaceInScene": "シーンに配置してください",
+        "persistValue": "値を永続化する"
     },
     "en": {
         "moduleName": "Module Name",
@@ -93,7 +94,8 @@
         "themeManagerNotFound": "ThemeManager not found",
         "presetsNotFound": "Presets not found",
         "playModeWarning": "Cannot edit in play mode",
-        "pleasePlaceInScene": "Please place in scene"
+        "pleasePlaceInScene": "Please place in scene",
+        "persistValue": "Persist value"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -141,7 +143,8 @@
         "themeManagerNotFound": "未找到ThemeManager",
         "presetsNotFound": "未找到预设",
         "playModeWarning": "无法在播放模式下编辑",
-        "pleasePlaceInScene": "请放置在场景中"
+        "pleasePlaceInScene": "请放置在场景中",
+        "persistValue": "持久化值"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -189,7 +192,8 @@
         "themeManagerNotFound": "未找到ThemeManager",
         "presetsNotFound": "未找到預設",
         "playModeWarning": "無法在播放模式下編輯",
-        "pleasePlaceInScene": "請放置在場景中"
+        "pleasePlaceInScene": "請放置在場景中",
+        "persistValue": "持久化值"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -237,6 +241,7 @@
         "themeManagerNotFound": "ThemeManager를 찾을 수 없습니다",
         "presetsNotFound": "프리셋을 찾을 수 없습니다",
         "playModeWarning": "재생 모드에서는 편집할 수 없습니다",
-        "pleasePlaceInScene": "씬에 배치하십시오"
+        "pleasePlaceInScene": "씬에 배치하십시오",
+        "persistValue": "값 유지"
     }
 }
