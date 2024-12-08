@@ -15,6 +15,7 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private Animator _displayController;
         [SerializeField] private Slider _percentageSlider;
         [SerializeField] private ApplyI18n _tutorialTextI18n;
+        [SerializeField] private QuickMenuManager _quickMenuManager;
         [SerializeField] private float _displayTime = 5.0f;
         [SerializeField] private Vector3 _desktopScreenPosition = new Vector3(0f, -0.1f, 0.3f);
         [SerializeField] private Vector3 _vrScreenPosition = new Vector3(0f, -0.05f, 0.3f);
@@ -41,7 +42,24 @@ namespace yukineko.WorldIntegratedMenu
             _player = Networking.LocalPlayer;
             _isVR = _player.IsUserInVR();
             _currentDisplayTime = _displayTime;
-            _tutorialTextI18n.key = _isVR ? "tutorialTextInVR" : "tutorialTextInDesktop";
+
+            if (_isVR && _quickMenuManager != null)
+            {
+                switch(_quickMenuManager.CurrentOpenMethod)
+                {
+                    case VRQuickMenuOpenMethod.Stick:
+                        _tutorialTextI18n.key = "tutorialTextInVRStick";
+                        break;
+                    case VRQuickMenuOpenMethod.Trigger:
+                        _tutorialTextI18n.key = "tutorialTextInVRTrigger";
+                        break;
+                }
+            }
+            else
+            {
+                _tutorialTextI18n.key = "tutorialTextInDesktop";
+            }
+
             _tutorialTextI18n.Apply();
 
             transform.SetParent(transform.root.parent);

@@ -49,6 +49,7 @@ namespace yukineko.WorldIntegratedMenu
         public bool IsOpened => _holdTime >= _vrHoldTime;
         public bool IsOpening => _isInputting && !IsOpened;
         public VRQuickMenuOpenMethod DefaultOpenMethod => _defaultOpenMethod;
+        public VRQuickMenuOpenMethod CurrentOpenMethod => _vrOpenMethod;
 
         private void Start()
         {
