@@ -4,34 +4,59 @@
         "languageSetting": "言語設定 / Language Setting",
         "auto": "auto / 自動設定",
         "quickMenuSize": "クイックメニューのサイズ",
-        "qmSizeNotice": "VRChatの仕様上、小さくするとスクロールがしづらくなります"
+        "qmSizeNotice": "VRChatの仕様上、小さくするとスクロールがしづらくなります",
+        "qmOpenMethod": "クイックメニューのキーバインド",
+        "default": "ワールドの設定に従う",
+        "stick": "スティック",
+        "trigger": "トリガー",
+        "qmOpenMethodNotice": "スティック: 右コントローラーのスティックを上方向に入力して開く\nトリガー: 右コントローラーのトリガーを素早く2回押して開く"
     },
     "en": {
         "$moduleName": "System Settings",
         "languageSetting": "Language Setting",
         "auto": "auto",
         "quickMenuSize": "Quick Menu Size",
-        "qmSizeNotice": "Due to the specifications of VRChat, scrolling becomes difficult when it is reduced"
+        "qmSizeNotice": "Due to the specifications of VRChat, scrolling becomes difficult when it is reduced",
+        "qmOpenMethod": "Quick Menu Open Method",
+        "default": "Follow the world settings",
+        "stick": "Stick",
+        "trigger": "Trigger",
+        "qmOpenMethodNotice": "Stick: Open by inputting the stick of the right controller upwards\nTrigger: Open by quickly pressing the trigger of the right controller twice"
     },
     "zh-CN": {
         "$moduleName": "系统设置",
         "languageSetting": "语言设置 / Language Setting",
         "auto": "auto / 自动设置",
         "quickMenuSize": "快捷菜单大小",
-        "qmSizeNotice": "由于VRChat的规格，缩小后滚动会变得困难"
+        "qmSizeNotice": "由于VRChat的规格，缩小后滚动会变得困难",
+        "qmOpenMethod": "快捷菜单打开方式",
+        "default": "遵循世界设置",
+        "stick": "摇杆",
+        "trigger": "扳机",
+        "qmOpenMethodNotice": "摇杆: 通过输入右控制器的摇杆向上打开\n扳机: 通过快速按两次右控制器的扳机打开"
     },
     "zh-TW": {
         "$moduleName": "系統設定",
         "languageSetting": "語言設定 / Language Setting",
         "auto": "auto / 自動設定",
         "quickMenuSize": "快速選單大小",
-        "qmSizeNotice": "由於VRChat的規格，縮小後滾動會變得困難"
+        "qmSizeNotice": "由於VRChat的規格，縮小後滾動會變得困難",
+        "qmOpenMethod": "快速選單開啟方式",
+        "default": "遵循世界設定",
+        "stick": "搖桿",
+        "trigger": "扳機",
+        "qmOpenMethodNotice": "搖桿: 通過輸入右控制器的搖桿向上打開\n扳機: 通過快速按兩次右控制器的扳機打開"
     },
     "ko": {
         "$moduleName": "시스템 설정",
         "languageSetting": "언어 설정 / Language Setting",
         "auto": "auto / 자동 설정",
         "quickMenuSize": "퀵 메뉴 크기",
-        "qmSizeNotice": "VRChat의 사양상 작게 만들면 스크롤이 어려워집니다"
+        "qmSizeNotice": "VRChat의 사양상 작게 만들면 스크롤이 어려워집니다",
+        "qmOpenMethod": "퀵 메뉴 열기 방법",
+        "default": "월드 설정을 따름",
+        "stick": "스틱",
+        "trigger": "트리거",
+        "qmOpenMethodNotice": "스틱: 오른쪽 컨트롤러의 스틱을 위로 입력하여 열기\n트리거: 오른쪽 컨트롤러의 트리거를 빠르게 2번 눌러 열기"
     }
 }

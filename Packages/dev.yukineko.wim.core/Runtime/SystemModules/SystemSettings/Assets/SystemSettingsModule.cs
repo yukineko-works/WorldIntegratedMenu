@@ -16,6 +16,7 @@ namespace yukineko.WorldIntegratedMenu
     {
         [SerializeField] private I18nManager _systemI18nManager;
         [SerializeField] private RadioButtonHelper _languageSelector;
+        [SerializeField] private RadioButtonHelper _qmKeybindSelector;
         [SerializeField] private QuickMenuManager _quickMenuManager;
         [SerializeField] private CloudSyncManager _cloudSyncManager;
         [SerializeField] private Text _quickMenuSizeText;
@@ -30,7 +31,7 @@ namespace yukineko.WorldIntegratedMenu
 
         private void Start()
         {
-            if (_systemI18nManager == null || _languageSelector == null || _quickMenuManager == null || _cloudSyncManager == null || _quickMenuSizeText == null)
+            if (_systemI18nManager == null || _languageSelector == null || _qmKeybindSelector == null || _quickMenuManager == null || _cloudSyncManager == null || _quickMenuSizeText == null)
             {
                 Debug.LogError("SystemSettingsModule: Missing required components.");
                 return;
@@ -64,6 +65,12 @@ namespace yukineko.WorldIntegratedMenu
                 ChangeQuickMenuSize(true);
             }
 
+            if (data.ContainsKey("qmkeybind") && data.TryGetValue("qmkeybind", out var keybind))
+            {
+                _qmKeybindSelector.SetValue(keybind.String);
+                UpdateQMKeyBind(keybind.String);
+            }
+
             if (data.ContainsKey("lang") && data.TryGetValue("lang", out var lang))
             {
                 _languageSelector.SetValue(lang.String);
@@ -79,6 +86,30 @@ namespace yukineko.WorldIntegratedMenu
             var language = _languageSelector.Value;
             _systemI18nManager.SetLanguage(language);
             _cloudSyncManager.SaveQueue.SetValue("lang", language);
+        }
+
+        public void UpdateQMKeyBind()
+        {
+            if (_quickMenuManager == null) return;
+            if (_qmKeybindSelector == null) return;
+            UpdateQMKeyBind(_qmKeybindSelector.Value);
+            _cloudSyncManager.SaveQueue.SetValue("qmkeybind", _qmKeybindSelector.Value);
+        }
+
+        public void UpdateQMKeyBind(string value)
+        {
+            switch (value)
+            {
+                case "default":
+                    _quickMenuManager.ResetOpenMethod();
+                    break;
+                case "stick":
+                    _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.Stick);
+                    break;
+                case "trigger":
+                    _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.Trigger);
+                    break;
+            }
         }
 
         public void QMSizeUp()
@@ -181,6 +212,7 @@ namespace yukineko.WorldIntegratedMenu
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_systemI18nManager"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_languageSelector"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("_qmKeybindSelector"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuManager"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_cloudSyncManager"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuSizeText"));
