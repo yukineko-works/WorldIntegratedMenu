@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,12 @@ using VRC.Udon.Common;
 
 namespace yukineko.WorldIntegratedMenu
 {
+    public enum VRQuickMenuOpenMethod
+    {
+        Stick,
+        Trigger
+    }
+
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class QuickMenuManager : UdonSharpBehaviour
     {
@@ -21,11 +28,14 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private float _desktopQuickMenuStandardSize = 0.00025f;
         [SerializeField] private float _vrHoldTime = 0.5f;
         [SerializeField] private float _controllerInputThreshold = 0.1f;
+        [SerializeField] private int _vrToggleOpenThreshold = 500;
+        [SerializeField] private VRQuickMenuOpenMethod _vrOpenMethod = VRQuickMenuOpenMethod.Stick;
 
         private VRCPlayerApi _player;
         private bool _isVR;
         private BoxCollider _collider;
         private GraphicRaycaster _raycaster;
+        private VRQuickMenuOpenMethod _defaultOpenMethod;
         private Quaternion _lockedRotation = Quaternion.identity;
         private Quaternion _inversedLastHandRotation = Quaternion.identity;
         private float _holdTime = 0.0f;
@@ -33,9 +43,12 @@ namespace yukineko.WorldIntegratedMenu
         private bool _isShowing = false;
         private bool _isInputting = false;
         private bool _cancelPostClose = false;
+        private bool _vrToggleOpen = false;
+        private long _vrToggleLastInput = 0;
 
         public bool IsOpened => _holdTime >= _vrHoldTime;
         public bool IsOpening => _isInputting && !IsOpened;
+        public VRQuickMenuOpenMethod DefaultOpenMethod => _defaultOpenMethod;
 
         private void Start()
         {
@@ -53,6 +66,8 @@ namespace yukineko.WorldIntegratedMenu
 
             transform.SetParent(transform.root.parent, false);
             SetMenuSize(1f);
+
+            _defaultOpenMethod = _vrOpenMethod;
             _isInitialized = true;
         }
 
@@ -63,24 +78,42 @@ namespace yukineko.WorldIntegratedMenu
 
             if (_isVR)
             {
-                if (!_isInputting && !_isShowing) return;
+                if (_vrOpenMethod == VRQuickMenuOpenMethod.Stick && !_isInputting && !_isShowing) return;
+                if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger && !_vrToggleOpen && !_isShowing) return;
+
                 var rightHandTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand);
+                var qmPosition = rightHandTrackingData.position + (rightHandTrackingData.rotation * _vrScreenPosition);
 
-                if (IsOpening)
+                // Stick
+                if (_vrOpenMethod == VRQuickMenuOpenMethod.Stick)
                 {
-                    _holdTime += Time.deltaTime;
-                    _progressBar.value = _holdTime / _vrHoldTime;
+                    if (IsOpening)
+                    {
+                        _holdTime += Time.deltaTime;
+                        _progressBar.value = _holdTime / _vrHoldTime;
 
-                    var headTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
-                    _lockedRotation = Quaternion.LookRotation(transform.position - headTrackingData.position);
+                        var headTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
+                        _lockedRotation = Quaternion.LookRotation(qmPosition - headTrackingData.position);
+                    }
+                    else if (!_isShowing)
+                    {
+                        _inversedLastHandRotation = Quaternion.Inverse(rightHandTrackingData.rotation);
+                        ShowMenu(true);
+                    }
                 }
-                else if (!_isShowing)
+                // Trigger
+                else if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger)
                 {
-                    _inversedLastHandRotation = Quaternion.Inverse(rightHandTrackingData.rotation);
-                    ShowMenu(true);
+                    if (_vrToggleOpen && !_isShowing)
+                    {
+                        var headTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
+                        _lockedRotation = Quaternion.LookRotation(qmPosition - headTrackingData.position);
+                        _inversedLastHandRotation = Quaternion.Inverse(rightHandTrackingData.rotation);
+                        ShowMenu(true);
+                    }
                 }
 
-                transform.SetPositionAndRotation(rightHandTrackingData.position + (rightHandTrackingData.rotation * _vrScreenPosition), IsOpening ? _lockedRotation : rightHandTrackingData.rotation * _inversedLastHandRotation * _lockedRotation);
+                transform.SetPositionAndRotation(qmPosition, !_isShowing ? _lockedRotation : rightHandTrackingData.rotation * _inversedLastHandRotation * _lockedRotation);
             }
             else
             {
@@ -95,7 +128,7 @@ namespace yukineko.WorldIntegratedMenu
 
         public override void InputLookVertical(float value, UdonInputEventArgs args)
         {
-            if (!_isVR) return;
+            if (!_isVR || _vrOpenMethod != VRQuickMenuOpenMethod.Stick) return;
             if (value < (1 - _controllerInputThreshold))
             {
                 _holdTime = 0.0f;
@@ -109,6 +142,30 @@ namespace yukineko.WorldIntegratedMenu
             _displayController.SetBool("showProgress", true);
         }
 
+        public override void InputUse(bool state, UdonInputEventArgs args)
+        {
+            if (
+                !_isVR ||
+                !state ||
+                _vrOpenMethod != VRQuickMenuOpenMethod.Trigger ||
+                args.handType != HandType.RIGHT ||
+                _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null
+            ) return;
+
+            var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            var diff = now - _vrToggleLastInput;
+            if (0 >= diff || diff > _vrToggleOpenThreshold)
+            {
+                _vrToggleLastInput = now;
+                return;
+            }
+
+            _vrToggleOpen = !_vrToggleOpen;
+            _vrToggleLastInput = 0;
+
+            if (_isShowing) ShowMenu(false);
+        }
+
         public void SetMenuSize(float value)
         {
             var size = (_isVR ? _vrQuickMenuStandardSize : _desktopQuickMenuStandardSize) * value;
@@ -118,6 +175,18 @@ namespace yukineko.WorldIntegratedMenu
         public void SetScreenPosition(Vector3 value)
         {
             _vrScreenPosition = value;
+        }
+
+        public void ResetOpenMethod()
+        {
+            SetOpenMethod(_defaultOpenMethod);
+        }
+
+        public void SetOpenMethod(VRQuickMenuOpenMethod value)
+        {
+            _vrToggleOpen = false;
+            _displayController.SetBool("showProgress", false);
+            _vrOpenMethod = value;
         }
 
         public void ShowMenu(bool show)
