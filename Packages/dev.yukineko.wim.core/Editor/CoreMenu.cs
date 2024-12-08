@@ -17,6 +17,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private ReorderableList _reorderableList;
         private ThemePreset[] _themes;
         private SerializedObject _themeManagerSerializedObject;
+        private SerializedObject _quickMenuManagerSerializedObject;
         private List<string> _usedUniqueModuleIds;
         private List<string> _duplicatedUniqueModuleIds;
 
@@ -26,6 +27,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private string[] _themeNames = new string[0];
         private int _selectedThemeIndex = 0;
         private bool _showThemeSettings = false;
+        private Dictionary<VRQuickMenuOpenMethod, string> _vrOpenMethodNames = new Dictionary<VRQuickMenuOpenMethod, string>
+        {
+            { VRQuickMenuOpenMethod.Stick, "openByStick" },
+            { VRQuickMenuOpenMethod.Trigger, "openByTrigger" }
+        };
 
         private void OnEnable()
         {
@@ -35,8 +41,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
             var moduleManager = gameObject.GetComponentInChildren<ModuleManager>(true);
             _moduleContainer = moduleManager == null ? null : moduleManager.ModulesRoot;
-            _themeManager = gameObject.GetComponentInChildren<ThemeManager>(true);
 
+            _themeManager = gameObject.GetComponentInChildren<ThemeManager>(true);
             if (_themeManager != null)
             {
                 _themeManagerSerializedObject = new SerializedObject(_themeManager);
@@ -58,6 +64,12 @@ namespace yukineko.WorldIntegratedMenu.Editor
                         }
                     }
                 }
+            }
+
+            var quickMenuManager = gameObject.GetComponentInChildren<QuickMenuManager>(true);
+            if (quickMenuManager != null)
+            {
+                _quickMenuManagerSerializedObject = new SerializedObject(quickMenuManager);
             }
         }
 
@@ -194,7 +206,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
             EditorGUILayout.Space(24);
             var tabs = new[]
             {
-                EditorI18n.GetTranslation("moduleSettings"),
+                EditorI18n.GetTranslation("mainSettings"),
                 EditorI18n.GetTranslation("themeSettings"),
                 EditorI18n.GetTranslation("versionInfo")
             };
@@ -205,7 +217,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
             switch (_selectedTabIndex)
             {
                 case 0:
-                    TabModuleSettings();
+                    TabMainSettings();
                     break;
                 case 1:
                     TabThemeSettings();
@@ -216,8 +228,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
         }
 
-        private void TabModuleSettings()
+        private void TabMainSettings()
         {
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("moduleSettings"), EditorStyles.largeLabel);
+            EditorGUILayout.Space();
+
             if (_moduleContainer == null)
             {
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("moduleContainerNotFound"), MessageType.Error);
@@ -233,6 +248,35 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     var duplicatedModules = string.Join("\n", _duplicatedUniqueModuleIds.Select(id => "- " + (ModuleRegistry.ModuleList.TryGetValue(id, out var m) ? m.GetTitle() : id)).ToArray());
                     EditorGUILayout.Space();
                     EditorGUILayout.HelpBox($"{EditorI18n.GetTranslation("uniqueModuleDuplicatedError")}\n{duplicatedModules}", MessageType.Error);
+                }
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("otherSettings"), EditorStyles.largeLabel);
+            EditorGUILayout.Space();
+
+            if (_quickMenuManagerSerializedObject == null)
+            {
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("quickMenuManagerNotFound"), MessageType.Error);
+            }
+            else
+            {
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("menuOpenMethodInVR"));
+
+                var enumCount = Enum.GetNames(typeof(VRQuickMenuOpenMethod)).Length;
+                var enumNames = new string[enumCount];
+
+                for (var i = 0; i < enumCount; i++)
+                {
+                    enumNames[i] = EditorI18n.GetTranslation(_vrOpenMethodNames[(VRQuickMenuOpenMethod)i]);
+                }
+
+                var selectedOpenMethod = _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex;
+                var newOpenMethod = EditorGUILayout.Popup(selectedOpenMethod, enumNames);
+                if (newOpenMethod != selectedOpenMethod)
+                {
+                    _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex = newOpenMethod;
+                    _quickMenuManagerSerializedObject.ApplyModifiedProperties();
                 }
             }
         }

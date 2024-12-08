@@ -33,6 +33,7 @@
         "assetList": "アセットリスト",
         "worldChangelog": "ワールド更新履歴",
         "freeText": "フリーテキスト",
+        "mainSettings": "メイン設定",
         "moduleSettings": "モジュール設定",
         "themeSettings": "テーマ設定",
         "versionInfo": "バージョン情報",
@@ -46,7 +47,12 @@
         "presetsNotFound": "プリセットが見つかりません",
         "playModeWarning": "プレイモード中は編集できません",
         "pleasePlaceInScene": "シーンに配置してください",
-        "persistValue": "値を永続化する"
+        "persistValue": "値を永続化する",
+        "otherSettings": "その他の設定",
+        "menuOpenMethodInVR": "VRでのクイックメニューの開き方",
+        "openByStick": "右コントローラーで上方向に入力して開く (デフォルト)",
+        "openByTrigger": "右コントローラーのトリガーを素早く2回押して開く",
+        "quickMenuManagerNotFound": "QuickMenuManagerが見つかりません"
     },
     "en": {
         "moduleName": "Module Name",
@@ -82,6 +88,7 @@
         "assetList": "Asset List",
         "worldChangelog": "World Changelog",
         "freeText": "Free Text",
+        "mainSettings": "Main Settings",
         "moduleSettings": "Module Settings",
         "themeSettings": "Theme Settings",
         "versionInfo": "Version Info",
@@ -95,7 +102,12 @@
         "presetsNotFound": "Presets not found",
         "playModeWarning": "Cannot edit in play mode",
         "pleasePlaceInScene": "Please place in scene",
-        "persistValue": "Persist value"
+        "persistValue": "Persist value",
+        "otherSettings": "Other Settings",
+        "menuOpenMethodInVR": "Menu Open Method in VR",
+        "openByStick": "Open by inputting upward on the right controller (Default)",
+        "openByTrigger": "Open by quickly pressing the trigger on the right controller twice",
+        "quickMenuManagerNotFound": "QuickMenuManager not found"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -131,6 +143,7 @@
         "assetList": "资产列表",
         "worldChangelog": "世界更新日志",
         "freeText": "自由文本",
+        "mainSettings": "主要设置",
         "moduleSettings": "模块设置",
         "themeSettings": "主题设置",
         "versionInfo": "版本信息",
@@ -144,7 +157,12 @@
         "presetsNotFound": "未找到预设",
         "playModeWarning": "无法在播放模式下编辑",
         "pleasePlaceInScene": "请放置在场景中",
-        "persistValue": "持久化值"
+        "persistValue": "持久化值",
+        "otherSettings": "其他设置",
+        "menuOpenMethodInVR": "VR中的菜单打开方式",
+        "openByStick": "通过在右控制器上输入向上打开 (默认)",
+        "openByTrigger": "通过快速两次按下右控制器的扳机打开",
+        "quickMenuManagerNotFound": "未找到QuickMenuManager"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -180,6 +198,7 @@
         "assetList": "資產列表",
         "worldChangelog": "世界更新日誌",
         "freeText": "自由文本",
+        "mainSettings": "主要設置",
         "moduleSettings": "模組設置",
         "themeSettings": "主題設置",
         "versionInfo": "版本信息",
@@ -193,7 +212,12 @@
         "presetsNotFound": "未找到預設",
         "playModeWarning": "無法在播放模式下編輯",
         "pleasePlaceInScene": "請放置在場景中",
-        "persistValue": "持久化值"
+        "persistValue": "持久化值",
+        "otherSettings": "其他設置",
+        "menuOpenMethodInVR": "VR中的菜單打開方式",
+        "openByStick": "通過在右控制器上輸入向上打開 (默認)",
+        "openByTrigger": "通過快速兩次按下右控制器的扳機打開",
+        "quickMenuManagerNotFound": "未找到QuickMenuManager"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -229,6 +253,7 @@
         "assetList": "자산 목록",
         "worldChangelog": "월드 변경 로그",
         "freeText": "프리 텍스트",
+        "mainSettings": "메인 설정",
         "moduleSettings": "모듈 설정",
         "themeSettings": "테마 설정",
         "versionInfo": "버전 정보",
@@ -242,6 +267,11 @@
         "presetsNotFound": "프리셋을 찾을 수 없습니다",
         "playModeWarning": "재생 모드에서는 편집할 수 없습니다",
         "pleasePlaceInScene": "씬에 배치하십시오",
-        "persistValue": "값 유지"
+        "persistValue": "값 유지",
+        "otherSettings": "기타 설정",
+        "menuOpenMethodInVR": "VR에서 메뉴 열기 방법",
+        "openByStick": "오른쪽 컨트롤러에서 위로 입력하여 열기 (기본값)",
+        "openByTrigger": "오른쪽 컨트롤러의 트리 거를 빠르게 두 번 눌러 열기",
+        "quickMenuManagerNotFound": "QuickMenuManager를 찾을 수 없습니다"
     }
 }
