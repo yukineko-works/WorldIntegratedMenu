@@ -36,7 +36,7 @@
       "dependencies": {}
     },
     "dev.yukineko.dev-utils": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "dependencies": {
         "com.vrchat.worlds": ">=3.7.1"
       }
