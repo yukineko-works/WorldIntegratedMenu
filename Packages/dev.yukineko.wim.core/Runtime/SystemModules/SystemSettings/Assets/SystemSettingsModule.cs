@@ -85,7 +85,7 @@ namespace yukineko.WorldIntegratedMenu
 
             var language = _languageSelector.Value;
             _systemI18nManager.SetLanguage(language);
-            _cloudSyncManager.SaveQueue.SetValue("lang", language);
+            _cloudSyncManager.Save("lang", language);
         }
 
         public void UpdateQMKeyBind()
@@ -93,7 +93,7 @@ namespace yukineko.WorldIntegratedMenu
             if (_quickMenuManager == null) return;
             if (_qmKeybindSelector == null) return;
             UpdateQMKeyBind(_qmKeybindSelector.Value);
-            _cloudSyncManager.SaveQueue.SetValue("qmkeybind", _qmKeybindSelector.Value);
+            _cloudSyncManager.Save("qmkeybind", _qmKeybindSelector.Value);
         }
 
         public void UpdateQMKeyBind(string value)
@@ -167,7 +167,7 @@ namespace yukineko.WorldIntegratedMenu
 
             _quickMenuManager.SetMenuSize(_quickMenuSize);
             _quickMenuSizeText.text = _quickMenuSize.ToString("P0");
-            if (!skipSave) _cloudSyncManager.SaveQueue.SetValue("qmsize", _quickMenuSize);
+            if (!skipSave) _cloudSyncManager.Save("qmsize", _quickMenuSize);
         }
 
         public void ChangeQuickMenuPosition()

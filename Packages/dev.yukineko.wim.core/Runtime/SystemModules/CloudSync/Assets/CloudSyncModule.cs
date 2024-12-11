@@ -20,7 +20,6 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private InputField _saveUrlCopyField;
         [SerializeField] private VRCUrlInputField _saveUrlPasteField;
         private VRCUrl _emptyUrl = new VRCUrl("");
-        private I18nManager _i18nManager;
 
         private void Start()
         {
@@ -31,9 +30,6 @@ namespace yukineko.WorldIntegratedMenu
             }
 
             _saveStatusAnimator.keepAnimatorStateOnDisable = true;
-            _cloudSyncManager.OnLoad(this, nameof(RefreshStatus));
-
-            _i18nManager = GetComponent<I18nManager>();
         }
 
         public void RefreshStatus()
@@ -53,6 +49,7 @@ namespace yukineko.WorldIntegratedMenu
                     {
                         _lastSaveTime.time = _cloudSyncManager.LastSaveTime.ToLocalTime();
                         _lastSaveTime.Apply();
+                        _saveStatusAnimator.SetBool("fromPersistence", _cloudSyncManager.UsingPersistenceData);
                         _saveStatusAnimator.SetTrigger("success");
                     }
                     break;
@@ -65,6 +62,7 @@ namespace yukineko.WorldIntegratedMenu
         public void OnModuleCalled()
         {
             _saveUrlCopyField.text = _cloudSyncManager.GetSaveUrl();
+            RefreshStatus();
         }
 
         public void OnSaveRequested()
