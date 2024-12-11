@@ -248,6 +248,11 @@ PrefabInstance:
       propertyPath: _syncMethod
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1569516798233874884, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 35630e38b4e5ffb40b44ec5348b4333f, type: 2}
     - target: {fileID: 2296315216482276141, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -303,6 +308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WorldChangelogModule
       objectReference: {fileID: 0}
+    - target: {fileID: 3494123409107547500, guid: 83284499c9ef31a4c8146cbc4ba59caf,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 35630e38b4e5ffb40b44ec5348b4333f, type: 2}
     - target: {fileID: 3604861266348181739, guid: 83284499c9ef31a4c8146cbc4ba59caf,
         type: 3}
       propertyPath: m_AnchorMax.x
