@@ -75,7 +75,7 @@ jobs:
       - name: Make Release
         uses: softprops/action-gh-release@v2
         with:
-          prerelease: ${{ contains(env.VERSION, fromJson('["alpha", "beta", "rc"]')) }}
+          prerelease: ${{ contains(env.VERSION, 'alpha') || contains(env.VERSION, 'beta') || contains(env.VERSION, 'rc') }}
           tag_name: ${{ env.VERSION }}
           files: |
             ${{ env.ZIP_FILE }}
