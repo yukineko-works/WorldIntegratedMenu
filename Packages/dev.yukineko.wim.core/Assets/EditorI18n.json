@@ -57,7 +57,8 @@
         "defaultOpenModule": "デフォルトで開くモジュール",
         "none": "なし (ホームを開く)",
         "homeSettings": "ホーム設定",
-        "enableCustomWelcomeText": "ホーム画面上部のメッセージ (WelcomeText) を変更する"
+        "enableCustomWelcomeText": "ホーム画面上部のメッセージ (WelcomeText) を変更する",
+        "beforeDisableCustomWelcomeText": "ホーム画面上部のメッセージを初期状態に戻しますか？\n現在設定されている内容は削除されます。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -117,7 +118,8 @@
         "defaultOpenModule": "Default Open Module",
         "none": "None (Open Home)",
         "homeSettings": "Home Settings",
-        "enableCustomWelcomeText": "Change the message at the top of the home screen (WelcomeText)"
+        "enableCustomWelcomeText": "Change the message at the top of the home screen (WelcomeText)",
+        "beforeDisableCustomWelcomeText": "Do you want to revert the message at the top of the home screen to the initial state?\nThe currently set content will be deleted."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -177,7 +179,8 @@
         "defaultOpenModule": "默认打开模块",
         "none": "无 (打开主页)",
         "homeSettings": "主页设置",
-        "enableCustomWelcomeText": "更改主屏幕顶部的消息 (WelcomeText)"
+        "enableCustomWelcomeText": "更改主屏幕顶部的消息 (WelcomeText)",
+        "beforeDisableCustomWelcomeText": "您要将主屏幕顶部的消息恢复为初始状态吗？\n当前设置的内容将被删除。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -237,7 +240,8 @@
         "defaultOpenModule": "默認打開模組",
         "none": "無 (打開主頁)",
         "homeSettings": "主頁設置",
-        "enableCustomWelcomeText": "更改主屏幕頂部的消息 (WelcomeText)"
+        "enableCustomWelcomeText": "更改主屏幕頂部的消息 (WelcomeText)",
+        "beforeDisableCustomWelcomeText": "您要將主屏幕頂部的消息恢復為初始狀態嗎？\n當前設置的內容將被刪除。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -297,6 +301,7 @@
         "defaultOpenModule": "기본 열기 모듈",
         "none": "없음 (홈 열기)",
         "homeSettings": "홈 설정",
-        "enableCustomWelcomeText": "홈 화면 상단 메시지 (WelcomeText) 변경"
+        "enableCustomWelcomeText": "홈 화면 상단 메시지 (WelcomeText) 변경",
+        "beforeDisableCustomWelcomeText": "홈 화면 상단 메시지를 초기 상태로 되돌리시겠습니까?\n현재 설정된 내용이 삭제됩니다."
     }
 }

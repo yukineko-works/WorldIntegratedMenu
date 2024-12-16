@@ -303,7 +303,13 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 }
                 else
                 {
-                    customWelcomeText.stringValue = null;
+                    if (!string.IsNullOrEmpty(customWelcomeText.stringValue))
+                    {
+                        if (EditorUtility.DisplayDialog(EditorI18n.GetTranslation("warning"), EditorI18n.GetTranslation("beforeDisableCustomWelcomeText"), EditorI18n.GetTranslation("delete"), EditorI18n.GetTranslation("cancel")))
+                        {
+                            customWelcomeText.stringValue = null;
+                        }
+                    }
                 }
 
                 _uiManagerSerializedObject.ApplyModifiedProperties();
