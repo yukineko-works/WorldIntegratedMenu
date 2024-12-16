@@ -282,6 +282,34 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
 
             EditorGUILayout.Space();
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("homeSettings"), EditorStyles.largeLabel);
+            EditorGUILayout.Space();
+
+            if (_uiManagerSerializedObject == null)
+            {
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
+            }
+            else
+            {
+                var customWelcomeText = _uiManagerSerializedObject.FindProperty("_customWelcomeText");
+                var enableCustomWelcomeText = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("enableCustomWelcomeText"), !string.IsNullOrEmpty(customWelcomeText.stringValue));
+                if (enableCustomWelcomeText)
+                {
+                    customWelcomeText.stringValue = EditorGUILayout.TextField(customWelcomeText.stringValue.Replace("<EMPTY>", ""));
+                    if (string.IsNullOrEmpty(customWelcomeText.stringValue))
+                    {
+                        customWelcomeText.stringValue = "<EMPTY>";
+                    }
+                }
+                else
+                {
+                    customWelcomeText.stringValue = null;
+                }
+
+                _uiManagerSerializedObject.ApplyModifiedProperties();
+            }
+
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField(EditorI18n.GetTranslation("otherSettings"), EditorStyles.largeLabel);
             EditorGUILayout.Space();
 

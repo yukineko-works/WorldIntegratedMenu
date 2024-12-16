@@ -55,7 +55,9 @@
         "quickMenuManagerNotFound": "QuickMenuManagerが見つかりません",
         "uiManagerNotFound": "UIManagerが見つかりません",
         "defaultOpenModule": "デフォルトで開くモジュール",
-        "none": "なし (ホームを開く)"
+        "none": "なし (ホームを開く)",
+        "homeSettings": "ホーム設定",
+        "enableCustomWelcomeText": "ホーム画面上部のメッセージ (WelcomeText) を変更する"
     },
     "en": {
         "moduleName": "Module Name",
@@ -113,7 +115,9 @@
         "quickMenuManagerNotFound": "QuickMenuManager not found",
         "uiManagerNotFound": "UIManager not found",
         "defaultOpenModule": "Default Open Module",
-        "none": "None (Open Home)"
+        "none": "None (Open Home)",
+        "homeSettings": "Home Settings",
+        "enableCustomWelcomeText": "Change the message at the top of the home screen (WelcomeText)"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -171,7 +175,9 @@
         "quickMenuManagerNotFound": "未找到QuickMenuManager",
         "uiManagerNotFound": "未找到UIManager",
         "defaultOpenModule": "默认打开模块",
-        "none": "无 (打开主页)"
+        "none": "无 (打开主页)",
+        "homeSettings": "主页设置",
+        "enableCustomWelcomeText": "更改主屏幕顶部的消息 (WelcomeText)"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -229,7 +235,9 @@
         "quickMenuManagerNotFound": "未找到QuickMenuManager",
         "uiManagerNotFound": "未找到UIManager",
         "defaultOpenModule": "默認打開模組",
-        "none": "無 (打開主頁)"
+        "none": "無 (打開主頁)",
+        "homeSettings": "主頁設置",
+        "enableCustomWelcomeText": "更改主屏幕頂部的消息 (WelcomeText)"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -287,6 +295,8 @@
         "quickMenuManagerNotFound": "QuickMenuManager를 찾을 수 없습니다",
         "uiManagerNotFound": "UIManager를 찾을 수 없습니다",
         "defaultOpenModule": "기본 열기 모듈",
-        "none": "없음 (홈 열기)"
+        "none": "없음 (홈 열기)",
+        "homeSettings": "홈 설정",
+        "enableCustomWelcomeText": "홈 화면 상단 메시지 (WelcomeText) 변경"
     }
 }

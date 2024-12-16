@@ -3,6 +3,7 @@ using System;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.SDKBase;
 
 namespace yukineko.WorldIntegratedMenu
 {
@@ -20,6 +21,7 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private ApplyTimeI18n _currentDate;
         [SerializeField] private ApplyTimeI18n _currentTime;
         [SerializeField] private Text _homeWelcomeText;
+        [SerializeField] private string _customWelcomeText;
         [SerializeField] private ModuleManager _moduleManager;
         [SerializeField] private ThemeManager _themeManager;
         [SerializeField] private I18nManager _i18nManager;
@@ -145,6 +147,23 @@ namespace yukineko.WorldIntegratedMenu
             if (_defaultOpenModule != null)
             {
                 UseModule(_defaultOpenModule);
+            }
+
+            if (!string.IsNullOrEmpty(_customWelcomeText))
+            {
+                var welcomeTextI18n = _homeWelcomeText.GetComponent<ApplyI18n>();
+                if (welcomeTextI18n != null)
+                {
+                    welcomeTextI18n.key = null;
+                }
+
+                var text = _customWelcomeText.Replace("<EMPTY>", "");
+                if (text.Contains("<NAME>"))
+                {
+                    text = text.Replace("<NAME>", Networking.LocalPlayer.displayName);
+                }
+
+                _homeWelcomeText.text = text;
             }
         }
 
