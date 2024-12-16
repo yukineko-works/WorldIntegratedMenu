@@ -13,6 +13,7 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private Transform _rootCanvas;
         [SerializeField] private Transform _panel;
         [SerializeField] private GameObject _usingMessagePanel;
+        [SerializeField] private ModuleMetadata _defaultOpenModule;
         [SerializeField] private Transform _moduleContentContainer;
         [SerializeField] private Animator _moduleContentAnimator;
         [SerializeField] private Animator _navigationMenuAnimator;
@@ -140,6 +141,11 @@ namespace yukineko.WorldIntegratedMenu
 
             _themeManager.ApplyTheme();
             _i18nManager.ApplyI18n();
+
+            if (_defaultOpenModule != null)
+            {
+                UseModule(_defaultOpenModule);
+            }
         }
 
         public void UseModule(ModuleMetadata module)

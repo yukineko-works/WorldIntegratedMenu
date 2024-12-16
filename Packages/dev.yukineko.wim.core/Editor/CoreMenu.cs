@@ -17,6 +17,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private ReorderableList _reorderableList;
         private ThemePreset[] _themes;
         private SerializedObject _themeManagerSerializedObject;
+        private SerializedObject _uiManagerSerializedObject;
         private SerializedObject _quickMenuManagerSerializedObject;
         private List<string> _usedUniqueModuleIds;
         private List<string> _duplicatedUniqueModuleIds;
@@ -64,6 +65,12 @@ namespace yukineko.WorldIntegratedMenu.Editor
                         }
                     }
                 }
+            }
+
+            var uiManager = gameObject.GetComponentInChildren<UIManager>(true);
+            if (uiManager != null)
+            {
+                _uiManagerSerializedObject = new SerializedObject(uiManager);
             }
 
             var quickMenuManager = gameObject.GetComponentInChildren<QuickMenuManager>(true);
@@ -248,6 +255,29 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     var duplicatedModules = string.Join("\n", _duplicatedUniqueModuleIds.Select(id => "- " + (ModuleRegistry.ModuleList.TryGetValue(id, out var m) ? m.GetTitle() : id)).ToArray());
                     EditorGUILayout.Space();
                     EditorGUILayout.HelpBox($"{EditorI18n.GetTranslation("uniqueModuleDuplicatedError")}\n{duplicatedModules}", MessageType.Error);
+                }
+
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("defaultOpenModule"));
+                if (_modulesCache != null && _uiManagerSerializedObject != null)
+                {
+                    var currentModule = _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue as ModuleMetadata;
+                    var moduleNames = _modulesCache.Select(m => {
+                        var moduleName = !m.forceUseModuleName && ModuleRegistry.ModuleList.TryGetValue(m.ModuleId, out var item) ? item.GetTitle() : m.moduleName;
+                        return moduleName.Replace("/", "\u2215");
+                    }).Prepend(EditorI18n.GetTranslation("none")).ToArray();
+                    var selectedModuleIndex = currentModule == null ? 0 : _modulesCache.IndexOf(currentModule) + 1;
+                    var newModuleIndex = EditorGUILayout.Popup(selectedModuleIndex, moduleNames);
+
+                    if (newModuleIndex != selectedModuleIndex)
+                    {
+                        _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue = newModuleIndex == 0 ? null : _modulesCache[newModuleIndex - 1];
+                        _uiManagerSerializedObject.ApplyModifiedProperties();
+                    }
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
                 }
             }
 
