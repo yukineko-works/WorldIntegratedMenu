@@ -118,7 +118,7 @@ namespace yukineko.WorldIntegratedMenu
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Tab)) ShowMenu(true);
+                if (Input.GetKeyDown(KeyCode.Tab) && _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null) ShowMenu(true);
                 if (Input.GetKeyUp(KeyCode.Tab)) ShowMenu(false);
 
                 if (!_isShowing) return;
