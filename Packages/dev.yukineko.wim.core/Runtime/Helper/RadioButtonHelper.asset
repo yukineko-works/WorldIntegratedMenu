@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: RadioButtonHelper
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: aaa12244fd050814e9ca6d2f39c9e61a,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: a94741f96635cf749834899a9a305ba6,
     type: 2}
   udonAssembly: 
   assemblyError: 
