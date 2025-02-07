@@ -173,7 +173,7 @@ namespace yukineko.WorldIntegratedMenu
                 },
                 onRemoveCallback = (list) =>
                 {
-                    if (EditorUtility.DisplayDialog(EditorI18n.GetTranslation("warning"), EditorI18n.GetTranslation("beforeDelete"), EditorI18n.GetTranslation("delete"), EditorI18n.GetTranslation("cancel")))
+                    if (Event.current.shift || EditorUtility.DisplayDialog(EditorI18n.GetTranslation("warning"), EditorI18n.GetTranslation("beforeDelete"), EditorI18n.GetTranslation("delete"), EditorI18n.GetTranslation("cancel")))
                     {
                         labels.DeleteArrayElementAtIndex(list.index);
                         values.DeleteArrayElementAtIndex(list.index);
