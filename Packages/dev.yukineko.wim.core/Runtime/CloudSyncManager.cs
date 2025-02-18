@@ -22,7 +22,6 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private string _apiBaseUrl = "https://vrc-api.yukineko.dev/wim";
         [SerializeField] private string _apiSchemaRev = "1";
         [SerializeField] private VRCUrl _apiLoadUrl = new VRCUrl("https://vrc-api.yukineko.dev/wim/load?rev=1");
-        [SerializeField] private ThemeManager _themeManager;
         [SerializeField] private GameObject _syncStatus;
         [SerializeField] private Sprite _syncStatusUnknownIcon;
         [SerializeField] private Sprite _syncStatusSuccessIcon;
@@ -200,7 +199,7 @@ namespace yukineko.WorldIntegratedMenu
                     break;
             }
 
-            _syncStatusTheme.Apply(_themeManager.GetColor(_syncStatusTheme.colorPalette));
+            _syncStatusTheme.Apply();
         }
         #endregion
 

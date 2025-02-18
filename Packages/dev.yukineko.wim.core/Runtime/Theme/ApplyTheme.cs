@@ -13,10 +13,13 @@ namespace yukineko.WorldIntegratedMenu
     public class ApplyTheme : UdonSharpBehaviour
     {
         public ColorPalette colorPalette;
+        public ThemeManager themeManager;
         public float alpha = 1.0f;
 
-        public void Apply(Color color)
+        public void Apply()
         {
+            if (themeManager == null) return;
+            var color = themeManager.GetColor(colorPalette, alpha);
             var img = GetComponent<Image>();
             if (img != null) img.color = color;
             var text = GetComponent<Text>();

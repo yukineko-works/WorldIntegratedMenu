@@ -66,7 +66,8 @@ namespace yukineko.WorldIntegratedMenu
             {
                 foreach (var component in canvas.GetComponentsInChildren<ApplyTheme>(true))
                 {
-                    component.Apply(GetColor(component.colorPalette, component.alpha));
+                    if (component.themeManager == null) component.themeManager = this;
+                    component.Apply();
                 }
             }
         }
