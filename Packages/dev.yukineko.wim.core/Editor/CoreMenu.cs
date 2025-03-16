@@ -440,17 +440,21 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private void TabVersionInfo()
         {
             EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
-            EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
 
-            EditorGUILayout.Space();
-            Updater.UseUnstableVersion = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("useUnstableVersion"), Updater.UseUnstableVersion);
-
-            if (Updater.AvailableUpdate)
+            if (Updater.availableVpmResolver)
             {
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
+
                 EditorGUILayout.Space();
-                if (GUILayout.Button(EditorI18n.GetTranslation("update"), GUILayout.Height(32)))
+                Updater.UseUnstableVersion = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("useUnstableVersion"), Updater.UseUnstableVersion);
+
+                if (Updater.AvailableUpdate)
                 {
-                    Updater.RunUpdate();
+                    EditorGUILayout.Space();
+                    if (GUILayout.Button(EditorI18n.GetTranslation("update"), GUILayout.Height(32)))
+                    {
+                        Updater.RunUpdate();
+                    }
                 }
             }
 

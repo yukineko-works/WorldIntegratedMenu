@@ -18,8 +18,10 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
 #if USE_VPM_RESOLVER
         private static readonly SemanticVersioning.Version _latestVersion;
+        public const bool availableVpmResolver = true;
 #else
         private static readonly string _latestVersion;
+        public const bool availableVpmResolver = false;
 #endif
 
         private static readonly UnityEditor.PackageManager.PackageInfo _packageInfo;
