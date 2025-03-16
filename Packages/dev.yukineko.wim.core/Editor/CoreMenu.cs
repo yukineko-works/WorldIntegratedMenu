@@ -184,8 +184,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         public override void OnInspectorGUI()
         {
             EditorGUILayout.LabelField("World Integrated Menu", UIStyles.header, GUILayout.ExpandWidth(true));
-            var version = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly).version;
-            EditorGUILayout.LabelField("v" + version, UIStyles.center, GUILayout.ExpandWidth(true));
+            EditorGUILayout.LabelField("v" + Updater.CurrentVersion, UIStyles.center, GUILayout.ExpandWidth(true));
             EditorGUILayout.Space();
 
             if (Application.isPlaying)
