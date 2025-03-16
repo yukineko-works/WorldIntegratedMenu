@@ -70,7 +70,8 @@
         "latestVersion": "最新バージョン",
         "update": "アップデート",
         "moduleSettingsDescription": "使用するモジュールの追加や削除、並び替えを行うことができます。\nモジュール自体の設定については「モジュール設定」から行えます。",
-        "homeSettingsDescription": "ホーム画面に関する設定を行うことができます。"
+        "homeSettingsDescription": "ホーム画面に関する設定を行うことができます。",
+        "vpmResolverNotImported": "VRChat Package Resolver Toolが未導入のため、アップデートチェックを行えません。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -143,7 +144,8 @@
         "latestVersion": "Latest Version",
         "update": "Update",
         "moduleSettingsDescription": "You can add, remove, and reorder modules to use.\nFor settings of the module itself, you can do it from \"Module Settings\".",
-        "homeSettingsDescription": "You can set the settings for the home screen."
+        "homeSettingsDescription": "You can set the settings for the home screen.",
+        "vpmResolverNotImported": "VRChat Package Resolver Tool is not imported, so update check is not possible."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -216,7 +218,8 @@
         "latestVersion": "最新版本",
         "update": "更新",
         "moduleSettingsDescription": "您可以添加、删除和重新排序要使用的模块。\n有关模块本身的设置，您可以从“模块设置”中进行设置。",
-        "homeSettingsDescription": "您可以设置主屏幕的设置。"
+        "homeSettingsDescription": "您可以设置主屏幕的设置。",
+        "vpmResolverNotImported": "VRChat Package Resolver Tool未导入，因此无法进行更新检查。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -289,7 +292,8 @@
         "latestVersion": "最新版本",
         "update": "更新",
         "moduleSettingsDescription": "您可以添加、刪除和重新排序要使用的模組。\n有關模組本身的設置，您可以從“模組設置”中進行設置。",
-        "homeSettingsDescription": "您可以設置主屏幕的設置。"
+        "homeSettingsDescription": "您可以設置主屏幕的設置。",
+        "vpmResolverNotImported": "VRChat Package Resolver Tool未導入，因此無法進行更新檢查。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -362,6 +366,7 @@
         "latestVersion": "최신 버전",
         "update": "업데이트",
         "moduleSettingsDescription": "사용할 모듈을 추가, 제거, 정렬할 수 있습니다.\n모듈 자체의 설정에 대해서는 \"모듈 설정\"에서 할 수 있습니다.",
-        "homeSettingsDescription": "홈 화면에 대한 설정을 할 수 있습니다."
+        "homeSettingsDescription": "홈 화면에 대한 설정을 할 수 있습니다.",
+        "vpmResolverNotImported": "VRChat Package Resolver Tool이 가져오지 않았기 때문에 업데이트 확인이 불가능합니다."
     }
 }

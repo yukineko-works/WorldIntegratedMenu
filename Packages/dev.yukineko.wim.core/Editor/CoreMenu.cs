@@ -441,6 +441,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         {
             EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
 
+#pragma warning disable CS0162
             if (Updater.availableVpmResolver)
             {
                 EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
@@ -457,6 +458,12 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     }
                 }
             }
+            else
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("vpmResolverNotImported"), MessageType.Warning);
+            }
+#pragma warning restore CS0162
 
             EditorGUILayout.Space(12);
 
