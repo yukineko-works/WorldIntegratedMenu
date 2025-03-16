@@ -15,7 +15,13 @@ namespace yukineko.WorldIntegratedMenu.Editor
     public static class Updater
     {
         private static readonly bool _availableUpdate = false;
+
+#if USE_VPM_RESOLVER
         private static readonly SemanticVersioning.Version _latestVersion;
+#else
+        private static readonly string _latestVersion;
+#endif
+
         private static readonly UnityEditor.PackageManager.PackageInfo _packageInfo;
 
         public static bool AvailableUpdate => _availableUpdate;
