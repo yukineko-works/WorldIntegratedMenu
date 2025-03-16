@@ -258,6 +258,20 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 }
 
                 EditorGUILayout.Space();
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("extensionModuleDescription"), MessageType.Info);
+                EditorGUILayout.Space();
+
+                if (GUILayout.Button(EditorI18n.GetTranslation("goModuleListPage")))
+                {
+                    Application.OpenURL("https://vpm.yukineko.dev/docs/wim-modules/intro");
+                }
+
+                if (GUILayout.Button(EditorI18n.GetTranslation("findExtensionModuleInBooth")))
+                {
+                    Application.OpenURL(ResolveUrl.Booth("items?tags%5B%5D=WIM拡張モジュール"));
+                }
+
+                EditorGUILayout.Space();
                 EditorGUILayout.LabelField(EditorI18n.GetTranslation("defaultOpenModule"));
                 if (_modulesCache != null && _uiManagerSerializedObject != null)
                 {
@@ -435,6 +449,26 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 Application.OpenURL("https://yukineko-works.booth.pm/");
             }
             EditorGUILayout.EndHorizontal();
+        }
+    }
+
+    internal static class ResolveUrl
+    {
+        public static string Booth(string path)
+        {
+            switch(InternalEditorI18n.CurrentLanguage)
+            {
+                case "ja":
+                    return $"https://booth.pm/ja/{path}";
+                case "zh-CN":
+                    return $"https://booth.pm/zh-cn/{path}";
+                case "zh-TW":
+                    return $"https://booth.pm/zh-tw/{path}";
+                case "ko":
+                    return $"https://booth.pm/ko/{path}";
+                default:
+                    return $"https://booth.pm/en/{path}";
+            }
         }
     }
 
