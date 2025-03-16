@@ -68,7 +68,9 @@
         "useUnstableVersion": "プレリリース版 (Alpha, Beta, RC) を使用する",
         "currentVersion": "現在のバージョン",
         "latestVersion": "最新バージョン",
-        "update": "アップデート"
+        "update": "アップデート",
+        "moduleSettingsDescription": "使用するモジュールの追加や削除、並び替えを行うことができます。\nモジュール自体の設定については「モジュール設定」から行えます。",
+        "homeSettingsDescription": "ホーム画面に関する設定を行うことができます。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -139,7 +141,9 @@
         "useUnstableVersion": "Use unstable version (Alpha, Beta, RC)",
         "currentVersion": "Current Version",
         "latestVersion": "Latest Version",
-        "update": "Update"
+        "update": "Update",
+        "moduleSettingsDescription": "You can add, remove, and reorder modules to use.\nFor settings of the module itself, you can do it from \"Module Settings\".",
+        "homeSettingsDescription": "You can set the settings for the home screen."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -210,7 +214,9 @@
         "useUnstableVersion": "使用不稳定版本 (Alpha, Beta, RC)",
         "currentVersion": "当前版本",
         "latestVersion": "最新版本",
-        "update": "更新"
+        "update": "更新",
+        "moduleSettingsDescription": "您可以添加、删除和重新排序要使用的模块。\n有关模块本身的设置，您可以从“模块设置”中进行设置。",
+        "homeSettingsDescription": "您可以设置主屏幕的设置。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -281,7 +287,9 @@
         "useUnstableVersion": "使用不穩定版本 (Alpha, Beta, RC)",
         "currentVersion": "當前版本",
         "latestVersion": "最新版本",
-        "update": "更新"
+        "update": "更新",
+        "moduleSettingsDescription": "您可以添加、刪除和重新排序要使用的模組。\n有關模組本身的設置，您可以從“模組設置”中進行設置。",
+        "homeSettingsDescription": "您可以設置主屏幕的設置。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -352,6 +360,8 @@
         "useUnstableVersion": "안정되지 않은 버전 (Alpha, Beta, RC) 사용",
         "currentVersion": "현재 버전",
         "latestVersion": "최신 버전",
-        "update": "업데이트"
+        "update": "업데이트",
+        "moduleSettingsDescription": "사용할 모듈을 추가, 제거, 정렬할 수 있습니다.\n모듈 자체의 설정에 대해서는 \"모듈 설정\"에서 할 수 있습니다.",
+        "homeSettingsDescription": "홈 화면에 대한 설정을 할 수 있습니다."
     }
 }

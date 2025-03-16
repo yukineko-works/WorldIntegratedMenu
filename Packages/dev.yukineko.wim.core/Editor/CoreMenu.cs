@@ -28,6 +28,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private string[] _themeNames = new string[0];
         private int _selectedThemeIndex = 0;
         private bool _showThemeSettings = false;
+        private bool _showExtensionModuleReference = false;
         private Dictionary<VRQuickMenuOpenMethod, string> _vrOpenMethodNames = new Dictionary<VRQuickMenuOpenMethod, string>
         {
             { VRQuickMenuOpenMethod.Stick, "openByStick" },
@@ -182,9 +183,9 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.LabelField("World Integrated Menu", LabelStyles.header, GUILayout.ExpandWidth(true));
+            EditorGUILayout.LabelField("World Integrated Menu", UIStyles.header, GUILayout.ExpandWidth(true));
             var version = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly).version;
-            EditorGUILayout.LabelField("v" + version, LabelStyles.center, GUILayout.ExpandWidth(true));
+            EditorGUILayout.LabelField("v" + version, UIStyles.center, GUILayout.ExpandWidth(true));
             EditorGUILayout.Space();
 
             if (Application.isPlaying)
@@ -243,7 +244,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void TabMainSettings()
         {
-            EditorGUILayout.LabelField(EditorI18n.GetTranslation("moduleSettings"), EditorStyles.largeLabel);
+            UIStyles.TitleBox(EditorI18n.GetTranslation("moduleSettings"), EditorI18n.GetTranslation("moduleSettingsDescription"), false);
             EditorGUILayout.Space();
 
             if (_moduleContainer == null)
@@ -263,48 +264,23 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     EditorGUILayout.HelpBox($"{EditorI18n.GetTranslation("uniqueModuleDuplicatedError")}\n{duplicatedModules}", MessageType.Error);
                 }
 
-                EditorGUILayout.Space();
-                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("extensionModuleDescription"), MessageType.Info);
-                EditorGUILayout.Space();
-
-                if (GUILayout.Button(EditorI18n.GetTranslation("goModuleListPage")))
+                _showExtensionModuleReference = EditorGUILayout.Foldout(_showExtensionModuleReference, EditorI18n.GetTranslation("extensionModuleDescription"));
+                if (_showExtensionModuleReference)
                 {
-                    Application.OpenURL("https://vpm.yukineko.dev/docs/wim-modules/intro");
-                }
-
-                if (GUILayout.Button(EditorI18n.GetTranslation("findExtensionModuleInBooth")))
-                {
-                    Application.OpenURL(ResolveUrl.Booth("items?tags%5B%5D=WIM拡張モジュール"));
-                }
-
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField(EditorI18n.GetTranslation("defaultOpenModule"));
-                if (_modulesCache != null && _uiManagerSerializedObject != null)
-                {
-                    var currentModule = _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue as ModuleMetadata;
-                    var moduleNames = _modulesCache.Select(m => {
-                        var moduleName = !m.forceUseModuleName && ModuleRegistry.ModuleList.TryGetValue(m.ModuleId, out var item) ? item.GetTitle() : m.moduleName;
-                        return moduleName.Replace("/", "\u2215");
-                    }).Prepend(EditorI18n.GetTranslation("none")).ToArray();
-                    var selectedModuleIndex = currentModule == null ? 0 : _modulesCache.IndexOf(currentModule) + 1;
-                    var newModuleIndex = EditorGUILayout.Popup(selectedModuleIndex, moduleNames);
-
-                    if (newModuleIndex != selectedModuleIndex)
+                    EditorGUILayout.Space();
+                    if (GUILayout.Button(EditorI18n.GetTranslation("goModuleListPage")))
                     {
-                        _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue = newModuleIndex == 0 ? null : _modulesCache[newModuleIndex - 1];
-                        _uiManagerSerializedObject.ApplyModifiedProperties();
+                        Application.OpenURL("https://vpm.yukineko.dev/docs/wim-modules/intro");
                     }
-                }
-                else
-                {
-                    EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
+
+                    if (GUILayout.Button(EditorI18n.GetTranslation("findExtensionModuleInBooth")))
+                    {
+                        Application.OpenURL(ResolveUrl.Booth("items?tags%5B%5D=WIM拡張モジュール"));
+                    }
                 }
             }
 
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(EditorI18n.GetTranslation("homeSettings"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
+            UIStyles.TitleBox(EditorI18n.GetTranslation("homeSettings"), EditorI18n.GetTranslation("homeSettingsDescription"));
             if (_uiManagerSerializedObject == null)
             {
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
@@ -336,8 +312,30 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField(EditorI18n.GetTranslation("otherSettings"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("defaultOpenModule"));
+            if (_moduleContainer != null && _modulesCache != null && _uiManagerSerializedObject != null)
+            {
+                var currentModule = _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue as ModuleMetadata;
+                var moduleNames = _modulesCache.Select(m =>
+                {
+                    var moduleName = !m.forceUseModuleName && ModuleRegistry.ModuleList.TryGetValue(m.ModuleId, out var item) ? item.GetTitle() : m.moduleName;
+                    return moduleName.Replace("/", "\u2215");
+                }).Prepend(EditorI18n.GetTranslation("none")).ToArray();
+                var selectedModuleIndex = currentModule == null ? 0 : _modulesCache.IndexOf(currentModule) + 1;
+                var newModuleIndex = EditorGUILayout.Popup(selectedModuleIndex, moduleNames);
+
+                if (newModuleIndex != selectedModuleIndex)
+                {
+                    _uiManagerSerializedObject.FindProperty("_defaultOpenModule").objectReferenceValue = newModuleIndex == 0 ? null : _modulesCache[newModuleIndex - 1];
+                    _uiManagerSerializedObject.ApplyModifiedProperties();
+                }
+            }
+            else
+            {
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
+            }
+
+            UIStyles.TitleBox(EditorI18n.GetTranslation("otherSettings"));
 
             if (_quickMenuManagerSerializedObject == null)
             {
@@ -363,6 +361,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     _quickMenuManagerSerializedObject.ApplyModifiedProperties();
                 }
             }
+
+            EditorGUILayout.Space();
         }
 
         private void TabThemeSettings()
@@ -489,12 +489,6 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     return $"https://booth.pm/en/{path}";
             }
         }
-    }
-
-    internal static class LabelStyles
-    {
-        public readonly static GUIStyle header = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter, fontSize = 16, fontStyle = FontStyle.Bold };
-        public readonly static GUIStyle center = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter };
     }
 
     [Serializable]
