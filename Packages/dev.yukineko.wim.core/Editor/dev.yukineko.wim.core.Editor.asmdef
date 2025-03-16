@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "UdonSharp.Runtime",
+        "com.vrchat.core.vpm-resolver.Editor",
         "dev.yukineko.wim.core",
         "dev.yukineko.wim.core.Shared"
     ],
@@ -15,6 +16,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.vrchat.core.vpm-resolver",
+            "expression": "",
+            "define": "USE_VPM_RESOLVER"
+        }
+    ],
     "noEngineReferences": false
 }

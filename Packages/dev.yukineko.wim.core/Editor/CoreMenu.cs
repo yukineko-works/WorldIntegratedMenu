@@ -203,6 +203,12 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 HierachyMenu.RebuildMenu();
             }
 
+            if (Updater.AvailableUpdate)
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox($"{EditorI18n.GetTranslation("updateAvailable")}\n(v{Updater.CurrentVersion} → v{Updater.LatestVersion})", MessageType.Info);
+            }
+
             if (_isReferencedByProjectWindow)
             {
                 EditorGUILayout.Space();
@@ -434,17 +440,30 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void TabVersionInfo()
         {
-            var version = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly).version;
-            EditorGUILayout.LabelField("Version", version);
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
+
+            EditorGUILayout.Space();
+            Updater.UseUnstableVersion = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("useUnstableVersion"), Updater.UseUnstableVersion);
+
+            if (Updater.AvailableUpdate)
+            {
+                EditorGUILayout.Space();
+                if (GUILayout.Button(EditorI18n.GetTranslation("update"), GUILayout.Height(32)))
+                {
+                    Updater.RunUpdate();
+                }
+            }
+
             EditorGUILayout.Space(12);
 
             EditorGUILayout.LabelField("Links", EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("GitHub"))
+            if (GUILayout.Button("GitHub", GUILayout.Height(24)))
             {
                 Application.OpenURL("https://github.com/yukineko-works/WorldIntegratedMenu");
             }
-            if (GUILayout.Button("Booth"))
+            if (GUILayout.Button("Booth", GUILayout.Height(24)))
             {
                 Application.OpenURL("https://yukineko-works.booth.pm/");
             }

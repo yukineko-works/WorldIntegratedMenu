@@ -61,7 +61,14 @@
         "beforeDisableCustomWelcomeText": "ホーム画面上部のメッセージを初期状態に戻しますか？\n現在設定されている内容は削除されます。",
         "extensionModuleDescription": "拡張モジュールを導入することで、更に機能を追加することができます。",
         "goModuleListPage": "モジュール一覧ページを開く",
-        "findExtensionModuleInBooth": "BOOTHで拡張モジュールを探す"
+        "findExtensionModuleInBooth": "BOOTHで拡張モジュールを探す",
+        "updaterPackageAffectWarn": "依存関係解決のため、以下のパッケージも合わせて更新されます。続行しますか？",
+        "updateSuccessfull": "アップデートに成功しました。",
+        "updateAvailable": "アップデートが利用可能です。バージョン情報タブからアップデートを行えます。",
+        "useUnstableVersion": "プレリリース版 (Alpha, Beta, RC) を使用する",
+        "currentVersion": "現在のバージョン",
+        "latestVersion": "最新バージョン",
+        "update": "アップデート"
     },
     "en": {
         "moduleName": "Module Name",
@@ -125,7 +132,14 @@
         "beforeDisableCustomWelcomeText": "Do you want to revert the message at the top of the home screen to the initial state?\nThe currently set content will be deleted.",
         "extensionModuleDescription": "By introducing extension modules, you can add more functions.",
         "goModuleListPage": "Open the module list page",
-        "findExtensionModuleInBooth": "Find extension modules on BOOTH"
+        "findExtensionModuleInBooth": "Find extension modules on BOOTH",
+        "updaterPackageAffectWarn": "For dependency resolution, the following packages will also be updated. Do you want to continue?",
+        "updateSuccessfull": "Update successfull.",
+        "updateAvailable": "Update is available. You can update from the version info tab.",
+        "useUnstableVersion": "Use unstable version (Alpha, Beta, RC)",
+        "currentVersion": "Current Version",
+        "latestVersion": "Latest Version",
+        "update": "Update"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -189,7 +203,14 @@
         "beforeDisableCustomWelcomeText": "您要将主屏幕顶部的消息恢复为初始状态吗？\n当前设置的内容将被删除。",
         "extensionModuleDescription": "通过引入扩展模块，您可以添加更多功能。",
         "goModuleListPage": "打开模块列表页面",
-        "findExtensionModuleInBooth": "在BOOTH上查找扩展模块"
+        "findExtensionModuleInBooth": "在BOOTH上查找扩展模块",
+        "updaterPackageAffectWarn": "为了解决依赖关系，以下包也将被更新。是否继续？",
+        "updateSuccessfull": "更新成功。",
+        "updateAvailable": "更新可用。您可以从版本信息选项卡中更新。",
+        "useUnstableVersion": "使用不稳定版本 (Alpha, Beta, RC)",
+        "currentVersion": "当前版本",
+        "latestVersion": "最新版本",
+        "update": "更新"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -253,7 +274,14 @@
         "beforeDisableCustomWelcomeText": "您要將主屏幕頂部的消息恢復為初始狀態嗎？\n當前設置的內容將被刪除。",
         "extensionModuleDescription": "通過引入擴展模組，您可以添加更多功能。",
         "goModuleListPage": "打開模組列表頁",
-        "findExtensionModuleInBooth": "在BOOTH上查找擴展模組"
+        "findExtensionModuleInBooth": "在BOOTH上查找擴展模組",
+        "updaterPackageAffectWarn": "為了解決依賴關係，以下包也將被更新。是否繼續？",
+        "updateSuccessfull": "更新成功。",
+        "updateAvailable": "更新可用。您可以從版本信息選項卡中更新。",
+        "useUnstableVersion": "使用不穩定版本 (Alpha, Beta, RC)",
+        "currentVersion": "當前版本",
+        "latestVersion": "最新版本",
+        "update": "更新"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -317,6 +345,13 @@
         "beforeDisableCustomWelcomeText": "홈 화면 상단 메시지를 초기 상태로 되돌리시겠습니까?\n현재 설정된 내용이 삭제됩니다.",
         "extensionModuleDescription": "확장 모듈을 도입하여 더 많은 기능을 추가할 수 있습니다.",
         "goModuleListPage": "모듈 목록 페이지 열기",
-        "findExtensionModuleInBooth": "BOOTH에서 확장 모듈 찾기"
+        "findExtensionModuleInBooth": "BOOTH에서 확장 모듈 찾기",
+        "updaterPackageAffectWarn": "의존성 해결을 위해 다음 패키지도 업데이트됩니다. 계속하시겠습니까?",
+        "updateSuccessfull": "업데이트 성공.",
+        "updateAvailable": "업데이트 가능합니다. 버전 정보 탭에서 업데이트할 수 있습니다.",
+        "useUnstableVersion": "안정되지 않은 버전 (Alpha, Beta, RC) 사용",
+        "currentVersion": "현재 버전",
+        "latestVersion": "최신 버전",
+        "update": "업데이트"
     }
 }
