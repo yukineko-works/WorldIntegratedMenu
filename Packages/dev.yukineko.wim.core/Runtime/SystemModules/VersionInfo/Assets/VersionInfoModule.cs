@@ -3,8 +3,6 @@ using UdonSharp;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu
@@ -26,42 +24,15 @@ namespace yukineko.WorldIntegratedMenu
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [CustomEditor(typeof(VersionInfoModule))]
-    public class VersionInfoModuleInspector : Editor
+    public class VersionInfoModuleInspector : ModuleInspector
     {
-        private InternalEditorI18n _i18n;
-        private bool _showObjectProperties = false;
+        protected override string I18nUUID => "4808d31699fba654f86b406d56d0e5c7";
+        protected override string[] ObjectProperties => new string[] { "version", "_versionText" };
 
-        private void OnEnable()
+        protected override void DrawModuleInspector()
         {
-            _i18n = new InternalEditorI18n("4808d31699fba654f86b406d56d0e5c7");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
             EditorGUILayout.HelpBox(EditorI18n.GetTranslation("noSettings"), MessageType.Info);
             EditorGUILayout.HelpBox(_i18n.GetTranslation("warning"), MessageType.Warning);
-            EditorGUILayout.Space();
-
-            _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_showObjectProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("version"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_versionText"));
-                EditorGUI.indentLevel--;
-            }
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
         }
     }
 #endif

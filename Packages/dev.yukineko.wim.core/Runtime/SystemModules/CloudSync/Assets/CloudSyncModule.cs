@@ -1,12 +1,10 @@
-﻿
-using System;
+﻿using System;
 using UdonSharp;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
-using VRC.Udon;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu
@@ -74,44 +72,14 @@ namespace yukineko.WorldIntegratedMenu
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [CustomEditor(typeof(CloudSyncModule))]
-    public class CloudSyncModuleInspector : Editor
+    public class CloudSyncModuleInspector : ModuleInspector
     {
-        private InternalEditorI18n _i18n;
-        private bool _showObjectProperties = false;
+        protected override string I18nUUID => "924493d0692e091469e86bb170d34d8e";
+        protected override string[] ObjectProperties => new string[] { "_cloudSyncManager", "_saveStatusAnimator", "_lastSaveTime", "_saveUrlCopyField", "_saveUrlPasteField" };
 
-        private void OnEnable()
+        protected override void DrawModuleInspector()
         {
-            _i18n = new InternalEditorI18n("924493d0692e091469e86bb170d34d8e");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
             EditorGUILayout.HelpBox(EditorI18n.GetTranslation("noSettings"), MessageType.Info);
-            EditorGUILayout.Space();
-
-            _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_showObjectProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_cloudSyncManager"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveStatusAnimator"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_lastSaveTime"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveUrlCopyField"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_saveUrlPasteField"));
-                EditorGUI.indentLevel--;
-            }
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
         }
     }
 #endif

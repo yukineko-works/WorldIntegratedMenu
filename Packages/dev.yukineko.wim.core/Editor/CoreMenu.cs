@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
@@ -14,7 +13,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private Transform _moduleContainer;
         private ThemeManager _themeManager;
         private List<ModuleMetadata> _modulesCache;
-        private ReorderableList _reorderableList;
+        private ListDrawer _listDrawer;
         private ThemePreset[] _themes;
         private SerializedObject _themeManagerSerializedObject;
         private SerializedObject _uiManagerSerializedObject;
@@ -79,6 +78,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
             {
                 _quickMenuManagerSerializedObject = new SerializedObject(quickMenuManager);
             }
+
+            GenerateList();
         }
 
         private void GenerateList()
@@ -88,15 +89,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 _modulesCache = _moduleContainer.GetComponentsInChildren<ModuleMetadata>().ToList();
             }
 
-            _reorderableList = new ReorderableList(_modulesCache, typeof(ModuleMetadata))
-            {
-                drawHeaderCallback = rect => EditorGUI.LabelField(rect, EditorI18n.GetTranslation("modules")),
-                drawElementCallback = (rect, index, isActive, isFocused) =>
+            _listDrawer = new ListDrawer(_modulesCache, new ListDrawerCallbacks() {
+                drawHeader = () => EditorI18n.GetTranslation("modules"),
+                drawElement = (rect, index, isActive, isFocused) =>
                 {
                     var xSpacing = 0;
-                    rect.height = EditorGUIUtility.singleLineHeight;
-                    rect.y += EditorGUIUtility.standardVerticalSpacing * 2;
-
                     var module = _modulesCache[index];
                     var moduleRegistryItem = ModuleRegistry.ModuleList.TryGetValue(module.ModuleId, out var item) ? item : null;
 
@@ -115,8 +112,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
                         Selection.activeObject = module.gameObject;
                     }
                 },
-                elementHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 3,
-                onAddDropdownCallback = (rect, list) =>
+                onAddDropdown = (rect, list) =>
                 {
                     var menu = new GenericMenu();
                     UniqueModuleDuplicateCheck();
@@ -143,22 +139,20 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
                     menu.DropDown(rect);
                 },
-                onRemoveCallback = (list) =>
+                onRemove = (list) =>
                 {
-                    if (Event.current.shift || EditorUtility.DisplayDialog(EditorI18n.GetTranslation("warning"), EditorI18n.GetTranslation("beforeDelete"), EditorI18n.GetTranslation("delete"), EditorI18n.GetTranslation("cancel")))
-                    {
-                        var module = _modulesCache[list.index];
-                        DestroyImmediate(module.gameObject);
-                        _modulesCache.RemoveAt(list.index);
-                        UniqueModuleDuplicateCheck(true);
-                    }
+                    var module = _modulesCache[list.index];
+                    DestroyImmediate(module.gameObject);
+                    _modulesCache.RemoveAt(list.index);
+                    UniqueModuleDuplicateCheck(true);
                 },
-                onReorderCallback = (list) =>
+                onReorder = (list) =>
                 {
                     var module = _modulesCache[list.index];
                     module.transform.SetSiblingIndex(list.index);
-                }
-            };
+                },
+                elementCount = index => 1
+            });
         }
 
         private void UniqueModuleDuplicateCheck(bool force = false)
@@ -252,8 +246,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
             else
             {
-                if (_reorderableList == null) GenerateList();
-                _reorderableList.DoLayoutList();
+                _listDrawer.Draw();
 
                 UniqueModuleDuplicateCheck();
                 if (_duplicatedUniqueModuleIds != null && _duplicatedUniqueModuleIds.Count > 0)

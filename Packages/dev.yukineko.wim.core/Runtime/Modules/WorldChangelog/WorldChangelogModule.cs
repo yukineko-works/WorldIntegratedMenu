@@ -6,10 +6,6 @@ using System.Reflection;
 using System.Collections.Generic;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using UnityEditorInternal;
-#endif
-
 namespace yukineko.WorldIntegratedMenu
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
@@ -50,38 +46,35 @@ namespace yukineko.WorldIntegratedMenu
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [CustomEditor(typeof(WorldChangelogModule))]
-    internal class WorldChangelogModuleInspector : Editor
+    internal class WorldChangelogModuleInspector : ModuleInspector
     {
-        private InternalEditorI18n _i18n;
-        private bool _showObjectProperties = false;
-        private ReorderableList _reorderableList;
+        protected override string I18nUUID => "ff0c90b29aac9784184b3982777b0c83";
+        protected override string[] ObjectProperties => new string[] { "_changelogItemTemplate", "_changelogListContent" };
+        private ListDrawer _listDrawer;
         private Dictionary<int, Vector2> _scrollPosition = new Dictionary<int, Vector2>();
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _i18n = new InternalEditorI18n("ff0c90b29aac9784184b3982777b0c83");
+            base.OnEnable();
+            GenerateList();
         }
 
         private void GenerateList()
         {
             var prop = serializedObject.FindProperty("_changelogList");
-            _reorderableList = new ReorderableList(serializedObject, prop, true, true, true, true)
-            {
-                drawHeaderCallback = rect => EditorGUI.LabelField(rect, _i18n.GetTranslation("changelog")),
-                drawElementCallback = (rect, index, isActive, isFocused) =>
+            _listDrawer = new ListDrawer(prop, new ListDrawerCallbacks() {
+                drawHeader = () => _i18n.GetTranslation("changelog"),
+                drawElement = (rect, index, isActive, isFocused) =>
                 {
                     var element = prop.GetArrayElementAtIndex(index);
                     var item = element.stringValue.Split("<SPLIT>");
                     if (item.Length < 2) item = new string[] { item[0], "" };
 
-                    rect.height = EditorGUIUtility.singleLineHeight;
-                    rect.y += EditorGUIUtility.standardVerticalSpacing;
                     EditorGUI.LabelField(rect, _i18n.GetTranslation("title"));
-                    rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                    item[0] = EditorGUI.TextField(rect, item[0]);
-                    rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 2;
-                    EditorGUI.LabelField(rect, _i18n.GetTranslation("content"));
-                    rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                    item[0] = EditorGUI.TextField(ListDrawerUtils.AdjustRect(ref rect), item[0]);
+                    EditorGUI.LabelField(ListDrawerUtils.AdjustRect(ref rect), _i18n.GetTranslation("content"));
+                    ListDrawerUtils.AdjustRect(ref rect);
+
                     rect.height = 100;
 
                     var method = typeof(EditorGUI).GetMethod("ScrollableTextAreaInternal", BindingFlags.Static | BindingFlags.NonPublic);
@@ -98,54 +91,22 @@ namespace yukineko.WorldIntegratedMenu
 
                     element.stringValue = string.Join("<SPLIT>", item);
                 },
-                elementHeight = (EditorGUIUtility.singleLineHeight * 4) + (EditorGUIUtility.standardVerticalSpacing * 3) + 100,
-                onAddCallback = list =>
+                elementHeight = index => (EditorGUIUtility.singleLineHeight * 4) + (EditorGUIUtility.standardVerticalSpacing * 3) + 100,
+                onAdd = list =>
                 {
                     prop.InsertArrayElementAtIndex(0);
                     prop.GetArrayElementAtIndex(0).stringValue = "New Changelog<SPLIT>";
                 },
-                onRemoveCallback = list =>
-                {
-                    if (Event.current.shift || EditorUtility.DisplayDialog(EditorI18n.GetTranslation("warning"), EditorI18n.GetTranslation("beforeDelete"), EditorI18n.GetTranslation("delete"), EditorI18n.GetTranslation("cancel")))
-                    {
-                        prop.DeleteArrayElementAtIndex(list.index);
-                    }
-                },
-                onReorderCallback = list =>
-                {
-                    _scrollPosition.Clear();
-                }
-            };
+                onRemove = list => prop.DeleteArrayElementAtIndex(list.index),
+                onReorder = list => _scrollPosition.Clear(),
+            });
         }
 
-        public override void OnInspectorGUI()
+        protected override void DrawModuleInspector()
         {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
             EditorGUILayout.HelpBox(_i18n.GetTranslation("description"), MessageType.Info);
             EditorGUILayout.Space();
-            if (_reorderableList == null) GenerateList();
-            _reorderableList.DoLayoutList();
-
-            EditorGUILayout.Space();
-            _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_showObjectProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_changelogItemTemplate"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_changelogListContent"));
-                EditorGUI.indentLevel--;
-            }
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
+            _listDrawer.Draw();
         }
     }
 #endif

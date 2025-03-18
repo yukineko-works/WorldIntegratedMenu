@@ -22,26 +22,14 @@ namespace yukineko.WorldIntegratedMenu
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [CustomEditor(typeof(FreeTextModule))]
-    internal class FreeTextModuleInspector : Editor
+    internal class FreeTextModuleInspector : ModuleInspector
     {
-        private InternalEditorI18n _i18n;
-        private bool _showObjectProperties = false;
+        protected override string I18nUUID => "c4bf8ba219fc3d14a8df85911b3973aa";
+        protected override string[] ObjectProperties => new string[] { "_textComponent" };
         private Vector2 _scrollPosition = Vector2.zero;
 
-        private void OnEnable()
+        protected override void DrawModuleInspector()
         {
-            _i18n = new InternalEditorI18n("c4bf8ba219fc3d14a8df85911b3973aa");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
             EditorGUILayout.HelpBox(_i18n.GetTranslation("description"), MessageType.Info);
             EditorGUILayout.Space();
 
@@ -60,20 +48,6 @@ namespace yukineko.WorldIntegratedMenu
             object methodResult = method.Invoke(null, parameters);
             _scrollPosition = (Vector2)parameters[2];
             textProperty.stringValue = methodResult.ToString();
-
-            EditorGUILayout.Space();
-            _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_showObjectProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_textComponent"));
-                EditorGUI.indentLevel--;
-            }
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
         }
     }
 #endif

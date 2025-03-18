@@ -1,12 +1,8 @@
-﻿
-using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDK3.Data;
-using VRC.SDKBase;
-using VRC.Udon;
 using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu
@@ -184,48 +180,24 @@ namespace yukineko.WorldIntegratedMenu
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [CustomEditor(typeof(SystemSettingsModule))]
-    public class SystemSettingsModuleInspector : Editor
+    public class SystemSettingsModuleInspector : ModuleInspector
     {
-        private InternalEditorI18n _i18n;
-        private bool _showObjectProperties = false;
+        protected override string I18nUUID => "a1e9f9d4be7f50b4280969b169245980";
+        protected override string[] ObjectProperties => new string[] {
+            "_systemI18nManager",
+            "_languageSelector",
+            "_qmKeybindSelector",
+            "_quickMenuManager",
+            "_cloudSyncManager",
+            "_quickMenuSizeText",
+            "_quickMenuPositionXText",
+            "_quickMenuPositionYText",
+            "_quickMenuPositionZText"
+        };
 
-        private void OnEnable()
+        protected override void DrawModuleInspector()
         {
-            _i18n = new InternalEditorI18n("a1e9f9d4be7f50b4280969b169245980");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-            EditorGUILayout.Space();
-
             EditorGUILayout.HelpBox(_i18n.GetTranslation("description"), MessageType.Warning);
-            EditorGUILayout.Space();
-
-            _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_showObjectProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_systemI18nManager"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_languageSelector"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_qmKeybindSelector"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuManager"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_cloudSyncManager"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuSizeText"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuPositionXText"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuPositionYText"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_quickMenuPositionZText"));
-                EditorGUI.indentLevel--;
-            }
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
         }
     }
 #endif
