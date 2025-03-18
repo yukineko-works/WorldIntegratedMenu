@@ -94,6 +94,14 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             }
         }
 
+        public static void UrlLabel(string label, string url)
+        {
+            if (GUILayout.Button(label, EditorStyles.linkLabel, GUILayout.ExpandWidth(false)))
+            {
+                Application.OpenURL(url);
+            }
+        }
+
         public readonly static GUIStyle header = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter, fontSize = 16, fontStyle = FontStyle.Bold };
         public readonly static GUIStyle center = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter };
     }
