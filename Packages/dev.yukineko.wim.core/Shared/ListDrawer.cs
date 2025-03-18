@@ -1,7 +1,10 @@
 using System.Collections;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using UnityEditorInternal;
+#endif
 
 namespace yukineko.WorldIntegratedMenu.EditorShared
 {
@@ -33,6 +36,7 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
 
     public class ListDrawerCallbacks
     {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         public delegate string HeaderStringCallbackDelegate();
         public delegate int ElementCountCallbackDelegate(int index);
 
@@ -47,10 +51,12 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
         public ReorderableList.ChangedCallbackDelegate onChanged;
 
         public ElementCountCallbackDelegate elementCount;
+#endif
     }
 
     public class ListDrawer
     {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         private readonly ReorderableList _reorderableList;
 
         public ListDrawer(IList elements, ListDrawerCallbacks callbacks, ListDrawerProperties properties = null)
@@ -179,14 +185,17 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             EditorGUI.DrawRect(rect, color);
         }
 #endregion
+#endif
     }
 
     public static class ListDrawerUtils
     {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         public static Rect AdjustRect(ref Rect rect)
         {
             rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             return rect;
         }
+#endif
     }
 }

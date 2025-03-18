@@ -5,6 +5,7 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
 {
     public static class UIStyles
     {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         private static GUIStyle _titleBoxStyle;
         private static GUIStyle _bgStyle;
 
@@ -104,5 +105,6 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
 
         public readonly static GUIStyle header = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter, fontSize = 16, fontStyle = FontStyle.Bold };
         public readonly static GUIStyle center = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter };
+#endif
     }
 }

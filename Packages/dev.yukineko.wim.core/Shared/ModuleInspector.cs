@@ -1,13 +1,20 @@
-using System.Collections.Generic;
 using UdonSharp;
-using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
 
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using UdonSharpEditor;
+#endif
+
 namespace yukineko.WorldIntegratedMenu.EditorShared
 {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
     public abstract class ModuleInspector : Editor
+#else
+    public abstract class ModuleInspector
+#endif
     {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         protected InternalEditorI18n _i18n;
         protected abstract string I18nUUID { get; }
         protected virtual string[] ObjectProperties { get; }
@@ -95,5 +102,6 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
                 serializedObject.ApplyModifiedProperties();
             }
         }
+#endif
     }
 }
