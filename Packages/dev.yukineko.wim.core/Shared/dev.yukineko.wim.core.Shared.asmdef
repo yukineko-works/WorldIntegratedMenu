@@ -2,7 +2,9 @@
     "name": "dev.yukineko.wim.core.Shared",
     "rootNamespace": "",
     "references": [
-        "VRC.SDK3"
+        "VRC.SDK3",
+        "UdonSharp.Runtime",
+        "UdonSharp.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
