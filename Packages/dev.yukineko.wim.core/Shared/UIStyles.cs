@@ -103,8 +103,14 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             }
         }
 
+        public static void DrawBorder()
+        {
+            GUILayout.Box("", GetBgStyle(), GUILayout.ExpandWidth(true), GUILayout.Height(2));
+        }
+
         public readonly static GUIStyle header = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter, fontSize = 16, fontStyle = FontStyle.Bold };
         public readonly static GUIStyle center = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperCenter };
+        public readonly static GUIStyle title = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperLeft, fontSize = 14, fontStyle = FontStyle.Normal };
 #endif
     }
 }

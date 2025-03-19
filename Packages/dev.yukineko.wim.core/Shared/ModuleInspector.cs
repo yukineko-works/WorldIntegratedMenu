@@ -43,12 +43,11 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             EditorGUILayout.Space();
             using (new EditorGUILayout.HorizontalScope())
             {
-                EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), EditorStyles.largeLabel);
-                var content = EditorGUIUtility.TrIconContent("d_UnityEditor.ConsoleWindow", "Open documentation");
-                content.text = EditorI18n.GetTranslation("openDocs");
-                if (!string.IsNullOrEmpty(DocumentationURL) && GUILayout.Button(content))
+                EditorGUILayout.LabelField(_i18n.GetTranslation("$title"), UIStyles.title);
+
+                if (!string.IsNullOrEmpty(DocumentationURL))
                 {
-                    Application.OpenURL(DocumentationURL);
+                    UIStyles.UrlLabel(EditorI18n.GetTranslation("openDocs"), DocumentationURL);
                 }
             }
             EditorGUILayout.Space();
@@ -68,6 +67,9 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("playModeWarning"), MessageType.Warning);
                 return;
             }
+
+            UIStyles.DrawBorder();
+            EditorGUILayout.Space();
 
             DrawModuleInspector();
 
