@@ -14,13 +14,13 @@ namespace yukineko.WorldIntegratedMenu.Editor
 {
     public static class Updater
     {
-        private static readonly bool _availableUpdate = false;
+        private static bool _availableUpdate = false;
 
 #if USE_VPM_RESOLVER
-        private static readonly SemanticVersioning.Version _latestVersion;
+        private static SemanticVersioning.Version _latestVersion;
         public const bool availableVpmResolver = true;
 #else
-        private static readonly string _latestVersion;
+        private static string _latestVersion;
         public const bool availableVpmResolver = false;
 #endif
 
@@ -39,7 +39,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
         static Updater()
         {
             _packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(CoreMenu).Assembly);
+            CheckForUpdate();
+        }
 
+        public static void CheckForUpdate()
+        {
 #if USE_VPM_RESOLVER
             var includeUnstableVersion = UseUnstableVersion;
             var availableVersions = Resolver.GetAllVersionsOf(_packageInfo.name)

@@ -440,7 +440,15 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
 
                 EditorGUILayout.Space();
-                Updater.UseUnstableVersion = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("useUnstableVersion"), Updater.UseUnstableVersion);
+
+                using (var x = new EditorGUI.ChangeCheckScope())
+                {
+                    Updater.UseUnstableVersion = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("useUnstableVersion"), Updater.UseUnstableVersion);
+                    if (x.changed)
+                    {
+                        Updater.CheckForUpdate();
+                    }
+                }
 
                 if (Updater.AvailableUpdate)
                 {
