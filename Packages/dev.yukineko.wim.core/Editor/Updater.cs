@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using yukineko.WorldIntegratedMenu.EditorShared;
+using System.Threading.Tasks;
 
 #if USE_VPM_RESOLVER
 using VRC.PackageManagement.Core;
@@ -42,19 +43,28 @@ namespace yukineko.WorldIntegratedMenu.Editor
             CheckForUpdate();
         }
 
-        public static void CheckForUpdate()
+        public static async void CheckForUpdate()
         {
 #if USE_VPM_RESOLVER
             var includeUnstableVersion = UseUnstableVersion;
-            var availableVersions = Resolver.GetAllVersionsOf(_packageInfo.name)
-                .Select(x => new SemanticVersioning.Version(x))
-                .Where(x => x != null && (includeUnstableVersion || !x.IsPreRelease));
+            SemanticVersioning.Version latest = null;
+            bool availableUpdate = false;
 
-            _latestVersion = availableVersions.OrderByDescending(x => x).First();
-            if (_latestVersion != null)
+            await Task.Run(() =>
             {
-                _availableUpdate = _latestVersion > new SemanticVersioning.Version(_packageInfo.version);
-            }
+                var availableVersions = Resolver.GetAllVersionsOf(_packageInfo.name)
+                    .Select(x => new SemanticVersioning.Version(x))
+                    .Where(x => x != null && (includeUnstableVersion || !x.IsPreRelease));
+
+                latest = availableVersions.OrderByDescending(x => x).First();
+                if (_latestVersion != null)
+                {
+                    availableUpdate = _latestVersion > new SemanticVersioning.Version(_packageInfo.version);
+                }
+            });
+
+            _latestVersion = latest;
+            _availableUpdate = availableUpdate;
 #endif
         }
 

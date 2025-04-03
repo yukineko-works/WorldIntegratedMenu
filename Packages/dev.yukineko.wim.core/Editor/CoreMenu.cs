@@ -437,7 +437,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
 #pragma warning disable CS0162
             if (Updater.availableVpmResolver)
             {
-                EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion);
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion ?? "Loading");
 
                 EditorGUILayout.Space();
 
