@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: FreeTextModule
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 2356adb25ccad56408111136e2e2ae1f,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: acc7a6b88dc6d9c45af64d468e1d9715,
     type: 2}
   udonAssembly: 
   assemblyError: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TextRebuildHelper
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: d0e704a3105b15244aacc247d2c2d7cf,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: ce4345f5bc0e3a24ba1c6a1d96cee5d9,
     type: 2}
   udonAssembly: 
   assemblyError: 

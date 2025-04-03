@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: CloudSyncUtils
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b813ddfff4847334786ca40448acc40a,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 000948e64e2e89b47b950af2740407ed,
     type: 2}
   udonAssembly: 
   assemblyError: 
