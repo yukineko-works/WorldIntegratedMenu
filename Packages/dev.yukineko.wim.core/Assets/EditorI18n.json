@@ -64,7 +64,7 @@
         "findExtensionModuleInBooth": "BOOTHで拡張モジュールを探す",
         "updaterPackageAffectWarn": "以下のパッケージが更新されます。続行しますか？",
         "updateSuccessfull": "アップデートに成功しました。",
-        "updateAvailable": "アップデートが利用可能です。バージョン情報タブからアップデートを行えます。",
+        "wimUpdateAvailable": "WIM本体のアップデートが利用可能です。バージョン情報タブからアップデートを行えます。",
         "useUnstableVersion": "プレリリース版 (Alpha, Beta, RC) を使用する",
         "currentVersion": "現在のバージョン",
         "latestVersion": "最新バージョン",
@@ -72,7 +72,13 @@
         "moduleSettingsDescription": "使用するモジュールの追加や削除、並び替えを行うことができます。\nモジュール自体の設定については「モジュール設定」から行えます。",
         "homeSettingsDescription": "ホーム画面に関する設定を行うことができます。",
         "vpmResolverNotImported": "VRChat Package Resolver Toolが未導入のため、アップデートチェックを行えません。",
-        "openDocs": "ドキュメントを開く"
+        "openDocs": "ドキュメントを開く",
+        "moduleUpdateAvailable": "モジュールのアップデートが利用可能です。バージョン情報タブから詳細を確認できます。",
+        "updateAvailable": "アップデートがあります",
+        "upToDate": "最新バージョンを使用しています",
+        "downloadLatestVersionFromBooth": "BOOTHから最新バージョンをダウンロード",
+        "links": "リンク",
+        "checkingForUpdate": "アップデートを確認中"
     },
     "en": {
         "moduleName": "Module Name",
@@ -139,7 +145,7 @@
         "findExtensionModuleInBooth": "Find extension modules on BOOTH",
         "updaterPackageAffectWarn": "The following packages will be updated. Do you want to continue?",
         "updateSuccessfull": "Update successfull.",
-        "updateAvailable": "Update is available. You can update from the version info tab.",
+        "wimUpdateAvailable": "WIM core update is available. You can update it from the version info tab.",
         "useUnstableVersion": "Use unstable version (Alpha, Beta, RC)",
         "currentVersion": "Current Version",
         "latestVersion": "Latest Version",
@@ -147,7 +153,13 @@
         "moduleSettingsDescription": "You can add, remove, and reorder modules to use.\nFor settings of the module itself, you can do it from \"Module Settings\".",
         "homeSettingsDescription": "You can set the settings for the home screen.",
         "vpmResolverNotImported": "VRChat Package Resolver Tool is not imported, so update check is not possible.",
-        "openDocs": "Open Documentation"
+        "openDocs": "Open Documentation",
+        "moduleUpdateAvailable": "Module update is available. You can check the details from the version info tab.",
+        "updateAvailable": "Update available",
+        "upToDate": "You are using the latest version",
+        "downloadLatestVersionFromBooth": "Download the latest version from BOOTH",
+        "links": "Links",
+        "checkingForUpdate": "Checking for updates"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -214,7 +226,7 @@
         "findExtensionModuleInBooth": "在BOOTH上查找扩展模块",
         "updaterPackageAffectWarn": "以下包将被更新。是否继续？",
         "updateSuccessfull": "更新成功。",
-        "updateAvailable": "更新可用。您可以从版本信息选项卡中更新。",
+        "wimUpdateAvailable": "WIM核心更新可用。您可以从版本信息选项卡进行更新。",
         "useUnstableVersion": "使用不稳定版本 (Alpha, Beta, RC)",
         "currentVersion": "当前版本",
         "latestVersion": "最新版本",
@@ -222,7 +234,13 @@
         "moduleSettingsDescription": "您可以添加、删除和重新排序要使用的模块。\n有关模块本身的设置，您可以从“模块设置”中进行设置。",
         "homeSettingsDescription": "您可以设置主屏幕的设置。",
         "vpmResolverNotImported": "VRChat Package Resolver Tool未导入，因此无法进行更新检查。",
-        "openDocs": "打开文档"
+        "openDocs": "打开文档",
+        "moduleUpdateAvailable": "模块更新可用。您可以从版本信息选项卡查看详细信息。",
+        "updateAvailable": "可用更新",
+        "upToDate": "您正在使用最新版本",
+        "downloadLatestVersionFromBooth": "从BOOTH下载最新版本",
+        "links": "链接",
+        "checkingForUpdate": "检查更新中"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -289,7 +307,7 @@
         "findExtensionModuleInBooth": "在BOOTH上查找擴展模組",
         "updaterPackageAffectWarn": "以下包將被更新。是否繼續？",
         "updateSuccessfull": "更新成功。",
-        "updateAvailable": "更新可用。您可以從版本信息選項卡中更新。",
+        "wimUpdateAvailable": "WIM核心更新可用。您可以從版本信息選項卡進行更新。",
         "useUnstableVersion": "使用不穩定版本 (Alpha, Beta, RC)",
         "currentVersion": "當前版本",
         "latestVersion": "最新版本",
@@ -297,7 +315,13 @@
         "moduleSettingsDescription": "您可以添加、刪除和重新排序要使用的模組。\n有關模組本身的設置，您可以從“模組設置”中進行設置。",
         "homeSettingsDescription": "您可以設置主屏幕的設置。",
         "vpmResolverNotImported": "VRChat Package Resolver Tool未導入，因此無法進行更新檢查。",
-        "openDocs": "打開文檔"
+        "openDocs": "打開文檔",
+        "moduleUpdateAvailable": "模組更新可用。您可以從版本信息選項卡查看詳細信息。",
+        "updateAvailable": "可用更新",
+        "upToDate": "您正在使用最新版本",
+        "downloadLatestVersionFromBooth": "從BOOTH下載最新版本",
+        "links": "鏈接",
+        "checkingForUpdate": "檢查更新中"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -364,7 +388,7 @@
         "findExtensionModuleInBooth": "BOOTH에서 확장 모듈 찾기",
         "updaterPackageAffectWarn": "다음 패키지가 업데이트됩니다. 계속 하시겠습니까?",
         "updateSuccessfull": "업데이트 성공.",
-        "updateAvailable": "업데이트 가능합니다. 버전 정보 탭에서 업데이트할 수 있습니다.",
+        "wimUpdateAvailable": "WIM 코어 업데이트가 가능합니다. 버전 정보 탭에서 업데이트 할 수 있습니다.",
         "useUnstableVersion": "안정되지 않은 버전 (Alpha, Beta, RC) 사용",
         "currentVersion": "현재 버전",
         "latestVersion": "최신 버전",
@@ -372,6 +396,12 @@
         "moduleSettingsDescription": "사용할 모듈을 추가, 제거, 정렬할 수 있습니다.\n모듈 자체의 설정에 대해서는 \"모듈 설정\"에서 할 수 있습니다.",
         "homeSettingsDescription": "홈 화면에 대한 설정을 할 수 있습니다.",
         "vpmResolverNotImported": "VRChat Package Resolver Tool이 가져오지 않았기 때문에 업데이트 확인이 불가능합니다.",
-        "openDocs": "문서 열기"
+        "openDocs": "문서 열기",
+        "moduleUpdateAvailable": "모듈 업데이트가 가능합니다. 버전 정보 탭에서 세부정보를 확인할 수 있습니다.",
+        "updateAvailable": "업데이트 가능",
+        "upToDate": "최신 버전을 사용하고 있습니다",
+        "downloadLatestVersionFromBooth": "BOOTH에서 최신 버전 다운로드",
+        "links": "링크",
+        "checkingForUpdate": "업데이트 확인 중"
     }
 }

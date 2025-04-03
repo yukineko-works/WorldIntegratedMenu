@@ -200,7 +200,13 @@ namespace yukineko.WorldIntegratedMenu.Editor
             if (Updater.AvailableUpdate)
             {
                 EditorGUILayout.Space();
-                EditorGUILayout.HelpBox($"{EditorI18n.GetTranslation("updateAvailable")}\n(v{Updater.CurrentVersion} → v{Updater.LatestVersion})", MessageType.Info);
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("wimUpdateAvailable"), MessageType.Info);
+            }
+
+            if (ModuleVersionManager.AvailableUpdate)
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("moduleUpdateAvailable"), MessageType.Info);
             }
 
             if (_isReferencedByProjectWindow)
@@ -432,12 +438,24 @@ namespace yukineko.WorldIntegratedMenu.Editor
 
         private void TabVersionInfo()
         {
-            EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
+            UIStyles.TitleBox("World Integrated Menu", margin: false);
+            EditorGUILayout.Space();
 
 #pragma warning disable CS0162
             if (Updater.availableVpmResolver)
             {
-                EditorGUILayout.LabelField(EditorI18n.GetTranslation("latestVersion"), Updater.LatestVersion ?? "Loading");
+                if (Updater.AvailableUpdate)
+                {
+                    EditorGUILayout.LabelField($"{EditorI18n.GetTranslation("updateAvailable")} (v{Updater.CurrentVersion} → v{Updater.LatestVersion})");
+                }
+                else if(Updater.LatestVersion == null)
+                {
+                    EditorGUILayout.LabelField(EditorI18n.GetTranslation("checkingForUpdate"));
+                }
+                else
+                {
+                    EditorGUILayout.LabelField($"{EditorI18n.GetTranslation("upToDate")} (v{Updater.CurrentVersion})");
+                }
 
                 EditorGUILayout.Space();
 
@@ -461,24 +479,47 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
             else
             {
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
                 EditorGUILayout.Space();
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("vpmResolverNotImported"), MessageType.Warning);
             }
 #pragma warning restore CS0162
 
-            EditorGUILayout.Space(12);
+            if (ModuleVersionManager.AvailableModules)
+            {
+                UIStyles.TitleBox(EditorI18n.GetTranslation("modules"));
 
-            EditorGUILayout.LabelField("Links", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("GitHub", GUILayout.Height(24)))
-            {
-                Application.OpenURL("https://github.com/yukineko-works/WorldIntegratedMenu");
+                foreach (var item in ModuleVersionManager.CurrentVersions)
+                {
+                    var packageName = item.Key;
+                    EditorGUILayout.LabelField(ModuleVersionManager.GetPackageName(packageName), EditorStyles.boldLabel);
+
+                    if (ModuleVersionManager.HasUpdate(packageName))
+                    {
+                        EditorGUILayout.LabelField($"{EditorI18n.GetTranslation("updateAvailable")} (v{item.Value} → v{ModuleVersionManager.GetLatestVersion(packageName)})");
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField($"{EditorI18n.GetTranslation("upToDate")} (v{item.Value})");
+                    }
+
+                    EditorGUILayout.Space();
+                }
+
+                if (ModuleVersionManager.AvailableUpdate)
+                {
+                    if (GUILayout.Button(EditorI18n.GetTranslation("downloadLatestVersionFromBooth"), GUILayout.Height(32)))
+                    {
+                        Application.OpenURL("https://accounts.booth.pm/orders?q=wim&sort=order_created_at_desc");
+                    }
+                }
             }
-            if (GUILayout.Button("Booth", GUILayout.Height(24)))
-            {
-                Application.OpenURL("https://yukineko-works.booth.pm/");
-            }
-            EditorGUILayout.EndHorizontal();
+
+            UIStyles.TitleBox(EditorI18n.GetTranslation("links"));
+
+            UIStyles.UrlLabel(EditorI18n.GetTranslation("openDocs"), "https://vpm.yukineko.dev/docs/wim-core/intro");
+            UIStyles.UrlLabel("BOOTH", "https://yukineko-works.booth.pm/");
+            UIStyles.UrlLabel("GitHub", "https://github.com/yukineko-works/WorldIntegratedMenu");
         }
     }
 
