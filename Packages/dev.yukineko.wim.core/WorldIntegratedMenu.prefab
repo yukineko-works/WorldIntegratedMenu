@@ -343,6 +343,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6035411960402080252}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6035411960402080252
 MonoBehaviour:
@@ -638,6 +639,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 4587648151381267293}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &4587648151381267293
 MonoBehaviour:
@@ -771,6 +773,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7235116214300384748}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7235116214300384748
 MonoBehaviour:
@@ -955,6 +958,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8551259577806380565}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 0.65
 --- !u!114 &8551259577806380565
 MonoBehaviour:
@@ -1141,6 +1145,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2131122042848462095}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &2131122042848462095
 MonoBehaviour:
@@ -1239,6 +1244,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 926605426605241464}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &926605426605241464
 MonoBehaviour:
@@ -1625,6 +1631,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6379351695627412594}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6379351695627412594
 MonoBehaviour:
@@ -1752,6 +1759,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7673415161438317506}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7673415161438317506
 MonoBehaviour:
@@ -1879,6 +1887,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 3136768082578723366}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &3136768082578723366
 MonoBehaviour:
@@ -2313,6 +2322,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5159351196324178276}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &5159351196324178276
 MonoBehaviour:
@@ -2840,6 +2850,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2467256681880578270}
   colorPalette: 1
+  themeManager: {fileID: 0}
   alpha: 0.75
 --- !u!114 &2467256681880578270
 MonoBehaviour:
@@ -2992,6 +3003,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8865091950087611812}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &8865091950087611812
 MonoBehaviour:
@@ -3341,6 +3353,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8484619867322134867}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &8484619867322134867
 MonoBehaviour:
@@ -3474,6 +3487,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7296100241119143813}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7296100241119143813
 MonoBehaviour:
@@ -3661,7 +3675,6 @@ MonoBehaviour:
   _apiSchemaRev: 1
   _apiLoadUrl:
     url: https://vrc-api.yukineko.dev/wim/load?rev=1
-  _themeManager: {fileID: 1078992371878531510}
   _syncStatus: {fileID: 192885542890662878}
   _syncStatusUnknownIcon: {fileID: 21300000, guid: d4492c6b6d083b64fa733bba6db07167,
     type: 3}
@@ -3838,6 +3851,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7602901702491974733}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7602901702491974733
 MonoBehaviour:
@@ -4016,6 +4030,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6510055411604589059}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6510055411604589059
 MonoBehaviour:
@@ -4644,6 +4659,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2964168208438508953}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &2964168208438508953
 MonoBehaviour:
@@ -4771,6 +4787,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8244607528015836213}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &8244607528015836213
 MonoBehaviour:
@@ -4945,6 +4962,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6692968609339897798}
   colorPalette: 1
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6692968609339897798
 MonoBehaviour:
@@ -5078,6 +5096,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8536080054003625820}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &8536080054003625820
 MonoBehaviour:
@@ -5475,6 +5494,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7728970250025159071}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7728970250025159071
 MonoBehaviour:
@@ -5597,12 +5617,14 @@ MonoBehaviour:
   _rootCanvas: {fileID: 4139205318913639841}
   _panel: {fileID: 2573865138991788826}
   _usingMessagePanel: {fileID: 8270719541465172598}
+  _defaultOpenModule: {fileID: 0}
   _moduleContentContainer: {fileID: 6617344592864605862}
   _moduleContentAnimator: {fileID: 3138498217248350597}
   _navigationMenuAnimator: {fileID: 5124839536498694248}
   _currentDate: {fileID: 1969811864818390390}
   _currentTime: {fileID: 7922538038935046190}
   _homeWelcomeText: {fileID: 4818657545440107696}
+  _customWelcomeText: 
   _moduleManager: {fileID: 2239879031301303425}
   _themeManager: {fileID: 1078992371878531510}
   _i18nManager: {fileID: 4524561051189541014}
@@ -5913,6 +5935,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1072009092051169902}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &1072009092051169902
 MonoBehaviour:
@@ -6040,6 +6063,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7364605558498720324}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7364605558498720324
 MonoBehaviour:
@@ -6375,6 +6399,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5826541521782540013}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 0.25
 --- !u!114 &5826541521782540013
 MonoBehaviour:
@@ -6715,6 +6740,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2399635800588895684}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 0.65
 --- !u!114 &2399635800588895684
 MonoBehaviour:
@@ -6844,6 +6870,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 4666163737819677865}
   colorPalette: 1
+  themeManager: {fileID: 0}
   alpha: 0.75
 --- !u!114 &4666163737819677865
 MonoBehaviour:
@@ -7145,6 +7172,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6423404276404164364}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 0.65
 --- !u!114 &6423404276404164364
 MonoBehaviour:
@@ -8613,7 +8641,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: aaa12244fd050814e9ca6d2f39c9e61a,
+        type: 2}
     - target: {fileID: 9061101609605260331, guid: 5d68460abd089b348b4984f17a40591e,
         type: 3}
       propertyPath: serializationData.Prefab
