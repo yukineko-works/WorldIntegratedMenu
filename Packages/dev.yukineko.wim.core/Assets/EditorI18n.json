@@ -78,7 +78,8 @@
         "upToDate": "最新バージョンを使用しています",
         "downloadLatestVersionFromBooth": "BOOTHから最新バージョンをダウンロード",
         "links": "リンク",
-        "checkingForUpdate": "アップデートを確認中"
+        "checkingForUpdate": "アップデートを確認中",
+        "openChangelog": "更新履歴を開く"
     },
     "en": {
         "moduleName": "Module Name",
@@ -159,7 +160,8 @@
         "upToDate": "You are using the latest version",
         "downloadLatestVersionFromBooth": "Download the latest version from BOOTH",
         "links": "Links",
-        "checkingForUpdate": "Checking for updates"
+        "checkingForUpdate": "Checking for updates",
+        "openChangelog": "Open changelog"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -240,7 +242,8 @@
         "upToDate": "您正在使用最新版本",
         "downloadLatestVersionFromBooth": "从BOOTH下载最新版本",
         "links": "链接",
-        "checkingForUpdate": "检查更新中"
+        "checkingForUpdate": "检查更新中",
+        "openChangelog": "打开更新日志"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -321,7 +324,8 @@
         "upToDate": "您正在使用最新版本",
         "downloadLatestVersionFromBooth": "從BOOTH下載最新版本",
         "links": "鏈接",
-        "checkingForUpdate": "檢查更新中"
+        "checkingForUpdate": "檢查更新中",
+        "openChangelog": "打開更新日誌"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -402,6 +406,7 @@
         "upToDate": "최신 버전을 사용하고 있습니다",
         "downloadLatestVersionFromBooth": "BOOTH에서 최신 버전 다운로드",
         "links": "링크",
-        "checkingForUpdate": "업데이트 확인 중"
+        "checkingForUpdate": "업데이트 확인 중",
+        "openChangelog": "업데이트 로그 열기"
     }
 }

@@ -457,6 +457,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     EditorGUILayout.LabelField($"{EditorI18n.GetTranslation("upToDate")} (v{Updater.CurrentVersion})");
                 }
 
+                UIStyles.UrlLabel(EditorI18n.GetTranslation("openChangelog"), "https://vpm.yukineko.dev/docs/wim-core/changelog");
                 EditorGUILayout.Space();
 
                 using (var x = new EditorGUI.ChangeCheckScope())
@@ -480,6 +481,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
             else
             {
                 EditorGUILayout.LabelField(EditorI18n.GetTranslation("currentVersion"), Updater.CurrentVersion);
+                UIStyles.UrlLabel(EditorI18n.GetTranslation("openChangelog"), "https://vpm.yukineko.dev/docs/wim-core/changelog");
                 EditorGUILayout.Space();
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("vpmResolverNotImported"), MessageType.Warning);
             }
@@ -488,6 +490,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
             if (ModuleVersionManager.AvailableModules)
             {
                 UIStyles.TitleBox(EditorI18n.GetTranslation("modules"));
+                UIStyles.UrlLabel(EditorI18n.GetTranslation("openChangelog"), "https://vpm.yukineko.dev/docs/wim-modules/changelog/");
+                EditorGUILayout.Space();
 
                 foreach (var item in ModuleVersionManager.CurrentVersions)
                 {
