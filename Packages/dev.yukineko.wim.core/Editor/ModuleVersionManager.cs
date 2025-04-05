@@ -12,14 +12,14 @@ namespace yukineko.WorldIntegratedMenu.Editor
     public static class ModuleVersionManager
     {
         private const string _listingUrl = "https://vpm.yukineko.dev/latest-version.json";
-        private static readonly Dictionary<string, SemanticVersioning.Version> _latestVersions = new Dictionary<string, SemanticVersioning.Version>();
-        private static readonly Dictionary<string, SemanticVersioning.Version> _currentVersions = new Dictionary<string, SemanticVersioning.Version>();
+        private static readonly Dictionary<string, Version> _latestVersions = new Dictionary<string, Version>();
+        private static readonly Dictionary<string, Version> _currentVersions = new Dictionary<string, Version>();
         private static readonly List<string> _updateAvailableModules = new List<string>();
 
         private static readonly Dictionary<string, string> _packageNameCache = new Dictionary<string, string>();
 
-        public static Dictionary<string, SemanticVersioning.Version> LatestVersions => _latestVersions;
-        public static Dictionary<string, SemanticVersioning.Version> CurrentVersions => _currentVersions;
+        public static Dictionary<string, Version> LatestVersions => _latestVersions;
+        public static Dictionary<string, Version> CurrentVersions => _currentVersions;
         public static List<string> UpdateAvailableModules => _updateAvailableModules;
         public static bool AvailableUpdate => _updateAvailableModules.Count > 0;
         public static bool AvailableModules => _currentVersions.Count > 0;
@@ -71,7 +71,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
                     continue;
                 }
 
-                _latestVersions[module.Key.String] = new SemanticVersioning.Version(module.Value.String);
+                _latestVersions[module.Key.String] = new Version(module.Value.String);
             }
 
             #endregion
@@ -94,7 +94,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 var module = pack.Result.FirstOrDefault(x => x.name == moduleName);
                 if (module == null) continue;
 
-                _currentVersions[moduleName] = new SemanticVersioning.Version(module.version);
+                _currentVersions[moduleName] = new Version(module.version);
                 _packageNameCache[moduleName] = module.displayName;
             }
 
