@@ -48,6 +48,7 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
         public ReorderableList.RemoveCallbackDelegate onRemove;
         public ReorderableList.SelectCallbackDelegate onSelect;
         public ReorderableList.ReorderCallbackDelegate onReorder;
+        public ReorderableList.ReorderCallbackDelegateWithDetails onReorderWithDetails;
         public ReorderableList.ChangedCallbackDelegate onChanged;
 
         public ElementCountCallbackDelegate elementCount;
@@ -156,6 +157,11 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
             if (callbacks.onReorder != null)
             {
                 _reorderableList.onReorderCallback += callbacks.onReorder;
+            }
+
+            if (callbacks.onReorderWithDetails != null)
+            {
+                _reorderableList.onReorderCallbackWithDetails += callbacks.onReorderWithDetails;
             }
 
             if (callbacks.onChanged != null)
