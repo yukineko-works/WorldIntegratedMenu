@@ -14,9 +14,20 @@ using yukineko.WorldIntegratedMenu.EditorShared;
 
 namespace yukineko.WorldIntegratedMenu
 {
-    public enum DynamicArgs
+    public enum I18nArgumentType
     {
+        Dynamic,
+        String,
+        I18n,
+    }
+
+    public enum I18nDynamicArgumentType
+    {
+        None,
         VRCLocalPlayerName,
+        CurrentTime,
+        CurrentDate,
+        CurrentDateTime,
     }
 
     [DisallowMultipleComponent]
@@ -95,23 +106,42 @@ namespace yukineko.WorldIntegratedMenu
             return value.String;
         }
 
-        public string GetTranslationWithArgs(string key, DynamicArgs[] args, string language = null)
+        public string GetTranslationWithArgs(string key, I18nArgumentType[] args, string[] argValues, string language = null)
         {
             var translation = GetTranslation(key, language);
             for (int i = 0; i < args.Length; i++)
             {
-                translation = translation.Replace($"{{{i}}}", GetDynamicArg(args[i]));
+                var argument = string.Empty;
+                switch (args[i])
+                {
+                    case I18nArgumentType.Dynamic:
+                        argument = GetDynamicArg(argValues[i]);
+                        break;
+                    case I18nArgumentType.String:
+                        argument = argValues[i];
+                        break;
+                    case I18nArgumentType.I18n:
+                        argument = GetTranslation(argValues[i], language);
+                        break;
+                }
+                translation = translation.Replace($"{{{i}}}", argument);
             }
 
             return translation;
         }
 
-        public string GetDynamicArg(DynamicArgs arg)
+        public string GetDynamicArg(string arg)
         {
             switch (arg)
             {
-                case DynamicArgs.VRCLocalPlayerName:
+                case nameof(I18nDynamicArgumentType.VRCLocalPlayerName):
                     return Networking.LocalPlayer.displayName;
+                case nameof(I18nDynamicArgumentType.CurrentTime):
+                    return DateTimeOffset.Now.ToLocalTime().ToString("T", CurrentCulture);
+                case nameof(I18nDynamicArgumentType.CurrentDate):
+                    return DateTimeOffset.Now.ToLocalTime().ToString("d", CurrentCulture);
+                case nameof(I18nDynamicArgumentType.CurrentDateTime):
+                    return DateTimeOffset.Now.ToLocalTime().ToString("G", CurrentCulture);
                 default:
                     return string.Empty;
             }

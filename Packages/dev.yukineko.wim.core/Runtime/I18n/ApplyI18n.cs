@@ -1,16 +1,9 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
-using System.Collections.Generic;
 using yukineko.WorldIntegratedMenu.EditorShared;
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using UnityEditorInternal;
-#endif
+using System;
 
 namespace yukineko.WorldIntegratedMenu
 {
@@ -19,7 +12,9 @@ namespace yukineko.WorldIntegratedMenu
     {
         public I18nManager manager;
         public string key;
-        public DynamicArgs[] args;
+        public I18nArgumentType[] args;
+        public string[] argValues;
+
 
         public void Apply(string language = null)
         {
@@ -30,7 +25,7 @@ namespace yukineko.WorldIntegratedMenu
 
             if (args != null)
             {
-                text.text = manager.GetTranslationWithArgs(key, args, language);
+                text.text = manager.GetTranslationWithArgs(key, args, argValues, language);
             }
             else
             {
@@ -43,47 +38,88 @@ namespace yukineko.WorldIntegratedMenu
     [CustomEditor(typeof(ApplyI18n))]
     internal class ApplyI18nInspector : Editor
     {
-        private ApplyI18n _applyI18n;
-        private ReorderableList _reorderableList;
-        private List<DynamicArgs> _argsList;
+        private ListDrawer _listDrawer;
 
         private void OnEnable()
         {
-            _applyI18n = target as ApplyI18n;
+            serializedObject.Update();
+            var args = serializedObject.FindProperty("args");
+            var argValues = serializedObject.FindProperty("argValues");
+
+            if (args.arraySize != argValues.arraySize)
+            {
+                args.arraySize = argValues.arraySize = Mathf.Max(args.arraySize, argValues.arraySize);
+                Apply(true);
+            }
+
             GenerateList();
         }
 
         private void GenerateList()
         {
-            _argsList = _applyI18n.args != null ? new List<DynamicArgs>(_applyI18n.args) : new List<DynamicArgs>();
-            _reorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("args"), true, true, true, true)
+            serializedObject.Update();
+            var args = serializedObject.FindProperty("args");
+            var argValues = serializedObject.FindProperty("argValues");
+
+            var menu = new GenericMenu();
+            foreach (int type in Enum.GetValues(typeof(I18nArgumentType)))
             {
-                draggable = true,
-                elementHeight = EditorGUIUtility.singleLineHeight + (EditorGUIUtility.standardVerticalSpacing * 2),
-                drawHeaderCallback = (Rect rect) =>
+                menu.AddItem(new GUIContent(Enum.GetName(typeof(I18nArgumentType), type)), false, () =>
                 {
-                    EditorGUI.LabelField(rect, EditorI18n.GetTranslation("args"));
-                },
-                drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-                {
-                    rect.height = EditorGUIUtility.singleLineHeight;
-                    var element = _reorderableList.serializedProperty.GetArrayElementAtIndex(index);
-                    rect.y += EditorGUIUtility.standardVerticalSpacing;
-                    EditorGUI.PropertyField(rect, element, new GUIContent($"Argument {index + 1}"));
-                },
-                onAddCallback = (ReorderableList list) =>
-                {
-                    _argsList.Add(DynamicArgs.VRCLocalPlayerName);
-                },
-                onRemoveCallback = (ReorderableList list) =>
-                {
-                    _argsList.RemoveAt(list.index);
-                },
-                onChangedCallback = (ReorderableList list) =>
-                {
+                    args.InsertArrayElementAtIndex(args.arraySize);
+                    argValues.InsertArrayElementAtIndex(argValues.arraySize);
+                    var element = args.GetArrayElementAtIndex(args.arraySize - 1);
+                    var valueElement = argValues.GetArrayElementAtIndex(argValues.arraySize - 1);
+
+                    element.enumValueIndex = type;
+                    valueElement.stringValue = string.Empty;
+
                     Apply(true);
-                }
-            };
+                });
+            }
+
+            _listDrawer = new ListDrawer(args, new ListDrawerCallbacks() {
+                drawHeader = () => EditorI18n.GetTranslation("args"),
+                drawElement = (rect, index, isActive, isFocused) =>
+                {
+                    var element = args.GetArrayElementAtIndex(index);
+                    var valueElement = argValues.GetArrayElementAtIndex(index);
+
+                    var label = new GUIContent($"[{index}] {Enum.GetName(typeof(I18nArgumentType), element.enumValueIndex)}");
+                    if (element.enumValueIndex == (int)I18nArgumentType.Dynamic)
+                    {
+                        var enumValue = Enum.TryParse<I18nDynamicArgumentType>(valueElement.stringValue, out var value) ? value : I18nDynamicArgumentType.None;
+                        valueElement.stringValue = EditorGUI.EnumPopup(rect, label, enumValue).ToString();
+                    }
+                    else
+                    {
+                        EditorGUI.PropertyField(rect, valueElement, label);
+                    }
+                },
+                elementCount = (index) => 1,
+                onAddDropdown = (rect, list) =>
+                {
+                    menu.DropDown(rect);
+                },
+                onRemove = (list) =>
+                {
+                    args.DeleteArrayElementAtIndex(list.index);
+                    argValues.DeleteArrayElementAtIndex(list.index);
+                    Apply(true);
+                },
+                onReorderWithDetails = (list, beforeIndex, afterIndex) =>
+                {
+                    var before = argValues.GetArrayElementAtIndex(beforeIndex);
+                    var after = argValues.GetArrayElementAtIndex(afterIndex);
+                    var beforeValue = before.stringValue;
+                    var afterValue = after.stringValue;
+
+                    before.stringValue = afterValue;
+                    after.stringValue = beforeValue;
+
+                    Apply(true);
+                },
+            });
         }
 
         public override void OnInspectorGUI()
@@ -101,7 +137,7 @@ namespace yukineko.WorldIntegratedMenu
             EditorGUILayout.PropertyField(serializedObject.FindProperty("key"), new GUIContent("Key"));
             EditorGUILayout.Space(20);
 
-            _reorderableList.DoLayoutList();
+            _listDrawer.Draw();
 
             Apply();
         }
@@ -110,12 +146,6 @@ namespace yukineko.WorldIntegratedMenu
         {
             if (force || EditorGUI.EndChangeCheck())
             {
-                serializedObject.FindProperty("args").arraySize = _argsList.Count;
-                for (int i = 0; i < _argsList.Count; i++)
-                {
-                    serializedObject.FindProperty("args").GetArrayElementAtIndex(i).enumValueIndex = (int)_argsList[i];
-                }
-
                 serializedObject.ApplyModifiedProperties();
             }
         }
