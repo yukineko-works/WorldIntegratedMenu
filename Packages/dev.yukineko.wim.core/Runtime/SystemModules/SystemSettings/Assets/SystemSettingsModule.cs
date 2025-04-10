@@ -13,6 +13,8 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private I18nManager _systemI18nManager;
         [SerializeField] private RadioButtonHelper _languageSelector;
         [SerializeField] private RadioButtonHelper _qmKeybindSelector;
+        [SerializeField] private RadioButtonHelper _qmDominantHandSelector;
+        [SerializeField] private ApplyI18n _qmKeybindNoticeText;
         [SerializeField] private QuickMenuManager _quickMenuManager;
         [SerializeField] private CloudSyncManager _cloudSyncManager;
         [SerializeField] private Text _quickMenuSizeText;
@@ -27,7 +29,7 @@ namespace yukineko.WorldIntegratedMenu
 
         private void Start()
         {
-            if (_systemI18nManager == null || _languageSelector == null || _qmKeybindSelector == null || _quickMenuManager == null || _cloudSyncManager == null || _quickMenuSizeText == null)
+            if (_systemI18nManager == null || _languageSelector == null || _qmKeybindSelector == null || _qmDominantHandSelector == null || _quickMenuManager == null || _cloudSyncManager == null || _quickMenuSizeText == null)
             {
                 Debug.LogError("SystemSettingsModule: Missing required components.");
                 return;
@@ -67,6 +69,12 @@ namespace yukineko.WorldIntegratedMenu
                 UpdateQMKeyBind(keybind.String);
             }
 
+            if (data.ContainsKey("qmdominanthand") && data.TryGetValue("qmdominanthand", out var dominantHand))
+            {
+                _qmDominantHandSelector.SetValue(dominantHand.String);
+                UpdateQMDominantHand(dominantHand.String);
+            }
+
             if (data.ContainsKey("lang") && data.TryGetValue("lang", out var lang))
             {
                 _languageSelector.SetValue(lang.String);
@@ -96,14 +104,45 @@ namespace yukineko.WorldIntegratedMenu
         {
             switch (value)
             {
-                case "default":
-                    _quickMenuManager.ResetOpenMethod();
-                    break;
                 case "stick":
                     _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.Stick);
                     break;
                 case "trigger":
                     _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.Trigger);
+                    break;
+                default:
+                    _quickMenuManager.ResetOpenMethod();
+                    break;
+            }
+        }
+
+        public void UpdateQMDominantHand()
+        {
+            if (_quickMenuManager == null) return;
+            if (_qmDominantHandSelector == null) return;
+            UpdateQMDominantHand(_qmDominantHandSelector.Value);
+            _cloudSyncManager.Save("qmdominanthand", _qmDominantHandSelector.Value);
+
+            var value = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Left ? "left" : "right";
+            var argValues = new string[2];
+            argValues[0] = value;
+            argValues[1] = value;
+            _qmKeybindNoticeText.argValues = argValues;
+            _qmKeybindNoticeText.Apply();
+        }
+
+        public void UpdateQMDominantHand(string value)
+        {
+            switch (value)
+            {
+                case "left":
+                    _quickMenuManager.SetDominantHand(VRQuickMenuDominantHand.Left);
+                    break;
+                case "right":
+                    _quickMenuManager.SetDominantHand(VRQuickMenuDominantHand.Right);
+                    break;
+                default:
+                    _quickMenuManager.ResetDominantHand();
                     break;
             }
         }
@@ -187,6 +226,8 @@ namespace yukineko.WorldIntegratedMenu
             "_systemI18nManager",
             "_languageSelector",
             "_qmKeybindSelector",
+            "_qmDominantHandSelector",
+            "_qmKeybindNoticeText",
             "_quickMenuManager",
             "_cloudSyncManager",
             "_quickMenuSizeText",

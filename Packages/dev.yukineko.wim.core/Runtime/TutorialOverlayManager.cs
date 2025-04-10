@@ -41,29 +41,11 @@ namespace yukineko.WorldIntegratedMenu
 
             _player = Networking.LocalPlayer;
             _isVR = _player.IsUserInVR();
-            _currentDisplayTime = _displayTime;
-
-            if (_isVR && _quickMenuManager != null)
-            {
-                switch(_quickMenuManager.CurrentOpenMethod)
-                {
-                    case VRQuickMenuOpenMethod.Stick:
-                        _tutorialTextI18n.key = "tutorialTextInVRStick";
-                        break;
-                    case VRQuickMenuOpenMethod.Trigger:
-                        _tutorialTextI18n.key = "tutorialTextInVRTrigger";
-                        break;
-                }
-            }
-            else
-            {
-                _tutorialTextI18n.key = "tutorialTextInDesktop";
-            }
-
-            _tutorialTextI18n.Apply();
+            UpdateTutorialText();
 
             transform.SetParent(transform.root.parent);
             _displayController.SetBool("show", true);
+            _quickMenuManager.RegisterOpenMethodUpdateCallback(this);
         }
 
         // https://udonsharp.docs.vrchat.com/events/#udon-update-events
@@ -91,6 +73,36 @@ namespace yukineko.WorldIntegratedMenu
                 SendCustomEventDelayedSeconds(nameof(DestroySelf), 3.0f);
                 _isDestroying = true;
             }
+        }
+
+        private void UpdateTutorialText()
+        {
+            _currentDisplayTime = _displayTime;
+            if (_isVR && _quickMenuManager != null)
+            {
+                switch (_quickMenuManager.CurrentOpenMethod)
+                {
+                    case VRQuickMenuOpenMethod.Stick:
+                        _tutorialTextI18n.key = "tutorialTextInVRStick";
+                        break;
+                    case VRQuickMenuOpenMethod.Trigger:
+                        _tutorialTextI18n.key = "tutorialTextInVRTrigger";
+                        break;
+                }
+
+                var hand = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Right ? "right" : "left";
+                _tutorialTextI18n.args = new I18nArgumentType[1];
+                _tutorialTextI18n.argValues = new string[1];
+
+                _tutorialTextI18n.args[0] = I18nArgumentType.I18n;
+                _tutorialTextI18n.argValues[0] = hand;
+            }
+            else
+            {
+                _tutorialTextI18n.key = "tutorialTextInDesktop";
+            }
+
+            _tutorialTextI18n.Apply();
         }
 
         private Quaternion GetRotation(Quaternion targetRotation)
@@ -125,6 +137,11 @@ namespace yukineko.WorldIntegratedMenu
         public void DestroySelf()
         {
             Destroy(gameObject);
+        }
+
+        public void OnQuickMenuOpenMethodUpdated()
+        {
+            UpdateTutorialText();
         }
     }
 }

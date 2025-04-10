@@ -9,7 +9,10 @@
         "default": "ワールドの設定に従う",
         "stick": "スティック",
         "trigger": "トリガー",
-        "qmOpenMethodNotice": "スティック: 右コントローラーのスティックを上方向に入力して開く\nトリガー: 右コントローラーのトリガーを素早く2回押して開く"
+        "qmOpenMethodNotice": "スティック: {0}のコントローラーのスティックを上方向に入力して開く\nトリガー: {1}のコントローラーのトリガーを素早く2回押して開く",
+        "qmDominantHand": "クイックメニューを開く手",
+        "left": "左手",
+        "right": "右手"
     },
     "en": {
         "$moduleName": "System Settings",
@@ -21,7 +24,10 @@
         "default": "Follow the world settings",
         "stick": "Stick",
         "trigger": "Trigger",
-        "qmOpenMethodNotice": "Stick: Open by inputting the stick of the right controller upwards\nTrigger: Open by quickly pressing the trigger of the right controller twice"
+        "qmOpenMethodNotice": "Stick: Open by inputting the stick of the {0} controller upwards\nTrigger: Open by quickly pressing the trigger of the {1} controller twice",
+        "qmDominantHand": "Hand to open the quick menu",
+        "left": "Left Hand",
+        "right": "Right Hand"
     },
     "zh-CN": {
         "$moduleName": "系统设置",
@@ -33,7 +39,10 @@
         "default": "遵循世界设置",
         "stick": "摇杆",
         "trigger": "扳机",
-        "qmOpenMethodNotice": "摇杆: 通过输入右控制器的摇杆向上打开\n扳机: 通过快速按两次右控制器的扳机打开"
+        "qmOpenMethodNotice": "摇杆: 通过输入{0}的控制器的摇杆向上打开\n扳机: 通过快速按两次{1}的控制器的扳机打开",
+        "qmDominantHand": "打开快捷菜单的手",
+        "left": "左手",
+        "right": "右手"
     },
     "zh-TW": {
         "$moduleName": "系統設定",
@@ -45,7 +54,10 @@
         "default": "遵循世界設定",
         "stick": "搖桿",
         "trigger": "扳機",
-        "qmOpenMethodNotice": "搖桿: 通過輸入右控制器的搖桿向上打開\n扳機: 通過快速按兩次右控制器的扳機打開"
+        "qmOpenMethodNotice": "搖桿: 通過輸入{0}的控制器的搖桿向上打開\n扳機: 通過快速按兩次{1}的控制器的扳機打開",
+        "qmDominantHand": "打開快速選單的手",
+        "left": "左手",
+        "right": "右手"
     },
     "ko": {
         "$moduleName": "시스템 설정",
@@ -57,6 +69,9 @@
         "default": "월드 설정을 따름",
         "stick": "스틱",
         "trigger": "트리거",
-        "qmOpenMethodNotice": "스틱: 오른쪽 컨트롤러의 스틱을 위로 입력하여 열기\n트리거: 오른쪽 컨트롤러의 트리거를 빠르게 2번 눌러 열기"
+        "qmOpenMethodNotice": "스틱: {0}의 컨트롤러의 스틱을 위로 입력하여 열기\n트리거: {1}의 컨트롤러의 트리거를 빠르게 2번 눌러 열기",
+        "qmDominantHand": "퀵 메뉴를 여는 손",
+        "left": "왼손",
+        "right": "오른손"
     }
 }

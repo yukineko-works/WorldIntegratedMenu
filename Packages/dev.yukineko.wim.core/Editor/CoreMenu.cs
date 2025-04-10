@@ -33,6 +33,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
             { VRQuickMenuOpenMethod.Stick, "openByStick" },
             { VRQuickMenuOpenMethod.Trigger, "openByTrigger" }
         };
+        private Dictionary<VRQuickMenuDominantHand, string> _vrDominantHandNames = new Dictionary<VRQuickMenuDominantHand, string>
+        {
+            { VRQuickMenuDominantHand.Left, "leftHand" },
+            { VRQuickMenuDominantHand.Right, "rightHand" },
+        };
 
         private void OnEnable()
         {
@@ -333,7 +338,7 @@ namespace yukineko.WorldIntegratedMenu.Editor
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("uiManagerNotFound"), MessageType.Error);
             }
 
-            UIStyles.TitleBox(EditorI18n.GetTranslation("otherSettings"));
+            UIStyles.TitleBox(EditorI18n.GetTranslation("quickMenuSettings"), EditorI18n.GetTranslation("quickMenuSettingsDescription"));
 
             if (_quickMenuManagerSerializedObject == null)
             {
@@ -343,19 +348,38 @@ namespace yukineko.WorldIntegratedMenu.Editor
             {
                 EditorGUILayout.LabelField(EditorI18n.GetTranslation("menuOpenMethodInVR"));
 
-                var enumCount = Enum.GetNames(typeof(VRQuickMenuOpenMethod)).Length;
-                var enumNames = new string[enumCount];
+                var methodEnumCount = Enum.GetNames(typeof(VRQuickMenuOpenMethod)).Length;
+                var methodEnumNames = new string[methodEnumCount];
 
-                for (var i = 0; i < enumCount; i++)
+                for (var i = 0; i < methodEnumCount; i++)
                 {
-                    enumNames[i] = EditorI18n.GetTranslation(_vrOpenMethodNames[(VRQuickMenuOpenMethod)i]);
+                    methodEnumNames[i] = EditorI18n.GetTranslation(_vrOpenMethodNames[(VRQuickMenuOpenMethod)i]);
                 }
 
                 var selectedOpenMethod = _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex;
-                var newOpenMethod = EditorGUILayout.Popup(selectedOpenMethod, enumNames);
+                var newOpenMethod = EditorGUILayout.Popup(selectedOpenMethod, methodEnumNames);
                 if (newOpenMethod != selectedOpenMethod)
                 {
                     _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex = newOpenMethod;
+                    _quickMenuManagerSerializedObject.ApplyModifiedProperties();
+                }
+
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("quickmenuDominantHandInVR"));
+
+                var dominantHandEnumCount = Enum.GetNames(typeof(VRQuickMenuDominantHand)).Length;
+                var dominantHandEnumNames = new string[dominantHandEnumCount];
+
+                for (var i = 0; i < dominantHandEnumCount; i++)
+                {
+                    dominantHandEnumNames[i] = EditorI18n.GetTranslation(_vrDominantHandNames[(VRQuickMenuDominantHand)i]);
+                }
+
+                var selectedDominantHand = _quickMenuManagerSerializedObject.FindProperty("_dominantHand").enumValueIndex;
+                var newDominantHand = EditorGUILayout.Popup(selectedDominantHand, dominantHandEnumNames);
+                if (newDominantHand != selectedDominantHand)
+                {
+                    _quickMenuManagerSerializedObject.FindProperty("_dominantHand").enumValueIndex = newDominantHand;
                     _quickMenuManagerSerializedObject.ApplyModifiedProperties();
                 }
             }

@@ -50,8 +50,8 @@
         "persistValue": "値を永続化する",
         "otherSettings": "その他の設定",
         "menuOpenMethodInVR": "VRでのクイックメニューの開き方",
-        "openByStick": "右コントローラーで上方向に入力して開く (デフォルト)",
-        "openByTrigger": "右コントローラーのトリガーを素早く2回押して開く",
+        "openByStick": "コントローラーで上方向に入力して開く (デフォルト)",
+        "openByTrigger": "コントローラーのトリガーを素早く2回押して開く",
         "quickMenuManagerNotFound": "QuickMenuManagerが見つかりません",
         "uiManagerNotFound": "UIManagerが見つかりません",
         "defaultOpenModule": "デフォルトで開くモジュール",
@@ -79,7 +79,12 @@
         "downloadLatestVersionFromBooth": "BOOTHから最新バージョンをダウンロード",
         "links": "リンク",
         "checkingForUpdate": "アップデートを確認中",
-        "openChangelog": "更新履歴を開く"
+        "openChangelog": "更新履歴を開く",
+        "quickmenuDominantHandInVR": "VRでのクイックメニューを開く手",
+        "leftHand": "左手",
+        "rightHand": "右手",
+        "quickMenuSettings": "クイックメニュー設定",
+        "quickMenuSettingsDescription": "クイックメニューに関する設定を行うことができます。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -132,8 +137,8 @@
         "persistValue": "Persist value",
         "otherSettings": "Other Settings",
         "menuOpenMethodInVR": "Menu Open Method in VR",
-        "openByStick": "Open by inputting upward on the right controller (Default)",
-        "openByTrigger": "Open by quickly pressing the trigger on the right controller twice",
+        "openByStick": "Open by inputting upward on the controller (Default)",
+        "openByTrigger": "Open by quickly pressing the trigger on the controller twice",
         "quickMenuManagerNotFound": "QuickMenuManager not found",
         "uiManagerNotFound": "UIManager not found",
         "defaultOpenModule": "Default Open Module",
@@ -161,7 +166,12 @@
         "downloadLatestVersionFromBooth": "Download the latest version from BOOTH",
         "links": "Links",
         "checkingForUpdate": "Checking for updates",
-        "openChangelog": "Open changelog"
+        "openChangelog": "Open changelog",
+        "quickmenuDominantHandInVR": "Dominant hand for opening quick menu in VR",
+        "leftHand": "Left Hand",
+        "rightHand": "Right Hand",
+        "quickMenuSettings": "Quick Menu Settings",
+        "quickMenuSettingsDescription": "You can set the settings for the quick menu."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -214,8 +224,8 @@
         "persistValue": "持久化值",
         "otherSettings": "其他设置",
         "menuOpenMethodInVR": "VR中的菜单打开方式",
-        "openByStick": "通过在右控制器上输入向上打开 (默认)",
-        "openByTrigger": "通过快速两次按下右控制器的扳机打开",
+        "openByStick": "通过控制器向上输入打开 (默认)",
+        "openByTrigger": "通过快速按下控制器上的触发器两次打开",
         "quickMenuManagerNotFound": "未找到QuickMenuManager",
         "uiManagerNotFound": "未找到UIManager",
         "defaultOpenModule": "默认打开模块",
@@ -243,7 +253,12 @@
         "downloadLatestVersionFromBooth": "从BOOTH下载最新版本",
         "links": "链接",
         "checkingForUpdate": "检查更新中",
-        "openChangelog": "打开更新日志"
+        "openChangelog": "打开更新日志",
+        "quickmenuDominantHandInVR": "VR中打开快速菜单的手",
+        "leftHand": "左手",
+        "rightHand": "右手",
+        "quickMenuSettings": "快速菜单设置",
+        "quickMenuSettingsDescription": "您可以设置快速菜单的设置。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -296,8 +311,8 @@
         "persistValue": "持久化值",
         "otherSettings": "其他設置",
         "menuOpenMethodInVR": "VR中的菜單打開方式",
-        "openByStick": "通過在右控制器上輸入向上打開 (默認)",
-        "openByTrigger": "通過快速兩次按下右控制器的扳機打開",
+        "openByStick": "通過控制器向上輸入打開 (默認)",
+        "openByTrigger": "通過快速按下控制器上的觸發器兩次打開",
         "quickMenuManagerNotFound": "未找到QuickMenuManager",
         "uiManagerNotFound": "未找到UIManager",
         "defaultOpenModule": "默認打開模組",
@@ -325,7 +340,12 @@
         "downloadLatestVersionFromBooth": "從BOOTH下載最新版本",
         "links": "鏈接",
         "checkingForUpdate": "檢查更新中",
-        "openChangelog": "打開更新日誌"
+        "openChangelog": "打開更新日誌",
+        "quickmenuDominantHandInVR": "VR中打開快速菜單的手",
+        "leftHand": "左手",
+        "rightHand": "右手",
+        "quickMenuSettings": "快速菜單設置",
+        "quickMenuSettingsDescription": "您可以設置快速菜單的設置。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -378,8 +398,8 @@
         "persistValue": "값 유지",
         "otherSettings": "기타 설정",
         "menuOpenMethodInVR": "VR에서 메뉴 열기 방법",
-        "openByStick": "오른쪽 컨트롤러에서 위로 입력하여 열기 (기본값)",
-        "openByTrigger": "오른쪽 컨트롤러의 트리 거를 빠르게 두 번 눌러 열기",
+        "openByStick": "컨트롤러에서 위쪽으로 입력하여 열기 (기본값)",
+        "openByTrigger": "컨트롤러의 트리거를 빠르게 두 번 눌러 열기",
         "quickMenuManagerNotFound": "QuickMenuManager를 찾을 수 없습니다",
         "uiManagerNotFound": "UIManager를 찾을 수 없습니다",
         "defaultOpenModule": "기본 열기 모듈",
@@ -407,6 +427,11 @@
         "downloadLatestVersionFromBooth": "BOOTH에서 최신 버전 다운로드",
         "links": "링크",
         "checkingForUpdate": "업데이트 확인 중",
-        "openChangelog": "업데이트 로그 열기"
+        "openChangelog": "업데이트 로그 열기",
+        "quickmenuDominantHandInVR": "VR에서 빠른 메뉴를 여는 손",
+        "leftHand": "왼손",
+        "rightHand": "오른손",
+        "quickMenuSettings": "빠른 메뉴 설정",
+        "quickMenuSettingsDescription": "빠른 메뉴에 대한 설정을 할 수 있습니다."
     }
 }

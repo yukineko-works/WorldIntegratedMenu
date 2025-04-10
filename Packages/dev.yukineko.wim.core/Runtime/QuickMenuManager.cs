@@ -14,6 +14,12 @@ namespace yukineko.WorldIntegratedMenu
         Trigger
     }
 
+    public enum VRQuickMenuDominantHand
+    {
+        Right,
+        Left
+    }
+
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class QuickMenuManager : UdonSharpBehaviour
     {
@@ -30,12 +36,15 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private float _controllerInputThreshold = 0.1f;
         [SerializeField] private int _vrToggleOpenThreshold = 500;
         [SerializeField] private VRQuickMenuOpenMethod _vrOpenMethod = VRQuickMenuOpenMethod.Stick;
+        [SerializeField] private VRQuickMenuDominantHand _dominantHand = VRQuickMenuDominantHand.Right;
 
         private VRCPlayerApi _player;
         private bool _isVR;
         private BoxCollider _collider;
         private GraphicRaycaster _raycaster;
         private VRQuickMenuOpenMethod _defaultOpenMethod;
+        private VRQuickMenuDominantHand _defaultDominantHand;
+        private Vector3 _overridedVrScreenPosition;
         private Quaternion _lockedRotation = Quaternion.identity;
         private Quaternion _inversedLastHandRotation = Quaternion.identity;
         private float _holdTime = 0.0f;
@@ -45,11 +54,14 @@ namespace yukineko.WorldIntegratedMenu
         private bool _cancelPostClose = false;
         private bool _vrToggleOpen = false;
         private long _vrToggleLastInput = 0;
+        private UdonSharpBehaviour[] _openMethodUpdateCallbacks = new UdonSharpBehaviour[0];
 
         public bool IsOpened => _holdTime >= _vrHoldTime;
         public bool IsOpening => _isInputting && !IsOpened;
         public VRQuickMenuOpenMethod DefaultOpenMethod => _defaultOpenMethod;
         public VRQuickMenuOpenMethod CurrentOpenMethod => _vrOpenMethod;
+        public VRQuickMenuDominantHand DefaultDominantHand => _defaultDominantHand;
+        public VRQuickMenuDominantHand DominantHand => _dominantHand;
 
         private void Start()
         {
@@ -69,6 +81,8 @@ namespace yukineko.WorldIntegratedMenu
             SetMenuSize(1f);
 
             _defaultOpenMethod = _vrOpenMethod;
+            _defaultDominantHand = _dominantHand;
+            _overridedVrScreenPosition = _vrScreenPosition;
             _isInitialized = true;
         }
 
@@ -82,8 +96,8 @@ namespace yukineko.WorldIntegratedMenu
                 if (_vrOpenMethod == VRQuickMenuOpenMethod.Stick && !_isInputting && !_isShowing) return;
                 if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger && !_vrToggleOpen && !_isShowing) return;
 
-                var rightHandTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand);
-                var qmPosition = rightHandTrackingData.position + (rightHandTrackingData.rotation * _vrScreenPosition);
+                var handTrackingData = _player.GetTrackingData(_dominantHand == VRQuickMenuDominantHand.Right ? VRCPlayerApi.TrackingDataType.RightHand : VRCPlayerApi.TrackingDataType.LeftHand);
+                var qmPosition = handTrackingData.position + (handTrackingData.rotation * _overridedVrScreenPosition);
 
                 // Stick
                 if (_vrOpenMethod == VRQuickMenuOpenMethod.Stick)
@@ -98,7 +112,7 @@ namespace yukineko.WorldIntegratedMenu
                     }
                     else if (!_isShowing)
                     {
-                        _inversedLastHandRotation = Quaternion.Inverse(rightHandTrackingData.rotation);
+                        _inversedLastHandRotation = Quaternion.Inverse(handTrackingData.rotation);
                         ShowMenu(true);
                     }
                 }
@@ -109,12 +123,12 @@ namespace yukineko.WorldIntegratedMenu
                     {
                         var headTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
                         _lockedRotation = Quaternion.LookRotation(qmPosition - headTrackingData.position);
-                        _inversedLastHandRotation = Quaternion.Inverse(rightHandTrackingData.rotation);
+                        _inversedLastHandRotation = Quaternion.Inverse(handTrackingData.rotation);
                         ShowMenu(true);
                     }
                 }
 
-                transform.SetPositionAndRotation(qmPosition, !_isShowing ? _lockedRotation : rightHandTrackingData.rotation * _inversedLastHandRotation * _lockedRotation);
+                transform.SetPositionAndRotation(qmPosition, !_isShowing ? _lockedRotation : handTrackingData.rotation * _inversedLastHandRotation * _lockedRotation);
             }
             else
             {
@@ -129,7 +143,17 @@ namespace yukineko.WorldIntegratedMenu
 
         public override void InputLookVertical(float value, UdonInputEventArgs args)
         {
-            if (!_isVR || _vrOpenMethod != VRQuickMenuOpenMethod.Stick) return;
+            InputStick(value, VRQuickMenuDominantHand.Right);
+        }
+
+        public override void InputMoveVertical(float value, UdonInputEventArgs args)
+        {
+            InputStick(value, VRQuickMenuDominantHand.Left);
+        }
+
+        private void InputStick(float value, VRQuickMenuDominantHand hand)
+        {
+            if (!_isVR || _vrOpenMethod != VRQuickMenuOpenMethod.Stick || _dominantHand != hand) return;
             if (value < (1 - _controllerInputThreshold))
             {
                 _holdTime = 0.0f;
@@ -148,10 +172,17 @@ namespace yukineko.WorldIntegratedMenu
             if (
                 !_isVR ||
                 !state ||
-                _vrOpenMethod != VRQuickMenuOpenMethod.Trigger ||
-                args.handType != HandType.RIGHT ||
-                _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null
+                _vrOpenMethod != VRQuickMenuOpenMethod.Trigger
             ) return;
+
+            if (_dominantHand == VRQuickMenuDominantHand.Right)
+            {
+                if (args.handType != HandType.RIGHT || _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null) return;
+            }
+            else
+            {
+                if (args.handType != HandType.LEFT || _player.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null) return;
+            }
 
             var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             var diff = now - _vrToggleLastInput;
@@ -176,6 +207,7 @@ namespace yukineko.WorldIntegratedMenu
         public void SetScreenPosition(Vector3 value)
         {
             _vrScreenPosition = value;
+            RecalculateVRScreenPosition();
         }
 
         public void ResetOpenMethod()
@@ -188,6 +220,33 @@ namespace yukineko.WorldIntegratedMenu
             _vrToggleOpen = false;
             _displayController.SetBool("showProgress", false);
             _vrOpenMethod = value;
+            CallOpenMethodUpdateCallbacks();
+        }
+
+        public void ResetDominantHand()
+        {
+            SetDominantHand(_defaultDominantHand);
+        }
+
+        public void SetDominantHand(VRQuickMenuDominantHand value)
+        {
+            _dominantHand = value;
+            RecalculateVRScreenPosition();
+            CallOpenMethodUpdateCallbacks();
+        }
+
+        private void RecalculateVRScreenPosition()
+        {
+            if (_dominantHand == VRQuickMenuDominantHand.Right)
+            {
+                _overridedVrScreenPosition = _vrScreenPosition;
+            }
+            else
+            {
+                _overridedVrScreenPosition = new Vector3(_vrScreenPosition.x, -_vrScreenPosition.y, _vrScreenPosition.z);
+            }
+
+            _inversedLastHandRotation = Quaternion.Inverse(_player.GetTrackingData(_dominantHand == VRQuickMenuDominantHand.Right ? VRCPlayerApi.TrackingDataType.RightHand : VRCPlayerApi.TrackingDataType.LeftHand).rotation);
         }
 
         public void ShowMenu(bool show)
@@ -220,6 +279,21 @@ namespace yukineko.WorldIntegratedMenu
         {
             _collider.enabled = value;
             _raycaster.enabled = value;
+        }
+
+        public void RegisterOpenMethodUpdateCallback(UdonSharpBehaviour callback)
+        {
+            if (callback == null) return;
+            _openMethodUpdateCallbacks = ArrayUtils.Add(_openMethodUpdateCallbacks, callback);
+        }
+
+        private void CallOpenMethodUpdateCallbacks()
+        {
+            for (int i = 0; i < _openMethodUpdateCallbacks.Length; i++)
+            {
+                if (_openMethodUpdateCallbacks[i] == null) continue;
+                _openMethodUpdateCallbacks[i].SendCustomEvent("OnQuickMenuOpenMethodUpdated");
+            }
         }
     }
 }

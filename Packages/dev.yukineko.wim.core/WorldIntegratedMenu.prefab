@@ -826,6 +826,7 @@ MonoBehaviour:
   manager: {fileID: 4524561051189541014}
   key: returnToHome
   args: 
+  argValues: []
 --- !u!114 &18828182319295928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1485,7 @@ MonoBehaviour:
   _controllerInputThreshold: 0.1
   _vrToggleOpenThreshold: 500
   _vrOpenMethod: 0
+  _dominantHand: 0
 --- !u!114 &7268332161590092723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3540,6 +3542,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   key: $moduleName
   args: 
+  argValues: []
 --- !u!114 &5967040178572876542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3904,6 +3907,8 @@ MonoBehaviour:
   manager: {fileID: 4524561051189541014}
   key: homeWelcomeText
   args: 00000000
+  argValues:
+  - VRCLocalPlayerName
 --- !u!114 &8612303314407001029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,6 +5154,7 @@ MonoBehaviour:
   manager: {fileID: 4524561051189541014}
   key: forceReset
   args: 
+  argValues: []
 --- !u!114 &4600616723932704801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10674,7 +10680,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 11b80e30907b85c43b57c6005d3ca43d,
+        type: 2}
     - target: {fileID: 2404339613675052787, guid: ab24826dde85ffe458f508ef71dc3072,
         type: 3}
       propertyPath: m_Pivot.x
@@ -10789,7 +10796,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 4335a055f50eae446a6852d66cc15ea2,
+        type: 2}
     - target: {fileID: 4283254737275751206, guid: ab24826dde85ffe458f508ef71dc3072,
         type: 3}
       propertyPath: m_Text
@@ -10902,7 +10910,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 11b80e30907b85c43b57c6005d3ca43d,
+        type: 2}
     - target: {fileID: 2404339613675052787, guid: ab24826dde85ffe458f508ef71dc3072,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11017,7 +11026,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 4335a055f50eae446a6852d66cc15ea2,
+        type: 2}
     - target: {fileID: 4283254737275751206, guid: ab24826dde85ffe458f508ef71dc3072,
         type: 3}
       propertyPath: m_Text
