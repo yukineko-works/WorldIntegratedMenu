@@ -100,6 +100,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7579006418551970464}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7579006418551970464
 MonoBehaviour:
@@ -228,6 +229,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6647680382248563562}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6647680382248563562
 MonoBehaviour:
@@ -418,6 +420,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7612769851642838248}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &7612769851642838248
 MonoBehaviour:
@@ -458,6 +461,7 @@ GameObject:
   - component: {fileID: 9009243442354218621}
   - component: {fileID: 2234029851512711}
   - component: {fileID: 6660447779581629833}
+  - component: {fileID: 4489058063476944099}
   m_Layer: 5
   m_Name: RadioButtons
   m_TagString: Untagged
@@ -579,6 +583,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &4489058063476944099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3973362323908148524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 1
 --- !u!1 &7416202186005192983
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +703,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6375373629425451704}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6375373629425451704
 MonoBehaviour:
@@ -737,6 +756,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   key: 
   args: 
+  argValues: []
 --- !u!114 &1316015226013042323
 MonoBehaviour:
   m_ObjectHideFlags: 0
