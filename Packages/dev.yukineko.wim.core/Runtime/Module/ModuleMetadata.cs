@@ -22,6 +22,7 @@ namespace yukineko.WorldIntegratedMenu
         public Sprite moduleIcon;
         public bool forceUseModuleName = false;
         public GameObject content;
+        public bool activateOnStart = false;
 
         [HideInInspector] public I18nManager i18nManager;
         [SerializeField] private string _moduleId = "";
@@ -50,6 +51,23 @@ namespace yukineko.WorldIntegratedMenu
                         _onModuleCalledMethods[i] = udonBehaviours[_onModuleCalledBehaviourIndexes[i]];
                     }
                 }
+            }
+        }
+
+        public void Activate()
+        {
+            if (activateOnStart && content != null)
+            {
+                content.SetActive(true);
+                SendCustomEventDelayedFrames(nameof(PostActivate), 1);
+            }
+        }
+
+        public void PostActivate()
+        {
+            if (content != null)
+            {
+                content.SetActive(false);
             }
         }
 
@@ -158,6 +176,7 @@ namespace yukineko.WorldIntegratedMenu
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("content"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("activateOnStart"));
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
             }
