@@ -18,13 +18,13 @@
   },
   "locked": {
     "com.vrchat.worlds": {
-      "version": "3.8.0",
+      "version": "3.9.0",
       "dependencies": {
-        "com.vrchat.base": "3.8.0"
+        "com.vrchat.base": "3.9.0"
       }
     },
     "com.vrchat.base": {
-      "version": "3.8.0",
+      "version": "3.9.0",
       "dependencies": {}
     },
     "com.vrchat.core.vpm-resolver": {
@@ -42,7 +42,7 @@
       }
     },
     "com.anatawa12.vpm-package-auto-installer.creator": {
-      "version": "1.1.4",
+      "version": "1.1.5",
       "dependencies": {}
     }
   }
