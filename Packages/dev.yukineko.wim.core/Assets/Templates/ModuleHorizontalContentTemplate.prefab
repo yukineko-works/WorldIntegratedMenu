@@ -122,6 +122,7 @@ MonoBehaviour:
   moduleIcon: {fileID: 21300000, guid: f38dc4c1bced9b14ea4ef37a9cdd3d4e, type: 3}
   forceUseModuleName: 0
   content: {fileID: 6318158788393929634}
+  activateOnStart: 0
   i18nManager: {fileID: 0}
   _moduleId: 
   _isUnique: 1
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -356,6 +357,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 788239445000164944}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 0.3
 --- !u!114 &788239445000164944
 MonoBehaviour:
@@ -673,6 +675,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6170826159373832689}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &6170826159373832689
 MonoBehaviour:

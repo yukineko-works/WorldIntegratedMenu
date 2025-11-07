@@ -215,6 +215,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 301771177942681798}
   colorPalette: 2
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &301771177942681798
 MonoBehaviour:
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -586,6 +587,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2194796475433139645}
   colorPalette: 0
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &2194796475433139645
 MonoBehaviour:
@@ -713,6 +715,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 513771459077198921}
   colorPalette: 3
+  themeManager: {fileID: 0}
   alpha: 1
 --- !u!114 &513771459077198921
 MonoBehaviour:
