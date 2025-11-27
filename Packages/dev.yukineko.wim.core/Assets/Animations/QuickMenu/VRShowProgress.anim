@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Neutral
+  m_Name: VRShowProgress
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Panel
+    path: VRCanvas/Panel
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -44,7 +44,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Slider
+    path: VRCanvas/Slider
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -68,7 +68,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1938862701
+      path: 1877020628
       attribute: 1574349066
       script: {fileID: 0}
       typeID: 225
@@ -77,7 +77,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1823091986
+      path: 3725285255
       attribute: 1574349066
       script: {fileID: 0}
       typeID: 225
@@ -124,7 +124,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Panel
+    path: VRCanvas/Panel
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -134,7 +134,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -145,7 +145,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Slider
+    path: VRCanvas/Slider
     classID: 225
     script: {fileID: 0}
     flags: 0

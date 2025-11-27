@@ -25,13 +25,10 @@ namespace yukineko.WorldIntegratedMenu
     {
         [SerializeField] private UIManager _uiManager;
         [SerializeField] private Animator _displayController;
-        [SerializeField] private GameObject _canvas;
-        [SerializeField] private GameObject _panel;
-        [SerializeField] private Slider _progressBar;
-        [SerializeField] private Vector3 _desktopScreenPosition = new Vector3(0f, 0f, 0.2f);
+        [SerializeField] private QuickMenuCanvas _vrCanvas;
+        [SerializeField] private QuickMenuCanvas _nonVrCanvas;
         [SerializeField] private Vector3 _vrScreenPosition = new Vector3(0f, -0.15f, 0.15f);
         [SerializeField] private float _vrQuickMenuStandardSize = 0.00016f;
-        [SerializeField] private float _desktopQuickMenuStandardSize = 0.00025f;
         [SerializeField] private float _vrHoldTime = 0.5f;
         [SerializeField] private float _controllerInputThreshold = 0.1f;
         [SerializeField] private int _vrToggleOpenThreshold = 500;
@@ -40,8 +37,6 @@ namespace yukineko.WorldIntegratedMenu
 
         private VRCPlayerApi _player;
         private bool _isVR;
-        private BoxCollider _collider;
-        private GraphicRaycaster _raycaster;
         private VRQuickMenuOpenMethod _defaultOpenMethod;
         private VRQuickMenuDominantHand _defaultDominantHand;
         private Vector3 _overridedVrScreenPosition;
@@ -63,18 +58,26 @@ namespace yukineko.WorldIntegratedMenu
         public VRQuickMenuDominantHand DefaultDominantHand => _defaultDominantHand;
         public VRQuickMenuDominantHand DominantHand => _dominantHand;
 
+        private QuickMenuCanvas Canvas => _isVR ? _vrCanvas : _nonVrCanvas;
+
         private void Start()
         {
-            if (_uiManager == null || _canvas == null || _displayController == null || _progressBar == null)
+            if (_uiManager == null || _displayController == null)
             {
                 Debug.LogError("QuickMenuManager: Missing required components.");
                 return;
             }
             _player = Networking.LocalPlayer;
             _isVR = _player.IsUserInVR();
-            _collider = _canvas.GetComponent<BoxCollider>();
-            _raycaster = _canvas.GetComponent<GraphicRaycaster>();
-            _canvas.SetActive(true);
+
+            var canvas = Canvas;
+            if (canvas == null || canvas.Collider == null || canvas.Raycaster == null || canvas.Panel == null || canvas.ProgressBar == null)
+            {
+                Debug.LogError("QuickMenuManager: Missing QuickMenuCanvas or its components.");
+                return;
+            }
+
+            canvas.gameObject.SetActive(true);
             QMSetActive(false);
 
             transform.SetParent(transform.root.parent, false);
@@ -105,7 +108,7 @@ namespace yukineko.WorldIntegratedMenu
                     if (IsOpening)
                     {
                         _holdTime += Time.deltaTime;
-                        _progressBar.value = _holdTime / _vrHoldTime;
+                        Canvas.ProgressBar.value = _holdTime / _vrHoldTime;
 
                         var headTrackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
                         _lockedRotation = Quaternion.LookRotation(qmPosition - headTrackingData.position);
@@ -134,10 +137,6 @@ namespace yukineko.WorldIntegratedMenu
             {
                 if (Input.GetKeyDown(KeyCode.Tab) && _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null) ShowMenu(true);
                 if (Input.GetKeyUp(KeyCode.Tab)) ShowMenu(false);
-
-                if (!_isShowing) return;
-                var trackingData = _player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
-                transform.SetPositionAndRotation(trackingData.position + (trackingData.rotation * _desktopScreenPosition), trackingData.rotation);
             }
         }
 
@@ -200,8 +199,23 @@ namespace yukineko.WorldIntegratedMenu
 
         public void SetMenuSize(float value)
         {
-            var size = (_isVR ? _vrQuickMenuStandardSize : _desktopQuickMenuStandardSize) * value;
-            _canvas.transform.localScale = new Vector3(size, size, size * 100f);
+            if (_isVR)
+            {
+                var size = _vrQuickMenuStandardSize * value;
+                Canvas.transform.localScale = new Vector3(size, size, size * 100f);
+            }
+            else
+            {
+                var container = Canvas.Container;
+                if (container == null)
+                {
+                    Debug.LogError("QuickMenuManager: Non-VR QuickMenuCanvas is missing Container reference.");
+                    return;
+                }
+
+                var size = 0.5f + (value - 0.5f) * 0.5f;
+                container.transform.localScale = new Vector3(size, size, size * 100f);
+            }
         }
 
         public void SetScreenPosition(Vector3 value)
@@ -256,7 +270,7 @@ namespace yukineko.WorldIntegratedMenu
                 _isShowing = true;
                 _cancelPostClose = true;
                 QMSetActive(true);
-                _uiManager.SetMenuParent(_panel.transform);
+                _uiManager.SetMenuParent(Canvas.Panel.transform);
                 _displayController.SetBool("showMenu", true);
             }
             else
@@ -277,8 +291,8 @@ namespace yukineko.WorldIntegratedMenu
 
         private void QMSetActive(bool value)
         {
-            _collider.enabled = value;
-            _raycaster.enabled = value;
+            Canvas.Collider.enabled = value;
+            Canvas.Raycaster.enabled = value;
         }
 
         public void RegisterOpenMethodUpdateCallback(UdonSharpBehaviour callback)

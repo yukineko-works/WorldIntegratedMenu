@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShowMenu
+  m_Name: NonVRShowMenu
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -40,7 +40,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
   m_FloatCurves:
   - serializedVersion: 2
     curve:
@@ -68,7 +68,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -89,7 +89,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Slider
+    path: OverlayCanvas/Slider
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -102,7 +102,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1938862701
+      path: 2843687861
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -111,7 +111,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1938862701
+      path: 2843687861
       attribute: 1574349066
       script: {fileID: 0}
       typeID: 225
@@ -120,7 +120,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1823091986
+      path: 1381560653
       attribute: 1574349066
       script: {fileID: 0}
       typeID: 225
@@ -176,7 +176,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -197,7 +197,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: Canvas/Slider
+    path: OverlayCanvas/Slider
     classID: 225
     script: {fileID: 0}
     flags: 0
@@ -227,7 +227,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -257,7 +257,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -287,7 +287,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Canvas/Panel
+    path: OverlayCanvas/Container/Panel
     classID: 224
     script: {fileID: 0}
     flags: 0
