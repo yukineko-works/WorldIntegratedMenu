@@ -169,6 +169,10 @@ namespace yukineko.WorldIntegratedMenu
             EditorGUI.BeginChangeCheck();
             _moduleMetadata.moduleName = EditorGUILayout.TextField(EditorI18n.GetTranslation("moduleName"), _moduleMetadata.moduleName);
             _moduleMetadata.moduleIcon = (Sprite)EditorGUILayout.ObjectField(EditorI18n.GetTranslation("moduleIcon"), _moduleMetadata.moduleIcon, typeof(Sprite), false);
+
+            var label = new GUIContent(EditorI18n.GetTranslation("useModuleNameAsDisplayName"), EditorI18n.GetTranslation("useModuleNameAsDisplayNameDescription"));
+            _moduleMetadata.forceUseModuleName = EditorGUILayout.ToggleLeft(label, _moduleMetadata.forceUseModuleName);
+
             EditorGUILayout.Space();
 
             _isOpeningInternalProperties = EditorGUILayout.Foldout(_isOpeningInternalProperties, EditorI18n.GetTranslation("internalProperties"));
@@ -187,7 +191,6 @@ namespace yukineko.WorldIntegratedMenu
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_moduleId"), EditorI18n.GetGUITranslation("moduleUniqueId"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_isUnique"), EditorI18n.GetGUITranslation("disallowMultipleInstances"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("forceUseModuleName"), EditorI18n.GetGUITranslation("forceUseModuleName"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("_hideInMenu"), EditorI18n.GetGUITranslation("hideInMenu"));
                 EditorGUILayout.Space();
 

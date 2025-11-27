@@ -84,7 +84,9 @@
         "leftHand": "左手",
         "rightHand": "右手",
         "quickMenuSettings": "クイックメニュー設定",
-        "quickMenuSettingsDescription": "クイックメニューに関する設定を行うことができます。"
+        "quickMenuSettingsDescription": "クイックメニューに関する設定を行うことができます。",
+        "useModuleNameAsDisplayName": "モジュール名を表示名として使用する [?]",
+        "useModuleNameAsDisplayNameDescription": "メニューに表示されるモジュールの名前を、モジュール名に入力された名前に変更します。\nこのオプションを有効にするとモジュール名のローカライズが無効になります。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -171,7 +173,9 @@
         "leftHand": "Left Hand",
         "rightHand": "Right Hand",
         "quickMenuSettings": "Quick Menu Settings",
-        "quickMenuSettingsDescription": "You can set the settings for the quick menu."
+        "quickMenuSettingsDescription": "You can set the settings for the quick menu.",
+        "useModuleNameAsDisplayName": "Use Module Name as Display Name [?]",
+        "useModuleNameAsDisplayNameDescription": "Changes the module name displayed in the menu to the entered module name. Enabling this option disables localization for the module name."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -258,7 +262,9 @@
         "leftHand": "左手",
         "rightHand": "右手",
         "quickMenuSettings": "快速菜单设置",
-        "quickMenuSettingsDescription": "您可以设置快速菜单的设置。"
+        "quickMenuSettingsDescription": "您可以设置快速菜单的设置。",
+        "useModuleNameAsDisplayName": "使用模块名作为显示名称 [?]",
+        "useModuleNameAsDisplayNameDescription": "将菜单中显示的模块名称更改为输入的模块名称。启用此选项将禁用模块名称的本地化。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -345,7 +351,9 @@
         "leftHand": "左手",
         "rightHand": "右手",
         "quickMenuSettings": "快速菜單設置",
-        "quickMenuSettingsDescription": "您可以設置快速菜單的設置。"
+        "quickMenuSettingsDescription": "您可以設置快速菜單的設置。",
+        "useModuleNameAsDisplayName": "使用模組名作為顯示名稱 [?]",
+        "useModuleNameAsDisplayNameDescription": "將菜單中顯示的模組名稱更改為輸入的模組名稱。啟用此選項將禁用模組名稱的本地化。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -432,6 +440,8 @@
         "leftHand": "왼손",
         "rightHand": "오른손",
         "quickMenuSettings": "빠른 메뉴 설정",
-        "quickMenuSettingsDescription": "빠른 메뉴에 대한 설정을 할 수 있습니다."
+        "quickMenuSettingsDescription": "빠른 메뉴에 대한 설정을 할 수 있습니다.",
+        "useModuleNameAsDisplayName": "모듈 이름을 표시 이름으로 사용 [?]",
+        "useModuleNameAsDisplayNameDescription": "메뉴에 표시되는 모듈 이름을 입력된 모듈 이름으로 변경합니다. 이 옵션을 활성화하면 모듈 이름에 대한 현지화가 비활성화됩니다."
     }
 }
