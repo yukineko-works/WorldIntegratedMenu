@@ -94,7 +94,8 @@
         "moduleCommonSettings": "モジュール共通設定",
         "enableDevMode": "開発者モードを有効にする",
         "setupSuccessfully": "正常にセットアップされています",
-        "setupIssuesFound": "問題が見つかりました。開発者モードを有効化すると詳細情報が表示されます。"
+        "setupIssuesFound": "問題が見つかりました。開発者モードを有効化すると詳細情報が表示されます。",
+        "modulePermissionsEnabled": "使用できるユーザーの制限が有効になっています (「インスタンスオーナーのみ」または「許可したユーザーのみ」)"
     },
     "en": {
         "moduleName": "Module Name",
@@ -191,7 +192,8 @@
         "moduleCommonSettings": "Module Common Settings",
         "enableDevMode": "Enable Developer Mode",
         "setupSuccessfully": "Set up successfully",
-        "setupIssuesFound": "Issues found. Enable developer mode to see more details."
+        "setupIssuesFound": "Issues found. Enable developer mode to see more details.",
+        "modulePermissionsEnabled": "Restrictions on users who can use it are enabled (\"Instance Owner Only\" or \"Allowed Users Only\")"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -288,7 +290,8 @@
         "moduleCommonSettings": "模块通用设置",
         "enableDevMode": "启用开发者模式",
         "setupSuccessfully": "设置成功",
-        "setupIssuesFound": "发现问题。启用开发者模式以查看更多详细信息。"
+        "setupIssuesFound": "发现问题。启用开发者模式以查看更多详细信息。",
+        "modulePermissionsEnabled": "已启用可使用的用户限制 (“仅实例所有者”或“仅允许指定用户”)"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -385,7 +388,8 @@
         "moduleCommonSettings": "模組通用設置",
         "enableDevMode": "啟用開發者模式",
         "setupSuccessfully": "設置成功",
-        "setupIssuesFound": "發現問題。啟用開發者模式以查看更多詳細信息。"
+        "setupIssuesFound": "發現問題。啟用開發者模式以查看更多詳細信息。",
+        "modulePermissionsEnabled": "已啟用可使用的用戶限制 (“僅實例所有者”或“僅允許指定用戶”)"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -482,6 +486,7 @@
         "moduleCommonSettings": "모듈 공통 설정",
         "enableDevMode": "개발자 모드 활성화",
         "setupSuccessfully": "성공적으로 설정됨",
-        "setupIssuesFound": "문제가 발견되었습니다. 개발자 모드를 활성화하여 자세한 정보를 확인하십시오."
+        "setupIssuesFound": "문제가 발견되었습니다. 개발자 모드를 활성화하여 자세한 정보를 확인하십시오.",
+        "modulePermissionsEnabled": "사용할 수 있는 사용자의 제한이 활성화되어 있습니다 (\"인스턴스 소유자만\" 또는 \"허용된 사용자만\")"
     }
 }

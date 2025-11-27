@@ -110,7 +110,19 @@ namespace yukineko.WorldIntegratedMenu.Editor
                         xSpacing += 28;
                     }
 
-                    EditorGUI.LabelField(rect, moduleRegistryItem != null && !module.forceUseModuleName ? moduleRegistryItem.GetTitle() : module.moduleName);
+                    var title = moduleRegistryItem != null && !module.forceUseModuleName ? moduleRegistryItem.GetTitle() : module.moduleName;
+                    var style = new GUIStyle(EditorStyles.label)
+                    {
+                        richText = true
+                    };
+
+                    if (module.instanceOwnerOnly || module.allowedUsersOnly)
+                    {
+                        title += " <color=\"#7dacf1\">[!]</color>";
+                    }
+
+                    var label = new GUIContent(title, module.instanceOwnerOnly || module.allowedUsersOnly ? EditorI18n.GetTranslation("modulePermissionsEnabled") : null);
+                    EditorGUI.LabelField(rect, label, style);
 
                     if (GUI.Button(new Rect(rect.x + rect.width - xSpacing - 120, rect.y, 120, EditorGUIUtility.singleLineHeight), EditorI18n.GetTranslation("moduleSettings")))
                     {
