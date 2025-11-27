@@ -31,6 +31,8 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private Transform _linkContainer;
         [SerializeField] private GameObject _navigationButtonTemplate;
         [SerializeField] private Transform _navigationButtonContainer;
+        [SerializeField] private GameObject _modalWindowTemplate;
+        [SerializeField] private Transform _modalWindowContainer;
 
         private ModuleMetadata _currentModule;
         private ModuleMetadata _nextModule;
@@ -299,6 +301,16 @@ namespace yukineko.WorldIntegratedMenu
             {
                 UseModule(module);
             }
+        }
+
+        public void ShowModalWindow(string title, string content, string closeButtonText)
+        {
+            var modalObject = Instantiate(_modalWindowTemplate, _modalWindowContainer);
+            var modalWindow = modalObject.GetComponent<ModalWindowHelper>();
+            modalWindow.title.text = title;
+            modalWindow.content.text = content;
+            modalWindow.closeButton.text = closeButtonText;
+            modalWindow.gameObject.SetActive(true);
         }
     }
 }
