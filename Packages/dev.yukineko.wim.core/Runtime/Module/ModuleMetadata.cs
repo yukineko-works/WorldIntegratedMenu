@@ -23,6 +23,9 @@ namespace yukineko.WorldIntegratedMenu
         public bool forceUseModuleName = false;
         public GameObject content;
         public bool activateOnStart = false;
+        public bool instanceOwnerOnly = false;
+        public bool allowedUsersOnly = false;
+        public string[] allowedUsers = new string[0];
 
         [HideInInspector] public I18nManager i18nManager;
         [SerializeField] private string _moduleId = "";
@@ -163,7 +166,7 @@ namespace yukineko.WorldIntegratedMenu
         {
             serializedObject.Update();
 
-            EditorGUILayout.LabelField("Module Metadata", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(EditorI18n.GetTranslation("moduleCommonSettings"), EditorStyles.boldLabel);
             EditorGUILayout.Space();
 
             EditorGUI.BeginChangeCheck();
@@ -172,6 +175,22 @@ namespace yukineko.WorldIntegratedMenu
 
             var label = new GUIContent(EditorI18n.GetTranslation("useModuleNameAsDisplayName"), EditorI18n.GetTranslation("useModuleNameAsDisplayNameDescription"));
             _moduleMetadata.forceUseModuleName = EditorGUILayout.ToggleLeft(label, _moduleMetadata.forceUseModuleName);
+            _moduleMetadata.instanceOwnerOnly = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("instanceOwnerOnly"), _moduleMetadata.instanceOwnerOnly);
+            _moduleMetadata.allowedUsersOnly = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("allowedUsersOnly"), _moduleMetadata.allowedUsersOnly);
+
+            if (_moduleMetadata.allowedUsersOnly)
+            {
+                using (new EditorGUI.IndentLevelScope())
+                {
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("allowedUsers"), EditorI18n.GetGUITranslation("allowUsingUsers"));
+                }
+            }
+
+            if (_moduleMetadata.instanceOwnerOnly && _moduleMetadata.allowedUsersOnly)
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox(EditorI18n.GetTranslation("instanceOwnerAndAllowedUsersInfo"), MessageType.Info);
+            }
 
             EditorGUILayout.Space();
 

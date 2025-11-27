@@ -86,7 +86,12 @@
         "quickMenuSettings": "クイックメニュー設定",
         "quickMenuSettingsDescription": "クイックメニューに関する設定を行うことができます。",
         "useModuleNameAsDisplayName": "モジュール名を表示名として使用する [?]",
-        "useModuleNameAsDisplayNameDescription": "メニューに表示されるモジュールの名前を、モジュール名に入力された名前に変更します。\nこのオプションを有効にするとモジュール名のローカライズが無効になります。"
+        "useModuleNameAsDisplayNameDescription": "メニューに表示されるモジュールの名前を、モジュール名に入力された名前に変更します。\nこのオプションを有効にするとモジュール名のローカライズが無効になります。",
+        "instanceOwnerOnly": "インスタンスオーナーのみ使用できるようにする",
+        "allowedUsersOnly": "許可したユーザーのみ使用できるようにする",
+        "instanceOwnerAndAllowedUsersInfo": "「インスタンスオーナーのみ」と「許可したユーザーのみ」の両方を有効化した場合、インスタンスオーナーまたは許可したユーザーが使用できるようになります。(ORとして扱われます)",
+        "allowUsingUsers": "使用を許可するユーザーのユーザー名",
+        "moduleCommonSettings": "モジュール共通設定"
     },
     "en": {
         "moduleName": "Module Name",
@@ -175,7 +180,12 @@
         "quickMenuSettings": "Quick Menu Settings",
         "quickMenuSettingsDescription": "You can set the settings for the quick menu.",
         "useModuleNameAsDisplayName": "Use Module Name as Display Name [?]",
-        "useModuleNameAsDisplayNameDescription": "Changes the module name displayed in the menu to the entered module name. Enabling this option disables localization for the module name."
+        "useModuleNameAsDisplayNameDescription": "Changes the module name displayed in the menu to the entered module name. Enabling this option disables localization for the module name.",
+        "instanceOwnerOnly": "Make it usable only by instance owner",
+        "allowedUsersOnly": "Make it usable only by allowed users",
+        "instanceOwnerAndAllowedUsersInfo": "If both \"Instance Owner Only\" and \"Allowed Users Only\" are enabled, it will be usable by either the instance owner or the allowed users. (Treated as OR)",
+        "allowUsingUsers": "Usernames of users allowed to use",
+        "moduleCommonSettings": "Module Common Settings"
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -264,7 +274,12 @@
         "quickMenuSettings": "快速菜单设置",
         "quickMenuSettingsDescription": "您可以设置快速菜单的设置。",
         "useModuleNameAsDisplayName": "使用模块名作为显示名称 [?]",
-        "useModuleNameAsDisplayNameDescription": "将菜单中显示的模块名称更改为输入的模块名称。启用此选项将禁用模块名称的本地化。"
+        "useModuleNameAsDisplayNameDescription": "将菜单中显示的模块名称更改为输入的模块名称。启用此选项将禁用模块名称的本地化。",
+        "instanceOwnerOnly": "仅实例所有者可使用",
+        "allowedUsersOnly": "仅允许指定用户使用",
+        "instanceOwnerAndAllowedUsersInfo": "如果同时启用“仅实例所有者”和“仅允许指定用户”，则实例所有者或允许的用户都可以使用。(作为OR处理)",
+        "allowUsingUsers": "允许使用的用户的用户名",
+        "moduleCommonSettings": "模块通用设置"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -353,7 +368,12 @@
         "quickMenuSettings": "快速菜單設置",
         "quickMenuSettingsDescription": "您可以設置快速菜單的設置。",
         "useModuleNameAsDisplayName": "使用模組名作為顯示名稱 [?]",
-        "useModuleNameAsDisplayNameDescription": "將菜單中顯示的模組名稱更改為輸入的模組名稱。啟用此選項將禁用模組名稱的本地化。"
+        "useModuleNameAsDisplayNameDescription": "將菜單中顯示的模組名稱更改為輸入的模組名稱。啟用此選項將禁用模組名稱的本地化。",
+        "instanceOwnerOnly": "僅實例所有者可使用",
+        "allowedUsersOnly": "僅允許指定用戶使用",
+        "instanceOwnerAndAllowedUsersInfo": "如果同時啟用“僅實例所有者”和“僅允許指定用戶”，則實例所有者或允許的用戶都可以使用。(作為OR處理)",
+        "allowUsingUsers": "允許使用的用戶的用戶名",
+        "moduleCommonSettings": "模組通用設置"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -442,6 +462,11 @@
         "quickMenuSettings": "빠른 메뉴 설정",
         "quickMenuSettingsDescription": "빠른 메뉴에 대한 설정을 할 수 있습니다.",
         "useModuleNameAsDisplayName": "모듈 이름을 표시 이름으로 사용 [?]",
-        "useModuleNameAsDisplayNameDescription": "메뉴에 표시되는 모듈 이름을 입력된 모듈 이름으로 변경합니다. 이 옵션을 활성화하면 모듈 이름에 대한 현지화가 비활성화됩니다."
+        "useModuleNameAsDisplayNameDescription": "메뉴에 표시되는 모듈 이름을 입력된 모듈 이름으로 변경합니다. 이 옵션을 활성화하면 모듈 이름에 대한 현지화가 비활성화됩니다.",
+        "instanceOwnerOnly": "인스턴스 소유자만 사용 가능",
+        "allowedUsersOnly": "허용된 사용자만 사용 가능",
+        "instanceOwnerAndAllowedUsersInfo": "\"인스턴스 소유자만\"과 \"허용된 사용자만\"을 모두 활성화하면 인스턴스 소유자 또는 허용된 사용자가 사용할 수 있습니다. (OR로 처리됨)",
+        "allowUsingUsers": "사용을 허용하는 사용자의 사용자 이름",
+        "moduleCommonSettings": "모듈 공통 설정"
     }
 }

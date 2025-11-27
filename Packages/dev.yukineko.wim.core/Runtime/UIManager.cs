@@ -88,14 +88,15 @@ namespace yukineko.WorldIntegratedMenu
 
                 if (!module.HideInMenu)
                 {
-                    var link = Instantiate(_linkTemplate, _linkContainer);
-                    link.name = module.Uuid;
-                    link.SetActive(true);
-                    link.transform.Find("Icon").GetComponent<Image>().sprite = module.moduleIcon;
+                    var linkObject = Instantiate(_linkTemplate, _linkContainer);
+                    linkObject.name = module.Uuid;
+                    linkObject.SetActive(true);
 
-                    var linkExecutor = link.GetComponent<ModuleExecutor>();
-                    linkExecutor.manager = this;
-                    linkExecutor.module = module;
+                    var link = linkObject.GetComponent<HomeAppLinkHelper>();
+                    link.icon.sprite = module.moduleIcon;
+
+                    link.moduleExecutor.manager = this;
+                    link.moduleExecutor.module = module;
 
                     var navigationButton = Instantiate(_navigationButtonTemplate, _navigationButtonContainer);
                     navigationButton.name = module.Uuid;
@@ -111,19 +112,29 @@ namespace yukineko.WorldIntegratedMenu
                         if (!module.i18nManager.Initialized) module.i18nManager.BuildLocalization();
                         if (module.i18nManager.HasLocalization)
                         {
-                            link.transform.Find("Title").GetComponent<ApplyI18n>().manager = module.i18nManager;
+                            link.titleI18n.manager = module.i18nManager;
                             navigationButton.transform.Find("Title").GetComponent<ApplyI18n>().manager = module.i18nManager;
                         }
                         else
                         {
-                            link.transform.Find("Title").GetComponent<Text>().text = module.moduleName;
+                            link.title.text = module.moduleName;
                             navigationButton.transform.Find("Title").GetComponent<Text>().text = module.moduleName;
                         }
                     }
                     else
                     {
-                        link.transform.Find("Title").GetComponent<Text>().text = module.moduleName;
+                        link.title.text = module.moduleName;
                         navigationButton.transform.Find("Title").GetComponent<Text>().text = module.moduleName;
+                    }
+
+                    if (module.instanceOwnerOnly)
+                    {
+                        link.permissionIconOwner.SetActive(true);
+                    }
+
+                    if (module.allowedUsersOnly)
+                    {
+                        link.permissionIconAllowedUser.SetActive(true);
                     }
                 }
 
@@ -173,6 +184,47 @@ namespace yukineko.WorldIntegratedMenu
         public void UseModule(ModuleMetadata module)
         {
             if (_currentModule != null && _currentModule.Uuid == module.Uuid) return;
+
+#region Permission check
+            var isAllowedUser = module.allowedUsers != null && ArrayUtils.Contains(module.allowedUsers, Networking.LocalPlayer.displayName);
+            if (module.instanceOwnerOnly && module.allowedUsersOnly)
+            {
+                if (!Networking.LocalPlayer.isInstanceOwner && !isAllowedUser)
+                {
+                    ShowModalWindow(
+                        _i18nManager.GetTranslation("noPermission"),
+                        _i18nManager.GetTranslation("notAllowedToUseThisModuleBecauseYouAreNotTheInstanceOwner"),
+                        _i18nManager.GetTranslation("close")
+                    );
+                    Debug.LogWarning("This module is only usable by the instance owner or allowed users.");
+                    return;
+                }
+            }
+            else
+            {
+                if (module.instanceOwnerOnly && !Networking.LocalPlayer.isInstanceOwner)
+                {
+                    ShowModalWindow(
+                        _i18nManager.GetTranslation("noPermission"),
+                        _i18nManager.GetTranslation("notAllowedToUseThisModuleBecauseYouAreNotTheInstanceOwner"),
+                        _i18nManager.GetTranslation("close")
+                    );
+                    Debug.LogWarning("This module is only usable by the instance owner.");
+                    return;
+                }
+
+                if (module.allowedUsersOnly && !isAllowedUser)
+                {
+                    ShowModalWindow(
+                        _i18nManager.GetTranslation("noPermission"),
+                        _i18nManager.GetTranslation("notAllowedToUseThisModuleBecauseYouAreNotInTheAllowedUsers"),
+                        _i18nManager.GetTranslation("close")
+                    );
+                    Debug.LogWarning("You are not in the allowed users for this module.");
+                    return;
+                }
+            }
+#endregion
 
             Debug.Log("UsingModule: " + module.moduleName);
             _navigationMenuAnimator.SetBool("isShow", true);
