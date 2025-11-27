@@ -548,6 +548,17 @@ namespace yukineko.WorldIntegratedMenu.Editor
             UIStyles.UrlLabel(EditorI18n.GetTranslation("openDocs"), "https://vpm.yukineko.dev/docs/wim-core/intro");
             UIStyles.UrlLabel("BOOTH", "https://yukineko-works.booth.pm/");
             UIStyles.UrlLabel("GitHub", "https://github.com/yukineko-works/WorldIntegratedMenu");
+
+            UIStyles.TitleBox(EditorI18n.GetTranslation("otherSettings"));
+            var isDevMode = EditorPrefs.GetBool("ynworks_devmode", false);
+            using (var x = new EditorGUI.ChangeCheckScope())
+            {
+                isDevMode = EditorGUILayout.ToggleLeft(EditorI18n.GetTranslation("enableDevMode"), isDevMode);
+                if (x.changed)
+                {
+                    EditorPrefs.SetBool("ynworks_devmode", isDevMode);
+                }
+            }
         }
     }
 

@@ -73,7 +73,7 @@ namespace yukineko.WorldIntegratedMenu.EditorShared
 
             DrawModuleInspector();
 
-            if (ObjectProperties != null && ObjectProperties.Length > 0)
+            if (ObjectProperties != null && ObjectProperties.Length > 0 && EditorPrefs.GetBool("ynworks_devmode", false))
             {
                 EditorGUILayout.Space();
                 _showObjectProperties = EditorGUILayout.Foldout(_showObjectProperties, EditorI18n.GetTranslation("internalProperties"));

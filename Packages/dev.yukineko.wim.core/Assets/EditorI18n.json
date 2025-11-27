@@ -91,7 +91,10 @@
         "allowedUsersOnly": "許可したユーザーのみ使用できるようにする",
         "instanceOwnerAndAllowedUsersInfo": "「インスタンスオーナーのみ」と「許可したユーザーのみ」の両方を有効化した場合、インスタンスオーナーまたは許可したユーザーが使用できるようになります。(ORとして扱われます)",
         "allowUsingUsers": "使用を許可するユーザーのユーザー名",
-        "moduleCommonSettings": "モジュール共通設定"
+        "moduleCommonSettings": "モジュール共通設定",
+        "enableDevMode": "開発者モードを有効にする",
+        "setupSuccessfully": "正常にセットアップされています",
+        "setupIssuesFound": "問題が見つかりました。開発者モードを有効化すると詳細情報が表示されます。"
     },
     "en": {
         "moduleName": "Module Name",
@@ -185,7 +188,10 @@
         "allowedUsersOnly": "Make it usable only by allowed users",
         "instanceOwnerAndAllowedUsersInfo": "If both \"Instance Owner Only\" and \"Allowed Users Only\" are enabled, it will be usable by either the instance owner or the allowed users. (Treated as OR)",
         "allowUsingUsers": "Usernames of users allowed to use",
-        "moduleCommonSettings": "Module Common Settings"
+        "moduleCommonSettings": "Module Common Settings",
+        "enableDevMode": "Enable Developer Mode",
+        "setupSuccessfully": "Set up successfully",
+        "setupIssuesFound": "Issues found. Enable developer mode to see more details."
     },
     "zh-CN": {
         "moduleName": "模块名",
@@ -279,7 +285,10 @@
         "allowedUsersOnly": "仅允许指定用户使用",
         "instanceOwnerAndAllowedUsersInfo": "如果同时启用“仅实例所有者”和“仅允许指定用户”，则实例所有者或允许的用户都可以使用。(作为OR处理)",
         "allowUsingUsers": "允许使用的用户的用户名",
-        "moduleCommonSettings": "模块通用设置"
+        "moduleCommonSettings": "模块通用设置",
+        "enableDevMode": "启用开发者模式",
+        "setupSuccessfully": "设置成功",
+        "setupIssuesFound": "发现问题。启用开发者模式以查看更多详细信息。"
     },
     "zh-TW": {
         "moduleName": "模組名",
@@ -373,7 +382,10 @@
         "allowedUsersOnly": "僅允許指定用戶使用",
         "instanceOwnerAndAllowedUsersInfo": "如果同時啟用“僅實例所有者”和“僅允許指定用戶”，則實例所有者或允許的用戶都可以使用。(作為OR處理)",
         "allowUsingUsers": "允許使用的用戶的用戶名",
-        "moduleCommonSettings": "模組通用設置"
+        "moduleCommonSettings": "模組通用設置",
+        "enableDevMode": "啟用開發者模式",
+        "setupSuccessfully": "設置成功",
+        "setupIssuesFound": "發現問題。啟用開發者模式以查看更多詳細信息。"
     },
     "ko": {
         "moduleName": "모듈 이름",
@@ -467,6 +479,9 @@
         "allowedUsersOnly": "허용된 사용자만 사용 가능",
         "instanceOwnerAndAllowedUsersInfo": "\"인스턴스 소유자만\"과 \"허용된 사용자만\"을 모두 활성화하면 인스턴스 소유자 또는 허용된 사용자가 사용할 수 있습니다. (OR로 처리됨)",
         "allowUsingUsers": "사용을 허용하는 사용자의 사용자 이름",
-        "moduleCommonSettings": "모듈 공통 설정"
+        "moduleCommonSettings": "모듈 공통 설정",
+        "enableDevMode": "개발자 모드 활성화",
+        "setupSuccessfully": "성공적으로 설정됨",
+        "setupIssuesFound": "문제가 발견되었습니다. 개발자 모드를 활성화하여 자세한 정보를 확인하십시오."
     }
 }

@@ -210,35 +210,53 @@ namespace yukineko.WorldIntegratedMenu
             {
                 serializedObject.Update();
 
-                EditorGUILayout.LabelField("I18n Manager", EditorStyles.boldLabel);
-                EditorGUILayout.Space();
-
-                if (!_hasModuleMetadata && _i18nManager._controller == null)
+                if (EditorPrefs.GetBool("ynworks_devmode", false))
                 {
-                    EditorGUILayout.HelpBox(EditorI18n.GetTranslation("controllerMissing"), MessageType.Warning);
-                }
+                    EditorGUILayout.LabelField("I18n Manager", EditorStyles.boldLabel);
+                    EditorGUILayout.Space();
 
-                if (_i18nManager._localizationJson == null)
-                {
-                    EditorGUILayout.HelpBox(EditorI18n.GetTranslation("localizeFileMissing"), MessageType.Warning);
-                }
-
-                EditorGUI.BeginChangeCheck();
-
-                if (!_hasModuleMetadata)
-                {
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_controller"), new GUIContent(EditorI18n.GetTranslation("controller")));
-                }
-                else if (_i18nManager._controller != null)
-                {
-                    EditorGUILayout.HelpBox(EditorI18n.GetTranslation("i18nManagerControllerWarning"), MessageType.Warning);
-                    if (GUILayout.Button(EditorI18n.GetTranslation("removeController")))
+                    if (!_hasModuleMetadata && _i18nManager._controller == null)
                     {
-                        _i18nManager._controller = null;
+                        EditorGUILayout.HelpBox(EditorI18n.GetTranslation("controllerMissing"), MessageType.Warning);
+                    }
+
+                    if (_i18nManager._localizationJson == null)
+                    {
+                        EditorGUILayout.HelpBox(EditorI18n.GetTranslation("localizeFileMissing"), MessageType.Warning);
+                    }
+
+                    EditorGUI.BeginChangeCheck();
+
+                    if (!_hasModuleMetadata)
+                    {
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("_controller"), new GUIContent(EditorI18n.GetTranslation("controller")));
+                    }
+                    else if (_i18nManager._controller != null)
+                    {
+                        EditorGUILayout.HelpBox(EditorI18n.GetTranslation("i18nManagerControllerWarning"), MessageType.Warning);
+                        if (GUILayout.Button(EditorI18n.GetTranslation("removeController")))
+                        {
+                            _i18nManager._controller = null;
+                        }
+                    }
+
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_localizationJson"), new GUIContent(EditorI18n.GetTranslation("localizeFile")));
+                }
+                else
+                {
+                    if (
+                        (!_hasModuleMetadata && _i18nManager._controller == null) ||
+                        (_hasModuleMetadata && _i18nManager._controller != null) ||
+                        _i18nManager._localizationJson == null
+                    )
+                    {
+                        EditorGUILayout.LabelField(EditorI18n.GetTranslation("setupIssuesFound"));
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField(EditorI18n.GetTranslation("setupSuccessfully"));
                     }
                 }
-
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_localizationJson"), new GUIContent(EditorI18n.GetTranslation("localizeFile")));
 
                 if (EditorGUI.EndChangeCheck())
                 {

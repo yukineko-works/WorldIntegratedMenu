@@ -182,6 +182,7 @@ namespace yukineko.WorldIntegratedMenu
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
+                    EditorGUILayout.Space();
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("allowedUsers"), EditorI18n.GetGUITranslation("allowUsingUsers"));
                 }
             }
@@ -192,34 +193,37 @@ namespace yukineko.WorldIntegratedMenu
                 EditorGUILayout.HelpBox(EditorI18n.GetTranslation("instanceOwnerAndAllowedUsersInfo"), MessageType.Info);
             }
 
-            EditorGUILayout.Space();
-
-            _isOpeningInternalProperties = EditorGUILayout.Foldout(_isOpeningInternalProperties, EditorI18n.GetTranslation("internalProperties"));
-            if (_isOpeningInternalProperties)
+            if (EditorPrefs.GetBool("ynworks_devmode", false))
             {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("content"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("activateOnStart"));
-                EditorGUILayout.Space();
-                EditorGUI.indentLevel--;
-            }
-
-            _isOpeningDeveloperProperties = EditorGUILayout.Foldout(_isOpeningDeveloperProperties, EditorI18n.GetTranslation("developerProperties"));
-            if (_isOpeningDeveloperProperties)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_moduleId"), EditorI18n.GetGUITranslation("moduleUniqueId"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_isUnique"), EditorI18n.GetGUITranslation("disallowMultipleInstances"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("_hideInMenu"), EditorI18n.GetGUITranslation("hideInMenu"));
                 EditorGUILayout.Space();
 
-                if (_reorderableList == null)
+                _isOpeningInternalProperties = EditorGUILayout.Foldout(_isOpeningInternalProperties, EditorI18n.GetTranslation("internalProperties"));
+                if (_isOpeningInternalProperties)
                 {
-                    GenerateList();
+                    EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("content"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("activateOnStart"));
+                    EditorGUILayout.Space();
+                    EditorGUI.indentLevel--;
                 }
 
-                _reorderableList.DoLayoutList();
-                EditorGUI.indentLevel--;
+                _isOpeningDeveloperProperties = EditorGUILayout.Foldout(_isOpeningDeveloperProperties, EditorI18n.GetTranslation("developerProperties"));
+                if (_isOpeningDeveloperProperties)
+                {
+                    EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_moduleId"), EditorI18n.GetGUITranslation("moduleUniqueId"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_isUnique"), EditorI18n.GetGUITranslation("disallowMultipleInstances"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_hideInMenu"), EditorI18n.GetGUITranslation("hideInMenu"));
+                    EditorGUILayout.Space();
+
+                    if (_reorderableList == null)
+                    {
+                        GenerateList();
+                    }
+
+                    _reorderableList.DoLayoutList();
+                    EditorGUI.indentLevel--;
+                }
             }
 
             if (EditorGUI.EndChangeCheck())
