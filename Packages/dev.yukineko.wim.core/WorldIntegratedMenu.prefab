@@ -1533,7 +1533,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 7268332161590092723}
   _uiManager: {fileID: 1721641642761849830}
   _displayController: {fileID: 7565302857470247921}
-  _vrCanvas: {fileID: 0}
+  _vrCanvas: {fileID: 40843090551291349}
   _nonVrCanvas: {fileID: 1918214443400371490}
   _vrScreenPosition: {x: 0, y: -0.15, z: 0.15}
   _vrQuickMenuStandardSize: 0.00016
