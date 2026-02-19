@@ -332,7 +332,7 @@ namespace yukineko.WorldIntegratedMenu
         {
             var targetModule = _navigationButtonContainer.Find(uuid);
             if (targetModule == null) return;
-            targetModule.GetComponent<Animator>().SetBool("selected", selected);
+            targetModule.GetComponent<Animator>().SetBool("ModuleSelected", selected);
         }
 
         public void SetMenuParent(Transform parent)
