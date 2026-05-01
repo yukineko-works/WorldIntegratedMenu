@@ -80,7 +80,7 @@ namespace yukineko.WorldIntegratedMenu
             _currentDisplayTime = _displayTime;
             if (_isVR && _quickMenuManager != null)
             {
-                switch (_quickMenuManager.CurrentOpenMethod)
+                switch (_quickMenuManager.CurrentVrOpenMethod)
                 {
                     case VRQuickMenuOpenMethod.Stick:
                         _tutorialTextI18n.key = "tutorialTextInVRStick";
@@ -104,7 +104,18 @@ namespace yukineko.WorldIntegratedMenu
             }
             else
             {
-                _tutorialTextI18n.key = "tutorialTextInDesktop";
+                switch(_quickMenuManager.CurrentDesktopOpenMethod)
+                {
+                    case DesktopQuickMenuOpenMethod.Tab:
+                        _tutorialTextI18n.key = "tutorialTextInDesktopTab";
+                        break;
+                    case DesktopQuickMenuOpenMethod.ShiftTab:
+                        _tutorialTextI18n.key = "tutorialTextInDesktopShiftTab";
+                        break;
+                    default:
+                        _tutorialTextI18n.key = "tutorialTextInDesktopTab";
+                        break;
+                }
             }
 
             _tutorialTextI18n.Apply();

@@ -28,6 +28,11 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private int _selectedThemeIndex = 0;
         private bool _showThemeSettings = false;
         private bool _showExtensionModuleReference = false;
+        private Dictionary<DesktopQuickMenuOpenMethod, string> _desktopOpenMethodNames = new Dictionary<DesktopQuickMenuOpenMethod, string>
+        {
+            { DesktopQuickMenuOpenMethod.Tab, "openByTab" },
+            { DesktopQuickMenuOpenMethod.ShiftTab, "openByShiftTab" },
+        };
         private Dictionary<VRQuickMenuOpenMethod, string> _vrOpenMethodNames = new Dictionary<VRQuickMenuOpenMethod, string>
         {
             { VRQuickMenuOpenMethod.Stick, "openByStick" },
@@ -359,21 +364,39 @@ namespace yukineko.WorldIntegratedMenu.Editor
             }
             else
             {
-                EditorGUILayout.LabelField(EditorI18n.GetTranslation("menuOpenMethodInVR"));
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("menuOpenMethodInDesktop"));
 
-                var methodEnumCount = Enum.GetNames(typeof(VRQuickMenuOpenMethod)).Length;
-                var methodEnumNames = new string[methodEnumCount];
-
-                for (var i = 0; i < methodEnumCount; i++)
+                var desktopMethodEnumCount = Enum.GetNames(typeof(DesktopQuickMenuOpenMethod)).Length;
+                var desktopMethodEnumNames = new string[desktopMethodEnumCount];
+                for (var i = 0; i < desktopMethodEnumCount; i++)
                 {
-                    methodEnumNames[i] = EditorI18n.GetTranslation(_vrOpenMethodNames[(VRQuickMenuOpenMethod)i]);
+                    desktopMethodEnumNames[i] = EditorI18n.GetTranslation(_desktopOpenMethodNames[(DesktopQuickMenuOpenMethod)i]);
                 }
 
-                var selectedOpenMethod = _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex;
-                var newOpenMethod = EditorGUILayout.Popup(selectedOpenMethod, methodEnumNames);
-                if (newOpenMethod != selectedOpenMethod)
+                var selectedDesktopOpenMethod = _quickMenuManagerSerializedObject.FindProperty("_desktopOpenMethod").enumValueIndex;
+                var newDesktopOpenMethod = EditorGUILayout.Popup(selectedDesktopOpenMethod, desktopMethodEnumNames);
+                if (newDesktopOpenMethod != selectedDesktopOpenMethod)
                 {
-                    _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex = newOpenMethod;
+                    _quickMenuManagerSerializedObject.FindProperty("_desktopOpenMethod").enumValueIndex = newDesktopOpenMethod;
+                    _quickMenuManagerSerializedObject.ApplyModifiedProperties();
+                }
+
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField(EditorI18n.GetTranslation("menuOpenMethodInVR"));
+
+                var vrMethodEnumCount = Enum.GetNames(typeof(VRQuickMenuOpenMethod)).Length;
+                var vrMethodEnumNames = new string[vrMethodEnumCount];
+
+                for (var i = 0; i < vrMethodEnumCount; i++)
+                {
+                    vrMethodEnumNames[i] = EditorI18n.GetTranslation(_vrOpenMethodNames[(VRQuickMenuOpenMethod)i]);
+                }
+
+                var selectedVrOpenMethod = _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex;
+                var newVrOpenMethod = EditorGUILayout.Popup(selectedVrOpenMethod, vrMethodEnumNames);
+                if (newVrOpenMethod != selectedVrOpenMethod)
+                {
+                    _quickMenuManagerSerializedObject.FindProperty("_vrOpenMethod").enumValueIndex = newVrOpenMethod;
                     _quickMenuManagerSerializedObject.ApplyModifiedProperties();
                 }
 

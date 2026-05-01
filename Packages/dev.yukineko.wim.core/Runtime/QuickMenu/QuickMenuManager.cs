@@ -2,12 +2,17 @@
 using System;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon.Common;
 
 namespace yukineko.WorldIntegratedMenu
 {
+    public enum DesktopQuickMenuOpenMethod
+    {
+        Tab,
+        ShiftTab
+    }
+
     public enum VRQuickMenuOpenMethod
     {
         Stick,
@@ -33,12 +38,14 @@ namespace yukineko.WorldIntegratedMenu
         [SerializeField] private float _vrHoldTime = 0.5f;
         [SerializeField] private float _controllerInputThreshold = 0.1f;
         [SerializeField] private int _vrToggleOpenThreshold = 500;
+        [SerializeField] private DesktopQuickMenuOpenMethod _desktopOpenMethod = DesktopQuickMenuOpenMethod.Tab;
         [SerializeField] private VRQuickMenuOpenMethod _vrOpenMethod = VRQuickMenuOpenMethod.Stick;
         [SerializeField] private VRQuickMenuDominantHand _dominantHand = VRQuickMenuDominantHand.Right;
 
         private VRCPlayerApi _player;
         private bool _isVR;
-        private VRQuickMenuOpenMethod _defaultOpenMethod;
+        private DesktopQuickMenuOpenMethod _defaultDesktopOpenMethod;
+        private VRQuickMenuOpenMethod _defaultVrOpenMethod;
         private VRQuickMenuDominantHand _defaultDominantHand;
         private Vector3 _overridedVrScreenPosition;
         private Quaternion _lockedRotation = Quaternion.identity;
@@ -55,8 +62,10 @@ namespace yukineko.WorldIntegratedMenu
 
         public bool IsOpened => _holdTime >= _vrHoldTime;
         public bool IsOpening => _isInputting && !IsOpened;
-        public VRQuickMenuOpenMethod DefaultOpenMethod => _defaultOpenMethod;
-        public VRQuickMenuOpenMethod CurrentOpenMethod => _vrOpenMethod;
+        public DesktopQuickMenuOpenMethod DefaultDesktopOpenMethod => _defaultDesktopOpenMethod;
+        public DesktopQuickMenuOpenMethod CurrentDesktopOpenMethod => _desktopOpenMethod;
+        public VRQuickMenuOpenMethod DefaultVrOpenMethod => _defaultVrOpenMethod;
+        public VRQuickMenuOpenMethod CurrentVrOpenMethod => _vrOpenMethod;
         public VRQuickMenuDominantHand DefaultDominantHand => _defaultDominantHand;
         public VRQuickMenuDominantHand DominantHand => _dominantHand;
 
@@ -85,7 +94,8 @@ namespace yukineko.WorldIntegratedMenu
             transform.SetParent(transform.root.parent, false);
             SetMenuSize(1f);
 
-            _defaultOpenMethod = _vrOpenMethod;
+            _defaultDesktopOpenMethod = _desktopOpenMethod;
+            _defaultVrOpenMethod = _vrOpenMethod;
             _defaultDominantHand = _dominantHand;
             _overridedVrScreenPosition = _vrScreenPosition;
             _isInitialized = true;
@@ -137,7 +147,16 @@ namespace yukineko.WorldIntegratedMenu
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Tab) && _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null) ShowMenu(true);
+                if (Input.GetKeyDown(KeyCode.Tab) && _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
+                {
+                    if (
+                        _desktopOpenMethod == DesktopQuickMenuOpenMethod.Tab ||
+                        (_desktopOpenMethod == DesktopQuickMenuOpenMethod.ShiftTab && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+                    )
+                    {
+                        ShowMenu(true);
+                    }
+                }
                 if (Input.GetKeyUp(KeyCode.Tab)) ShowMenu(false);
             }
         }
@@ -290,16 +309,27 @@ namespace yukineko.WorldIntegratedMenu
             RecalculateVRScreenPosition();
         }
 
-        public void ResetOpenMethod()
+        public void ResetDesktopOpenMethod()
         {
-            SetOpenMethod(_defaultOpenMethod);
+            SetDesktopOpenMethod(_defaultDesktopOpenMethod);
         }
 
-        public void SetOpenMethod(VRQuickMenuOpenMethod value)
+        public void ResetVrOpenMethod()
+        {
+            SetVrOpenMethod(_defaultVrOpenMethod);
+        }
+
+        public void SetVrOpenMethod(VRQuickMenuOpenMethod value)
         {
             _vrToggleOpen = false;
             _displayController.SetBool("showProgress", false);
             _vrOpenMethod = value;
+            CallOpenMethodUpdateCallbacks();
+        }
+
+        public void SetDesktopOpenMethod(DesktopQuickMenuOpenMethod value)
+        {
+            _desktopOpenMethod = value;
             CallOpenMethodUpdateCallbacks();
         }
 

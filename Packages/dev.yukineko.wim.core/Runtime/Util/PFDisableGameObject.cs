@@ -21,36 +21,46 @@ namespace yukineko.WorldIntegratedMenu
         NonVR,
     }
 
+    public enum ConditionType
+    {
+        And,
+        Or,
+    }
+
     public class PFDisableGameObject : UdonSharpBehaviour
     {
         [SerializeField] private PlatformType[] _platformType = new PlatformType[0];
         [SerializeField] private DeviceType[] _deviceType = new DeviceType[0];
+        [SerializeField] private ConditionType _conditionType = ConditionType.Or;
 
         private void Start()
         {
             // Platform check
+            var isPlatformMatch = false;
+            var isDeviceMatch = false;
+
 #if UNITY_STANDALONE_WIN
             if (ArrayUtils.Contains(_platformType, PlatformType.PC))
             {
-                gameObject.SetActive(false);
+                isPlatformMatch = true;
                 return;
             }
 #elif UNITY_ANDROID
             if (ArrayUtils.Contains(_platformType, PlatformType.Android))
             {
-                gameObject.SetActive(false);
+                isPlatformMatch = true;
                 return;
             }
 #elif UNITY_IOS
             if (ArrayUtils.Contains(_platformType, PlatformType.iOS))
             {
-                gameObject.SetActive(false);
+                isPlatformMatch = true;
                 return;
             }
 #else
             if (ArrayUtils.Contains(_platformType, PlatformType.Unknown))
             {
-                gameObject.SetActive(false);
+                isPlatformMatch = true;
                 return;
             }
 #endif
@@ -60,12 +70,28 @@ namespace yukineko.WorldIntegratedMenu
             {
                 if (ArrayUtils.Contains(_deviceType, DeviceType.VR))
                 {
-                    gameObject.SetActive(false);
+                    isDeviceMatch = true;
                 }
             }
             else
             {
                 if (ArrayUtils.Contains(_deviceType, DeviceType.NonVR))
+                {
+                    isDeviceMatch = true;
+                }
+            }
+
+            // Condition check
+            if (_conditionType == ConditionType.And)
+            {
+                if (isPlatformMatch && isDeviceMatch)
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+            else if (_conditionType == ConditionType.Or)
+            {
+                if (isPlatformMatch || isDeviceMatch)
                 {
                     gameObject.SetActive(false);
                 }
