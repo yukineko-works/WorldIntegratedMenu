@@ -43,25 +43,21 @@ namespace yukineko.WorldIntegratedMenu
             if (ArrayUtils.Contains(_platformType, PlatformType.PC))
             {
                 isPlatformMatch = true;
-                return;
             }
 #elif UNITY_ANDROID
             if (ArrayUtils.Contains(_platformType, PlatformType.Android))
             {
                 isPlatformMatch = true;
-                return;
             }
 #elif UNITY_IOS
             if (ArrayUtils.Contains(_platformType, PlatformType.iOS))
             {
                 isPlatformMatch = true;
-                return;
             }
 #else
             if (ArrayUtils.Contains(_platformType, PlatformType.Unknown))
             {
                 isPlatformMatch = true;
-                return;
             }
 #endif
 
