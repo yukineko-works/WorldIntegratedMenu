@@ -59,9 +59,11 @@ namespace yukineko.WorldIntegratedMenu
         private long _vrToggleLastInput = 0;
         private bool _nonDominantTriggerPressed = false;
         private UdonSharpBehaviour[] _openMethodUpdateCallbacks = new UdonSharpBehaviour[0];
+        private UdonSharpBehaviour[] _menuStateChangeCallbacks = new UdonSharpBehaviour[0];
 
         public bool IsOpened => _holdTime >= _vrHoldTime;
         public bool IsOpening => _isInputting && !IsOpened;
+        public bool IsShowing => _isShowing;
         public DesktopQuickMenuOpenMethod DefaultDesktopOpenMethod => _defaultDesktopOpenMethod;
         public DesktopQuickMenuOpenMethod CurrentDesktopOpenMethod => _desktopOpenMethod;
         public VRQuickMenuOpenMethod DefaultVrOpenMethod => _defaultVrOpenMethod;
@@ -361,6 +363,7 @@ namespace yukineko.WorldIntegratedMenu
 
         public void ShowMenu(bool show)
         {
+            if (show == _isShowing) return;
             if (show)
             {
                 _isShowing = true;
@@ -368,6 +371,7 @@ namespace yukineko.WorldIntegratedMenu
                 QMSetActive(true);
                 _uiManager.SetMenuParent(Canvas.Panel.transform);
                 _displayController.SetBool("showMenu", true);
+                CallMenuStateChangeCallbacks();
             }
             else
             {
@@ -383,6 +387,7 @@ namespace yukineko.WorldIntegratedMenu
             if (_cancelPostClose) return;
             _uiManager.SetMenuParent(null);
             _isShowing = false;
+            CallMenuStateChangeCallbacks();
         }
 
         private void QMSetActive(bool value)
@@ -403,6 +408,21 @@ namespace yukineko.WorldIntegratedMenu
             {
                 if (_openMethodUpdateCallbacks[i] == null) continue;
                 _openMethodUpdateCallbacks[i].SendCustomEvent("OnQuickMenuOpenMethodUpdated");
+            }
+        }
+
+        public void RegisterMenuStateChangeCallback(UdonSharpBehaviour callback)
+        {
+            if (callback == null) return;
+            _menuStateChangeCallbacks = ArrayUtils.Add(_menuStateChangeCallbacks, callback);
+        }
+
+        private void CallMenuStateChangeCallbacks()
+        {
+            for (int i = 0; i < _menuStateChangeCallbacks.Length; i++)
+            {
+                if (_menuStateChangeCallbacks[i] == null) continue;
+                _menuStateChangeCallbacks[i].SendCustomEvent("OnQuickMenuStateChanged");
             }
         }
     }

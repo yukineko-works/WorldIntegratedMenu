@@ -104,6 +104,7 @@ namespace yukineko.WorldIntegratedMenu
             }
             else
             {
+#if !UNITY_ANDROID && !UNITY_IOS
                 switch(_quickMenuManager.CurrentDesktopOpenMethod)
                 {
                     case DesktopQuickMenuOpenMethod.Tab:
@@ -116,6 +117,9 @@ namespace yukineko.WorldIntegratedMenu
                         _tutorialTextI18n.key = "tutorialTextInDesktopTab";
                         break;
                 }
+#else
+                _tutorialTextI18n.key = "tutorialTextInMobile";
+#endif
             }
 
             _tutorialTextI18n.Apply();
