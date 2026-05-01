@@ -31,7 +31,8 @@ namespace yukineko.WorldIntegratedMenu.Editor
         private Dictionary<VRQuickMenuOpenMethod, string> _vrOpenMethodNames = new Dictionary<VRQuickMenuOpenMethod, string>
         {
             { VRQuickMenuOpenMethod.Stick, "openByStick" },
-            { VRQuickMenuOpenMethod.Trigger, "openByTrigger" }
+            { VRQuickMenuOpenMethod.Trigger, "openByTrigger" },
+            { VRQuickMenuOpenMethod.TriggerCombo, "openByTriggerCombo" },
         };
         private Dictionary<VRQuickMenuDominantHand, string> _vrDominantHandNames = new Dictionary<VRQuickMenuDominantHand, string>
         {

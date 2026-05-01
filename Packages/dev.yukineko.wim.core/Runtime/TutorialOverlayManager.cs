@@ -88,14 +88,19 @@ namespace yukineko.WorldIntegratedMenu
                     case VRQuickMenuOpenMethod.Trigger:
                         _tutorialTextI18n.key = "tutorialTextInVRTrigger";
                         break;
+                    case VRQuickMenuOpenMethod.TriggerCombo:
+                        _tutorialTextI18n.key = "tutorialTextInVRTriggerCombo";
+                        break;
                 }
 
-                var hand = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Right ? "right" : "left";
-                _tutorialTextI18n.args = new I18nArgumentType[1];
-                _tutorialTextI18n.argValues = new string[1];
+                var isRightHand = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Right;
+                _tutorialTextI18n.args = new I18nArgumentType[2];
+                _tutorialTextI18n.argValues = new string[2];
 
                 _tutorialTextI18n.args[0] = I18nArgumentType.I18n;
-                _tutorialTextI18n.argValues[0] = hand;
+                _tutorialTextI18n.argValues[0] = isRightHand ? "right" : "left";
+                _tutorialTextI18n.args[1] = I18nArgumentType.I18n;
+                _tutorialTextI18n.argValues[1] = isRightHand ? "left" : "right";
             }
             else
             {

@@ -110,6 +110,9 @@ namespace yukineko.WorldIntegratedMenu
                 case "trigger":
                     _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.Trigger);
                     break;
+                case "triggerCombo":
+                    _quickMenuManager.SetOpenMethod(VRQuickMenuOpenMethod.TriggerCombo);
+                    break;
                 default:
                     _quickMenuManager.ResetOpenMethod();
                     break;
@@ -123,10 +126,14 @@ namespace yukineko.WorldIntegratedMenu
             UpdateQMDominantHand(_qmDominantHandSelector.Value);
             _cloudSyncManager.Save("qmdominanthand", _qmDominantHandSelector.Value);
 
-            var value = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Left ? "left" : "right";
-            var argValues = new string[2];
-            argValues[0] = value;
-            argValues[1] = value;
+            var dominantHand = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Left ? "left" : "right";
+            var nonDominantHand = _quickMenuManager.DominantHand == VRQuickMenuDominantHand.Left ? "right" : "left";
+
+            var argValues = new string[4];
+            argValues[0] = dominantHand;
+            argValues[1] = dominantHand;
+            argValues[2] = nonDominantHand;
+            argValues[3] = dominantHand;
             _qmKeybindNoticeText.argValues = argValues;
             _qmKeybindNoticeText.Apply();
         }

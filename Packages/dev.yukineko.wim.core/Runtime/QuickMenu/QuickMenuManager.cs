@@ -11,7 +11,8 @@ namespace yukineko.WorldIntegratedMenu
     public enum VRQuickMenuOpenMethod
     {
         Stick,
-        Trigger
+        Trigger,
+        TriggerCombo
     }
 
     public enum VRQuickMenuDominantHand
@@ -49,6 +50,7 @@ namespace yukineko.WorldIntegratedMenu
         private bool _cancelPostClose = false;
         private bool _vrToggleOpen = false;
         private long _vrToggleLastInput = 0;
+        private bool _nonDominantTriggerPressed = false;
         private UdonSharpBehaviour[] _openMethodUpdateCallbacks = new UdonSharpBehaviour[0];
 
         public bool IsOpened => _holdTime >= _vrHoldTime;
@@ -97,7 +99,7 @@ namespace yukineko.WorldIntegratedMenu
             if (_isVR)
             {
                 if (_vrOpenMethod == VRQuickMenuOpenMethod.Stick && !_isInputting && !_isShowing) return;
-                if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger && !_vrToggleOpen && !_isShowing) return;
+                if ((_vrOpenMethod == VRQuickMenuOpenMethod.Trigger || _vrOpenMethod == VRQuickMenuOpenMethod.TriggerCombo) && !_vrToggleOpen && !_isShowing) return;
 
                 var handTrackingData = _player.GetTrackingData(_dominantHand == VRQuickMenuDominantHand.Right ? VRCPlayerApi.TrackingDataType.RightHand : VRCPlayerApi.TrackingDataType.LeftHand);
                 var qmPosition = handTrackingData.position + (handTrackingData.rotation * _overridedVrScreenPosition);
@@ -119,8 +121,8 @@ namespace yukineko.WorldIntegratedMenu
                         ShowMenu(true);
                     }
                 }
-                // Trigger
-                else if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger)
+                // Trigger or TriggerCombo
+                else if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger || _vrOpenMethod == VRQuickMenuOpenMethod.TriggerCombo)
                 {
                     if (_vrToggleOpen && !_isShowing)
                     {
@@ -168,26 +170,90 @@ namespace yukineko.WorldIntegratedMenu
 
         public override void InputUse(bool state, UdonInputEventArgs args)
         {
-            if (
-                !_isVR ||
-                !state ||
-                _vrOpenMethod != VRQuickMenuOpenMethod.Trigger
-            ) return;
+            // 非VRまたはスティックで開く設定の場合は無視
+            if (!_isVR || _vrOpenMethod == VRQuickMenuOpenMethod.Stick) return;
 
+            // 利き手が右なら
             if (_dominantHand == VRQuickMenuDominantHand.Right)
             {
-                if (args.handType != HandType.RIGHT || _player.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null) return;
+                if (args.handType == HandType.RIGHT)
+                {
+                    InputUseDominantHand(state);
+                }
+                else if (args.handType == HandType.LEFT)
+                {
+                    InputUseNonDominantHand(state);
+                }
             }
             else
+            // 利き手が左なら
             {
-                if (args.handType != HandType.LEFT || _player.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null) return;
+                if (args.handType == HandType.LEFT)
+                {
+                    InputUseDominantHand(state);
+                }
+                else if (args.handType == HandType.RIGHT)
+                {
+                    InputUseNonDominantHand(state);
+                }
             }
+        }
 
+        private void InputUseDominantHand(bool state)
+        {
+            // 離したときの入力は無視
+            if (!state) return;
+            var pickupHand = _dominantHand == VRQuickMenuDominantHand.Right ? VRC_Pickup.PickupHand.Right : VRC_Pickup.PickupHand.Left;
+
+            // 利き手になにか持っていれば無視
+            if (_player.GetPickupInHand(pickupHand) != null) return;
+
+            if (_vrOpenMethod == VRQuickMenuOpenMethod.Trigger)
+            {
+                HandleTriggerPress();
+            }
+            else if (_vrOpenMethod == VRQuickMenuOpenMethod.TriggerCombo)
+            {
+                HandleTriggerComboPress();
+            }
+        }
+
+        private void InputUseNonDominantHand(bool pressed)
+        {
+            _nonDominantTriggerPressed = pressed;
+        }
+
+        private void HandleTriggerPress()
+        {
             var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             var diff = now - _vrToggleLastInput;
             if (0 >= diff || diff > _vrToggleOpenThreshold)
             {
                 _vrToggleLastInput = now;
+                return;
+            }
+
+            _vrToggleOpen = !_vrToggleOpen;
+            _vrToggleLastInput = 0;
+
+            if (_isShowing) ShowMenu(false);
+        }
+
+        private void HandleTriggerComboPress()
+        {
+            var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            var diff = now - _vrToggleLastInput;
+            if (0 >= diff || diff > _vrToggleOpenThreshold)
+            {
+                _vrToggleLastInput = now;
+                return;
+            }
+
+            // 非利き手側のトリガーが押されているか
+            // 閉じる時は押していなくてもOK
+            if (!_vrToggleOpen && !_nonDominantTriggerPressed)
+            {
+                _vrToggleLastInput = 0;
                 return;
             }
 
